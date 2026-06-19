@@ -1,8 +1,8 @@
 # lv1-coder — Operating rules
 
-The shared contract for every task in this project. The `/lv1` pipeline and every
-skill and subagent inherit these rules. They are not optional. Keep this file small —
-it loads into every context.
+The shared contract for every task in this project. Imported by `CLAUDE.md` so it
+loads into every context automatically. The `/lv1-coder` pipeline and every skill
+and subagent inherit these rules. They are not optional. Keep this file small.
 
 ## The bar
 
@@ -28,6 +28,8 @@ it loads into every context.
    genuinely independent work, never to look busy.
 8. **Independent check before delivery.** A separate inspector verifies the *real*
    artifact — the code and tests — not a summary from the maker.
+9. **Smallest effort that works.** Triage picks the tier; do not silently escalate.
+   If a fast lane is enough, use it and say so.
 
 ## Confidence grades
 
@@ -77,7 +79,16 @@ manifest.md        confidence list + assumptions + receipts index
 The inspector reads the real deliverable directly — never a summary. That is what
 makes the check independent.
 
+## Knowledge base
+
+Reference material lives in `sources/`. The `researcher` subagent owns this directory
+and maintains `sources/library.md` as the navigator/index. When new external material
+is needed (web pages, PDFs, books, project documents), the researcher distills the
+*needed* knowledge into a new `sources/<topic>.md` and registers it in `library.md`
+— it never dumps raw material into the repo. You can ask the assistant to add a
+source from a URL or a local file at any time.
+
 ## How to run
 
-Type `/lv1 <your task>` to run the whole line. Call a single station by loading its
-skill or delegating to a subagent when you only need one step.
+Type `/lv1-coder <your task>` to run the whole line. Call a single station by loading
+its skill or delegating to a subagent when you only need one step.
