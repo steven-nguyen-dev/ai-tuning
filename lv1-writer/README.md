@@ -1,55 +1,57 @@
-# lv1-writer
+# lv1-writer (skill)
 
-A self-contained discipline pack for book and research writing in Claude Cowork. It
-turns finding, keeping, and using source material into a disciplined pipeline — triage,
-source curation, research, outline, draft, independent inspection — and ships only work
-that is **impressive AND true**, with every fact traceable to a source.
+A single Skill, not a project pack — upload it once and it's available in any Cowork
+project (or chat).
 
 ## Install
 
-Copy the contents of this folder into your Cowork project folder:
+1. In Claude Desktop: **Customize → Skills → + → Upload a skill**.
+2. Upload `lv1-writer.zip`.
+3. It appears in your skills list as **lv1-writer**, toggled on.
+
+## Use, inside a Cowork project
 
 ```
-my-book/
-├── CLAUDE.md           ← the operating rules (loads automatically)
-├── .claude/
-│   ├── skills/         ← the pipeline stations you invoke
-│   │   ├── lv1/        ← /lv1 orchestrator
-│   │   ├── triage/
-│   │   ├── source-intake/
-│   │   ├── outline/
-│   │   └── draft/
-│   └── agents/         ← isolated workers (own context + model)
-│       ├── librarian.md
-│       ├── researcher.md
-│       └── inspector.md
-├── sources/            ← the kept source material
-│   ├── library.md      ← the index: every source + every claim, cited and graded
-│   ├── pdf/  word/  images/  web/
-└── manuscript/         ← your plain-text drafts
+lv1-writer init
 ```
-
-## Use
-
-Run the whole line:
+Creates `sources/library.md` and `manuscript/_about.md` if they don't exist yet,
+scans `sources/` and adds any files found there to the library (this part re-runs
+every time — it's how new sources you drop into the folder get picked up), drops a
+default tone instruction at `manuscript/writing-instruction.md` the first time (edit
+that file directly for a different tone — init won't overwrite it again), and updates
+the project's `CLAUDE.md` with the current folder layout. Safe to run again later;
+nothing customized gets clobbered.
 
 ```
-/lv1 Draft a 2,000-word chapter on the fall of the Western Roman economy
+lv1-writer draft a 2,000-word chapter on the fall of the Western Roman economy
 ```
+Runs the task through the full pipeline (or the fast lane for something small) and
+delivers a sourced, inspected draft with its confidence list.
 
-Hand over a source to file it into the library:
+You can also just describe the task naturally, or hand over a source file ("file this
+PDF into the source library") — Claude will recognize when this skill applies without
+needing the exact word "lv1-writer".
 
-```
-Use source-intake on sources/pdf/heather-2005.pdf
-```
+## Why this looks different from a Claude Code project
 
-The orchestrator runs each station, writes receipts to `runs/<id>/`, keeps every fact
-tied to `sources/library.md`, and delivers the draft with its confidence list and
-assumptions. On a `tiny` task it runs a fast lane (triage → draft → inspect).
+The original design used a `CLAUDE.md` + `.claude/skills/` + `.claude/agents/`
+project layout with isolated subagents for research and inspection. That format is
+specific to Claude Code / Cowork *projects* you point at a folder — it isn't what
+"Upload a skill" accepts. A skill upload is exactly one `SKILL.md` (plus optional
+`references/` and `assets/`), with no separate subagent files and no Claude
+Code-only frontmatter fields (no `model`, `tools`, `argument-hint`).
 
-## What makes the check real
+This version folds all five stations and the three former subagent roles into that
+one `SKILL.md` plus reference files, so it installs as one upload. The trade-off:
+the inspection pass is no longer running in a truly separate context — it's the same
+Claude deliberately re-reading the real draft and the real source library fresh,
+rather than a process-isolated reviewer. The instructions are written to make that
+re-read as honest as a single context can make it, but it isn't mechanical
+independence the way a real subagent would be.
 
-The inspector runs in its own context and reads the actual draft and the source library
-— not a summary. Independence is mechanical, not a promise. Factual claims are checked
-against real sources; interpretation is allowed, but only when it is honestly labeled as
-interpretation rather than dressed up as fact.
+`lv1-writer init` does write a `CLAUDE.md` into the project folder — but that's a
+different mechanism than the old project layout. Cowork reads a `CLAUDE.md` at a
+project's root as ordinary folder instructions, the same way it would for any
+project, skill or no skill. It isn't part of how this skill gets installed or
+triggered; it's just a courtesy so the project stays self-documenting even outside a
+conversation where this skill is active.

@@ -1,11 +1,11 @@
 # Source Library
 
-The spine of this project. Every factual claim in the manuscript traces back to a source
-listed here, with a citation and a confidence grade. Add sources with the `source-intake`
-skill (for files you have) or the `researcher` subagent (for web research).
+The spine of this project. Every factual claim in the manuscript traces back to a
+source listed here, with a citation and a confidence grade. Sources get added when a
+file is handed over (source-intake) or when research finds something on the open web.
 
-Grades: **A** primary source read · **B** reasoned from verified material · **C** single
-unchecked source, held back · **D** guess, never cited.
+Grades: **A** primary source read · **B** reasoned from verified material · **C**
+single unchecked source, held back · **D** guess, never cited.
 
 ---
 
