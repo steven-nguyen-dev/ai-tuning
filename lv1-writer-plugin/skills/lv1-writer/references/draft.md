@@ -38,7 +38,7 @@ pass, which owes the draft nothing.
 
 ## On a FIX-IT send-back
 
-Read `05-inspection.md`, address **every** finding, note exactly what changed, and
+Read `04-inspection.md`, address **every** finding, note exactly what changed, and
 don't argue with the inspection findings — their job is to be harder to satisfy than
 you are, not easier.
 

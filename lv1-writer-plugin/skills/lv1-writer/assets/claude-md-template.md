@@ -11,6 +11,9 @@ This project uses the **lv1-writer** Cowork skill — a sourced-writing pipeline
 - `manuscript/writing-instruction.md` — this project's default prose tone. Edit it
   directly to change the voice; the skill won't overwrite it once it exists.
 - `manuscript/*.md` — the drafts.
+- `agents/lv1-research.md`, `agents/lv1-inspect.md` — the research and inspection
+  stations, run as isolated subagents. Their contracts live here (the orchestrator
+  delegates by name); `references/` holds only the four inline stations.
 - `runs/<id>/` — receipts for each pipeline run (triage, research, outline, draft,
   inspection, manifest).
 

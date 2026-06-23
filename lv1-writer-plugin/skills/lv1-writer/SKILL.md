@@ -10,18 +10,36 @@ using source material into a repeatable line — triage, source curation and res
 outline, draft, independent inspection — and ships only work that is **impressive AND
 true**, with every fact traceable to a source.
 
-This skill runs in one continuous conversation (no isolated subagents), but it
-preserves the discipline that matters: a written plan before drafting, a graded source
-behind every fact, and a genuinely skeptical re-read of the real files before anything
-ships.
+This skill is the **orchestrator** of a plugin pipeline. It preserves the discipline
+that matters: a written plan before drafting, a graded source behind every fact, and a
+genuinely skeptical re-read of the real files before anything ships. The two stations
+most at risk of being quietly under-built run as **isolated subagents** with their own
+context: **research** (`lv1-research`) closes only when a claim ledger is fully sourced,
+and **inspection** (`lv1-inspect`) is mechanically independent — it never saw the
+drafting reasoning — and runs a coverage gate that can send thin research back for more.
+Each subagent carries its own contract (in `agents/`); this orchestrator delegates to
+them by name and integrates what they return.
 
-## First: is this an init request or a task?
+## First: init, review, or a task?
 
-- **Init** — the user explicitly says something like "lv1-writer init" or "set up
-  lv1-writer", or `sources/library.md` doesn't exist yet (a clearly fresh project).
-  Run **Setup** below, then stop and report what you created or updated.
-- **Task** — anything else: a writing or research request, a source handed over, a
-  single station to re-run.
+This skill is reached three ways. Two are handled by dedicated sibling skills that fire
+on their own trigger phrases; everything else is just described in plain language and the
+main skill auto-triggers on its description. There is deliberately **no skill per task
+type** beyond init and review (the task space is open-ended — a model-invoked skill covers
+it).
+
+- **Init** — the **`lv1-writer-init`** skill (triggers: "lv1-writer init", "set up
+  lv1-writer", or a clearly fresh project where `sources/library.md` doesn't exist yet).
+  It runs the **Setup** flow below, then stops and reports what was created or updated.
+- **Review** — the **`lv1-writer-review`** skill (triggers: "review this doc with
+  lv1-writer", "fact-check this document", etc.). It independently reviews an *existing*
+  document by delegating to the **lv1-inspect** subagent in **standalone review mode** —
+  generating a document-specific checklist from `assets/ai-review-checklist-template.md`,
+  then reviewing the document against it and writing `review-checklist.md` and
+  `review-feedback.md` beside it. This does **not** run the writing pipeline below — use it
+  when the document already exists; use the pipeline when producing new prose.
+- **Task** — anything else: a writing or research request, a source handed over, a single
+  station to re-run. The main `lv1-writer` skill auto-triggers and routes via triage.
 
 Re-running Setup on an already-initialized project is safe. Every step except the
 library sync is create-if-missing, and the library sync only adds new sources or
@@ -123,9 +141,14 @@ Default to the lighter lane; escalate for a reason.
 
 ```
 triage → (source-intake / research) → outline → draft (+ self-review) → inspect → ship
-                                                       ▲                    │
-                                                       └────── fix-it ◀──────┘
+              ▲                            ▲                               │
+              │                            └────────── fix-it ◀────────────┤
+              └─────────────── redo-research ◀──────────────────────────────┘
 ```
+
+(`research` and `inspect` run as isolated subagents — `lv1-research` and `lv1-inspect` —
+each with its own context and contract. The orchestrator delegates and integrates their
+results; the two loops are driven by the inspector's verdict.)
 
 1. **Set up the run.** Create `runs/<UTC-timestamp>-<short-slug>/` in the project
    folder. Tell the user the run id.
@@ -134,22 +157,27 @@ triage → (source-intake / research) → outline → draft (+ self-review) → 
    say you're running the fast lane and skip straight to draft after triage.
 3. **Gather material.** For a source the user hands over (PDF, Word, image, URL),
    read `references/source-intake.md` and follow it to add it to
-   `sources/library.md`. For facts still missing, read `references/research.md` and
-   follow it, writing `01-research.md`. Don't move on to outline until the facts the
-   task needs are in the library, graded and sourced.
+   `sources/library.md`. For facts still missing, **delegate to the `lv1-research`
+   subagent** — it researches in its own context and writes `01-research.md` as a graded
+   claim ledger, returning a summary. Don't move on to outline until every claim the task
+   needs is a ledger row that's sourced (A/B) or marked a declared gap.
 4. **Outline.** Read `references/outline.md` and follow it. Write `02-outline.md`.
 5. **Draft.** Read `references/draft.md` and follow it, including the tone in
    `manuscript/writing-instruction.md` if it exists. Write the prose to
    `manuscript/` and a copy to `03-draft.md`. Run its self-review pass before moving
    on.
-6. **Inspect.** Read `references/inspect.md` and follow it — deliberately re-reading
-   the real draft and `sources/library.md`, not your own notes about them. Write
-   `05-inspection.md` with one verdict:
-   - **FIX-IT** → go back to draft with the full findings, fix every one, then
-     re-inspect **from scratch**. Cap at 3 rounds; if still failing, treat as REJECT.
+6. **Inspect.** **Delegate to the `lv1-inspect` subagent** (pipeline mode) — running in
+   its own context, it re-reads the real draft, `sources/library.md`, and `01-research.md`
+   from disk (it never saw the drafting reasoning, which is what makes the check
+   independent) and writes `04-inspection.md` with one verdict:
+   - **FIX-IT** → a draft problem. Go back to draft with the full findings, fix every
+     one, then re-inspect **from scratch**. Cap at 3 rounds; if still failing, REJECT.
+   - **REDO-RESEARCH** → the draft is honest but the research base is too thin (the
+     Coverage check). Go back to the **research** station with the named gaps. Cap at 2
+     redos; then ship with gaps declared or REJECT.
    - **REJECT** → stop. Report honestly. Do not ship.
    - **PASS** → ship.
-7. **Ship.** Write `manifest.md`: a confidence list (every factual claim, its grade,
+7. **Ship.** Write `05-manifest.md`: a confidence list (every factual claim, its grade,
    its source), an assumptions list, and a receipts index. Deliver the draft plus a
    short cover note. State overall confidence and any open assumptions plainly.
 
@@ -162,3 +190,13 @@ If the user just hands over a file or link without asking for the full pipeline 
 this in" / "add this source"), you don't need a full run folder — read
 `references/source-intake.md`, add it to `sources/library.md`, and report the source
 id and what's now citable.
+
+## Reviewing an existing document (no pipeline run)
+
+If the user asks you to review / critique / fact-check a document that already exists
+(rather than write a new one) — whether through the `lv1-writer-review` skill or just in
+plain words — hand it to the **lv1-inspect** subagent in **standalone review mode**. It reads
+`assets/ai-review-checklist-template.md`, generates a document-specific `review-checklist.md`
+beside the target, then reviews against it and writes `review-feedback.md` (verdict
+PASS / FIX-IT / REJECT, every finding located precisely with a concrete fix). The
+inspector is read-only — it never edits the document itself.

@@ -1,0 +1,10 @@
+{
+  "name": "lv1-writer",
+  "version": "1.2.0",
+  "description": "Disciplined research-backed writing pipeline with an independent document-review mode: claim-ledger research, coverage-gated inspection, and isolated research/inspect subagents so nothing ships unless every factual claim traces to a real, checked source.",
+  "author": {
+    "name": "steven-nguyen-dev",
+    "url": "https://github.com/steven-nguyen-dev"
+  },
+  "keywords": ["writing", "research", "fact-checking", "sources", "review", "cowork"]
+}

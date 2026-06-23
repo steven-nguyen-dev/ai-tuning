@@ -18,7 +18,8 @@ has one, can shape the Shape section below), then write `runs/<id>/02-outline.md
 <which library claims support which section — so no section is left unsourced>
 
 ## Inspection plan
-- Checks: facts vs library · interpretation honestly labeled · coherence/voice · scope
+- Checks: facts vs library · interpretation honestly labeled · coherence/voice · scope ·
+  coverage (each headline claim to its own distinct source; no obvious source missed)
 - The inspection pass reads the real draft and sources/library.md directly, not a
   summary of either
 
