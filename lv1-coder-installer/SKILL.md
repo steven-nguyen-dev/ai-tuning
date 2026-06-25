@@ -1,6 +1,6 @@
 ---
 name: lv1-coder-installer
-description: Installs the lv1-coder coding pipeline (triage → research → plan → build → inspect → ship) into the current project. Use /lv1-coder-installer init to scaffold the operating contract, the pipeline skills, the researcher and inspector subagents, and a sources/ knowledge base.
+description: Installs the lv1-coder coding pipeline (triage → [research?] → [plan?] → build → inspect → ship) into the current project. Use /lv1-coder-installer init to scaffold the operating contract, working lessons, the pipeline skills, the researcher and inspector subagents, and a sources/ knowledge base.
 argument-hint: init
 disable-model-invocation: true
 ---
@@ -33,52 +33,57 @@ project's current working directory and use forward slashes.
 
 ### Step 1 — `CLAUDE.md` at the project root
 
-The import path is **exactly** `@.claude/lv1-coder.md`.
+The import paths are **exactly** `@.claude/lv1-coder.md` and
+`@.claude/working-lessons.md`.
 
 - If `CLAUDE.md` does **not** exist: create it from `assets/claude-md-template.md`.
-- If `CLAUDE.md` **already** exists: do **not** clobber it. Read it. If it does not
-  already contain the line `@.claude/lv1-coder.md`, append a blank line and then
-  that single line at the end of the file. If it already contains that line, leave
-  the file untouched.
+- If `CLAUDE.md` **already** exists: do **not** clobber it. Read it. For each of the
+  two import lines, if it is not already present, append a blank line and then that
+  line at the end of the file. If both lines already exist, leave the file untouched.
 
 ### Step 2 — `.claude/lv1-coder.md`
 
 Copy `assets/lv1-coder-rules-template.md` to `.claude/lv1-coder.md`. This is the
 operating contract that `CLAUDE.md` imports.
 
-### Step 3 — the project runner skill
+### Step 3 — `.claude/working-lessons.md`
+
+Copy `assets/working-lessons-template.md` to `.claude/working-lessons.md`. This is
+the living lessons file all stations read at the start of a run.
+
+### Step 4 — the project runner skill
 
 Copy `assets/lv1-coder-skill-template.md` to `.claude/skills/lv1-coder/SKILL.md`.
 This is the `/lv1-coder` runner.
 
-### Step 4 — the station skills
+### Step 5 — the station skills
 
 - Copy `assets/triage-skill-template.md` to `.claude/skills/triage/SKILL.md`.
 - Copy `assets/plan-skill-template.md` to `.claude/skills/plan/SKILL.md`.
 - Copy `assets/build-skill-template.md` to `.claude/skills/build/SKILL.md`.
 
-### Step 5 — the subagents
+### Step 6 — the subagents
 
 - Copy `assets/researcher-agent-template.md` to `.claude/agents/researcher.md`.
 - Copy `assets/inspector-agent-template.md` to `.claude/agents/inspector.md`.
 
-### Step 6 — the knowledge base
+### Step 7 — the knowledge base
 
 - Copy `assets/library-template.md` to `sources/library.md` (create `sources/` if
   needed).
 
-### Step 7 — the receipts directory
+### Step 8 — the receipts directory
 
 Create the directory `runs/` (empty) at the project root.
 
-### Step 8 — report and ask for a restart
+### Step 9 — report and ask for a restart
 
 Print a short summary listing exactly what was created (and whether `CLAUDE.md` was
 created fresh or appended to), then tell the user:
 
 > ✅ lv1-coder is installed in this project. **Restart Claude Code** so the new
-> skills, subagents, and the imported `.claude/lv1-coder.md` rules are picked up.
-> Then run `/lv1-coder <your task>` to run a task through the pipeline.
+> skills, subagents, and the imported `.claude/lv1-coder.md` rules and
+> `.claude/working-lessons.md` are picked up. Then run `/lv1-coder <your task>`.
 
 Do not run any pipeline work yourself. Do not modify any files outside the list
 above. If a target file other than `CLAUDE.md` already exists, overwrite it (the

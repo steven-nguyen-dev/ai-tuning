@@ -30,6 +30,8 @@ and subagent inherit these rules. They are not optional. Keep this file small.
    artifact — the code and tests — not a summary from the maker.
 9. **Smallest effort that works.** Triage picks the tier; do not silently escalate.
    If a fast lane is enough, use it and say so.
+10. **Token efficiency.** Run only the stations triage approved. Read only the files
+    the task needs. Do not sweep the whole repo when a targeted read suffices.
 
 ## Confidence grades
 
@@ -43,7 +45,7 @@ and subagent inherit these rules. They are not optional. Keep this file small.
 ## Effort tier (triage sets this first)
 
 - **tiny** — quick, clear, low-risk → fast lane: triage → build → inspect.
-- **normal** — ordinary task → core line.
+- **normal** — ordinary task → research and plan only when triage explicitly triggers them.
 - **full** — important or multi-part → full pipeline.
 - **high-stakes** — risky or irreversible → full pipeline + extra scrutiny at research
   and inspection.
@@ -53,13 +55,20 @@ Default to the lighter lane; escalate for a reason, not out of habit.
 ## The line
 
 ```
-triage → research → plan → build (+ self-review) → inspect → ship
-                                       ▲                 │
-                                       └──── fix-it ◀─────┘
+triage → [research?] → [plan?] → build (+ self-review) → inspect → ship
+                                        ▲                     │
+                                        └──── fix-it ◀─────────┤
+                                        └──── redo-research ◀──┘
 ```
 
+- **Research and plan are conditional.** Triage decides whether they run. The default
+  is to skip both — AI is strong at standard coding tasks; research fires only when a
+  specific external fact is missing that the codebase cannot answer.
 - **Fix-it loop:** if inspection returns FIX-IT, fix every finding and **re-inspect
   from scratch** — the old report is never trusted. Cap at 3 rounds, then REJECT.
+- **Redo-research loop:** if inspection returns REDO-RESEARCH, the build is honest but
+  the research base is too thin. Named gaps go back to the researcher, then rebuild
+  and re-inspect. Cap at 2 redos.
 - **Ship only what passed**, with its proof: a confidence list, an assumptions list,
   and the receipts index.
 
@@ -68,11 +77,11 @@ triage → research → plan → build (+ self-review) → inspect → ship
 Each real run writes to `runs/<UTC-timestamp>-<slug>/`:
 
 ```
-00-triage.md       lane + effort + scope
-01-research.md     facts, each with a source and a grade
-02-plan.md         the written plan + team size + inspection plan
-03-deliverable…    the actual change (or a summary + the diff)
-05-inspection.md   the inspector's verdict (written by the inspector)
+00-triage.md       lane + stations + research/plan decisions + scope
+01-research.md     claim ledger, each row sourced and graded (if research ran)
+02-plan.md         written plan + team size + inspection plan (if plan ran)
+03-deliverable…    the actual change (summary + diff/paths)
+04-inspection.md   the inspector's verdict (written by the inspector)
 manifest.md        confidence list + assumptions + receipts index
 ```
 
@@ -82,11 +91,10 @@ makes the check independent.
 ## Knowledge base
 
 Reference material lives in `sources/`. The `researcher` subagent owns this directory
-and maintains `sources/library.md` as the navigator/index. When new external material
-is needed (web pages, PDFs, books, project documents), the researcher distills the
-*needed* knowledge into a new `sources/<topic>.md` and registers it in `library.md`
-— it never dumps raw material into the repo. You can ask the assistant to add a
-source from a URL or a local file at any time.
+and maintains `sources/library.md` as the navigator/index. Read `sources/library.md`
+before any web search — do not re-fetch what is already distilled. When new external
+material is needed, the researcher distills it into `sources/<topic>.md` and registers
+it in `library.md`.
 
 ## How to run
 
