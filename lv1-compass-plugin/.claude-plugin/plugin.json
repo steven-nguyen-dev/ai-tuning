@@ -1,0 +1,10 @@
+{
+  "name": "lv1-compass",
+  "version": "0.1.0",
+  "description": "Assistant + advisor for work. lv1-assistant makes trustworthy work deliverables (analysis, reports, memos, decks, models) through a claim-ledger research → draft → independent-inspection pipeline; lv1-advisor is an independent judge that reviews an artifact, challenges a position with a sourced steelman, or helps you decide a fork and leaves the choice with you. Both share one constitution and ship only work that is impressive AND true.",
+  "author": {
+    "name": "steven-nguyen-dev",
+    "url": "https://github.com/steven-nguyen-dev"
+  },
+  "keywords": ["analysis", "report", "advisor", "review", "steelman", "decision", "research", "fact-checking", "sources", "cowork"]
+}

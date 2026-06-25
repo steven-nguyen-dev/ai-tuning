@@ -54,6 +54,20 @@ Replace it with a count.
 - If sources **conflict**, keep both and say so — don't silently pick the convenient one.
   Note the conflict in the ledger so the draft and inspector see it.
 
+## Hunt the pitfalls, don't just avoid them
+
+A flat-reported wrong number is the failure that survives inspection. Go looking for it:
+
+- **Conflict / pitfall hunt.** For each load-bearing figure, actively search for the
+  *most-cited or viral wrong version* of it and reconcile the two — definitional
+  mismatch, wrong reference frame, stale figure, a headline that conflated two datasets.
+  (The pattern: a "26,000 layoffs" rumor that was a consolidated-vs-group headcount
+  mismatch, debunked by the dated primary record.) Cite the correction. Don't report a
+  figure flat if a widely-believed contradicting version exists — name it and resolve it.
+- **Steelman material.** If the piece will reach a contested conclusion, gather the
+  strongest *opposing* evidence now — real, sourced data that cuts against the likely
+  thesis — so the draft's steelman is built from fact, not invented for symmetry.
+
 ## Grades (label every factual claim)
 
 | Grade | Meaning | Ships? |
@@ -79,8 +93,12 @@ fetch it, you didn't verify it — don't grade it A.
 | 2 | <…> | B | <url> | single-sourced |
 | 3 | <…> | DECLARED GAP | proxy: <…> — why: <no in-scope source> | — |
 
-## Conflicts
-<where sources disagree, both sides, who says what>
+## Conflicts / resolved pitfalls
+<each conflict or viral-wrong-number: both figures, who says what, and the
+reconciliation (definitional/frame mismatch, stale data…) with the correcting source>
+
+## Steelman material (if the conclusion will be contested)
+<the strongest opposing evidence found, sourced — for the draft's steelman section>
 
 ## Declared gaps
 <every row marked DECLARED GAP, gathered here so the draft and inspector can't miss them>

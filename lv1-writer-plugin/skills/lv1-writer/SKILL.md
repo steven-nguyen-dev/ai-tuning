@@ -49,9 +49,12 @@ lost work.
 
 ## Setup (`lv1-writer init`, or whenever `sources/library.md` is missing)
 
-Run every step below, in order. Step 1 always runs, even on a project that already
-has a library — everything else is create-if-missing, so a re-run never destroys a
-customization.
+Setup is **interactive**: first ask the user one grouped round — topic, genre/format,
+tone, and working mode (auto | interactive), each accepting "you decide" (full wording
+in `../lv1-writer-init/SKILL.md`). Use `references/tone-detect.md` for the genre
+taxonomy. Then run every step below, in order. Step 1 always runs, even on a project
+that already has a library — everything else is create-if-missing, so a re-run never
+destroys a customization.
 
 1. **Sync the source library.** If `sources/library.md` doesn't exist yet, write the
    content of `assets/library-template.md` first. Either way, read
@@ -60,10 +63,12 @@ customization.
    init runs, not just on a fresh project.
 2. **`manuscript/_about.md`** — if missing, write the content of
    `assets/manuscript-about-template.md` verbatim.
-3. **`manuscript/writing-instruction.md`** — if missing, write the content of
-   `assets/writing-instruction-template.md` verbatim. This is the project's default
-   prose tone; the `draft` station reads it. **Never overwrite this file if it
-   already exists** — that's where the user's own edits to the tone live.
+3. **`manuscript/writing-instruction.md`** — if missing, seed it from the chosen tone
+   profile (`assets/tone-profiles/<id>.md`). If the user said "you decide" for genre,
+   leave this file unwritten and let per-task detection (`references/tone-detect.md`)
+   drive tone instead. This is the project's default prose tone; the `draft` station
+   reads it. **Never overwrite this file if it already exists** — that's where the
+   user's own edits to the tone live.
 4. **`CLAUDE.md` (the final step).** If it doesn't exist, create it containing the
    block from `assets/claude-md-template.md`. If it exists, replace only the text
    between `<!-- lv1-writer:structure:start -->` and `<!-- lv1-writer:structure:end
@@ -77,13 +82,14 @@ customization.
   have written something you didn't touch.
 - How many source files were found in `sources/` and how many of those were newly
   added to the library (or "none yet" on a fresh project with no `sources/` files).
-- **The default tone**, in 2-4 plain sentences distilled from
-  `manuscript/writing-instruction.md` — e.g. "a storyteller telling one true thing to
-  one reader; vivid, case-driven, every claim graded and sourced; Scene → Mechanism →
-  Reflection → Bridge structure; real documented cases only, nothing invented." Tell
-  the user that to use a different tone, they should edit
+- **The chosen topic, genre, tone profile, and working mode** (auto | interactive),
+  plus **the tone** in 2-4 plain sentences distilled from the seeded
+  `manuscript/writing-instruction.md` (or the detected profile) — e.g. "a storyteller
+  telling one true thing to one reader; vivid, case-driven, every claim graded and
+  sourced; Scene → Mechanism → Reflection → Bridge structure; real documented cases
+  only, nothing invented." Tell the user that to use a different tone, they should edit
   `manuscript/writing-instruction.md` directly — init won't touch it again once it
-  exists.
+  exists — and that the available profiles live in `assets/tone-profiles/`.
 - That `CLAUDE.md` now reflects the current project layout.
 
 ## The bar
@@ -100,9 +106,10 @@ customization.
    search the web. Never write factual claims from memory alone.
 3. **Plan in writing.** The outline is a visible artifact. If it changes, say so.
 4. **Label confidence** on every factual claim (A/B/C/D below). A label is a reason to
-   commit *harder*, not a hedge — never soften a finding the evidence supports. If you
-   make a numeric or analytical claim, show the working, or don't make the precise
-   claim.
+   commit *harder*, not a hedge — never soften a finding the evidence supports
+   (neutral ≠ timid). A `[B]` is a real conclusion, not a maybe. A numeric or analytical
+   claim **is not a claim until its arithmetic is shown** — show the working or don't
+   make the precise claim. (See `references/working-lessons.md`, read before drafting.)
 5. **Source every factual claim** against the source library. No source, no claim.
 6. **Mark interpretation as interpretation.** Analysis, reading, argument, and
    creative choices are *your* judgment — present them honestly as such. They don't
@@ -119,7 +126,7 @@ customization.
 
 | Grade | Meaning | Ships? |
 |-------|---------|--------|
-| **A — Proven** | Backed by a primary source you fetched and read. | Yes |
+| **A — Proven** | Source text **present in this session** — fetched and read this run, handed over by the user, or returned by a tool call you actually made — such that you could quote it now. | Yes |
 | **B — Reasoned** | Derived with sound logic from verified material. A real conclusion. | Yes (labeled) |
 | **C — From memory** | Memory or a single unchecked source. | Held back until confirmed |
 | **D — Guess** | A guess. | **Never ships** — set aside or flag as an explicit assumption |
@@ -127,7 +134,27 @@ customization.
 (Confidence grades apply to *factual* claims. Interpretation and creative prose are
 governed by rule 6, not by citation.)
 
-## Effort tier (set this first, in triage)
+**The `[A]` provenance test.** You cannot feel the difference between reading a source and
+recalling one — so make it physical: a claim earns `[A]` only if you can point to where the
+source text sits *in this session*. A claim you "know" from training but did not pull this
+run is **not** `[A]` — grade it `[C]` (memory) until confirmed, or `[B]` only if it is a
+sound derivation from material that *is* present. If you can't point to the source, it isn't
+an `[A]`.
+
+## Three knobs (set these first, in triage)
+
+Every task is sorted along three independent knobs, recorded in `00-triage.md`:
+
+1. **Genre / tone profile** — *what voice and shape*. Detected per
+   `references/tone-detect.md`; selects a profile from `assets/tone-profiles/`. The
+   profile also decides whether the A/B/C/D grading and proof package apply at all
+   (fiction switches them off for craft contracts instead).
+2. **Rigor tier** — *how much proof apparatus ships* (below).
+3. **Working mode** — *auto | interactive* — which, with the genre, resolves the
+   **authorship approach** (AI-autonomous | interview-driven | hybrid; see
+   `references/interview.md`).
+
+### Rigor tier
 
 - **tiny** — short, clear → fast lane: triage → draft → inspect.
 - **normal** — ordinary piece → full line below.
@@ -135,7 +162,10 @@ governed by rule 6, not by citation.)
 - **high-stakes** — published, contested, or high-visibility → full line + extra
   scrutiny at research and inspection.
 
-Default to the lighter lane; escalate for a reason.
+Default to the lighter lane; escalate for a reason. For non-fiction, the rigor tier
+scales the proof apparatus the genre calls for (a `high-stakes` report ships
+methodology + inline grades + appendix; a `normal` piece ships grades in a closing
+note).
 
 ## The pipeline
 
@@ -152,20 +182,33 @@ results; the two loops are driven by the inspector's verdict.)
 
 1. **Set up the run.** Create `runs/<UTC-timestamp>-<short-slug>/` in the project
    folder. Tell the user the run id.
-2. **Triage.** Read `references/triage.md` and follow it. Write `00-triage.md`. If it
-   surfaces a genuinely blocking question, stop and ask the user (rule 1). On `tiny`,
-   say you're running the fast lane and skip straight to draft after triage.
-3. **Gather material.** For a source the user hands over (PDF, Word, image, URL),
-   read `references/source-intake.md` and follow it to add it to
-   `sources/library.md`. For facts still missing, **delegate to the `lv1-research`
-   subagent** — it researches in its own context and writes `01-research.md` as a graded
-   claim ledger, returning a summary. Don't move on to outline until every claim the task
-   needs is a ledger row that's sourced (A/B) or marked a declared gap.
+2. **Triage.** Read `references/triage.md` and follow it. Write `00-triage.md`. This
+   sets all three knobs — detect the **genre / tone profile** and **structure shape**
+   (`references/tone-detect.md`, `references/structure-shapes.md`), the **rigor tier**,
+   and the **working mode → authorship approach**. If genre or scope is genuinely
+   ambiguous, ask one batched round before continuing (rule 1). On `tiny`, say you're
+   running the fast lane and skip straight to draft after triage.
+3. **Gather material — routed by authorship approach.**
+   - **AI-autonomous:** for a source handed over (PDF, Word, image, URL), read
+     `references/source-intake.md` and add it to `sources/library.md`. For facts still
+     missing, **delegate to the `lv1-research` subagent** — it researches in its own
+     context and writes `01-research.md` as a graded claim ledger, returning a summary.
+     Don't move on until every claim the task needs is a ledger row sourced (A/B) or
+     marked a declared gap.
+   - **Interview-driven:** the spine comes from the user — run the intake interview
+     (`references/interview.md`), one batched round, and save answers to
+     `manuscript/intake.md`. Research the web only for context *around* the user's
+     material, if at all.
+   - **Hybrid (e.g. cognitive-behavior):** do both — interview for the lived material
+     (`intake.md`) *and* delegate to `lv1-research` for the science. Keep the two
+     visibly distinct downstream.
 4. **Outline.** Read `references/outline.md` and follow it. Write `02-outline.md`.
-5. **Draft.** Read `references/draft.md` and follow it, including the tone in
-   `manuscript/writing-instruction.md` if it exists. Write the prose to
-   `manuscript/` and a copy to `03-draft.md`. Run its self-review pass before moving
-   on.
+5. **Draft.** Read `references/draft.md` and follow it: compose the voice from the tone
+   profile in `00-triage.md` (+ `manuscript/writing-instruction.md` overrides), apply the
+   apparatus for the rigor tier, and let format follow content. For interview-driven /
+   hybrid work, read `manuscript/intake.md` as a first-class source and invent no
+   personal material. Write the prose to `manuscript/` and a copy to `03-draft.md`. Run
+   its self-review pass before moving on.
 6. **Inspect.** **Delegate to the `lv1-inspect` subagent** (pipeline mode) — running in
    its own context, it re-reads the real draft, `sources/library.md`, and `01-research.md`
    from disk (it never saw the drafting reasoning, which is what makes the check
@@ -178,8 +221,12 @@ results; the two loops are driven by the inspector's verdict.)
    - **REJECT** → stop. Report honestly. Do not ship.
    - **PASS** → ship.
 7. **Ship.** Write `05-manifest.md`: a confidence list (every factual claim, its grade,
-   its source), an assumptions list, and a receipts index. Deliver the draft plus a
-   short cover note. State overall confidence and any open assumptions plainly.
+   its source), an assumptions list, and a receipts index. For **full / high-stakes
+   non-fiction**, also **append the proof package to the delivered file itself**
+   (confidence table, assumptions, source index with in-window flags, data-limits) — the
+   reader should be able to verify without opening `runs/`. Lighter tiers keep grades in
+   a closing note; fiction ships none of this. Deliver the draft plus a short cover note;
+   state overall confidence and any open assumptions plainly.
 
 After each station, give the user a one-line status (e.g. "Research: 12 facts, all
 sourced"). If you cut a corner, say so — never fake a step.

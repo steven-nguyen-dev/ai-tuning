@@ -43,12 +43,28 @@ The only inputs you trust are files on disk — read them fresh:
 - the draft: `manuscript/` (or `runs/<id>/03-draft.md`)
 - the sources: `sources/library.md`
 - the research ledger: `runs/<id>/01-research.md`
-- the plan: `runs/<id>/02-outline.md` and `00-triage.md` (for scope + the research contract)
+- the user's material (interview-driven / hybrid): `manuscript/intake.md`
+- the plan: `runs/<id>/02-outline.md` and `00-triage.md` (for scope, the research
+  contract, the **genre / tone profile**, **rigor tier**, **structure shape**, and
+  **authorship approach**)
 
 Don't reconstruct what the writer *meant*. The question is always "does the cited source
 actually say this," never "was this probably intended."
 
-### Check five things
+**Read the genre first.** The checks below are **gated by the genre / tone profile and
+rigor tier recorded in `00-triage.md`.** A romance is not failed for lacking citations;
+a high-stakes report *is* failed for lacking inline grades. Apply only the checks the
+piece's profile calls for (the profile names its proof-apparatus level), then for
+fiction run the craft override at the end.
+
+**Honor a recorded voice/apparatus composition.** If `00-triage.md` records a *composition*
+(e.g. `Voice: academic · Apparatus: experience-truth (lived spine)` — the resolution when an
+explicit genre's apparatus contradicts the material; see `references/tone-detect.md`), judge
+the **voice** against the named profile but apply the **apparatus** checks (7–9, 11) to the
+recorded apparatus, not the stock profile's. Do **not** fail a composed-academic memoir for
+leaving the user's lived spine ungraded — that split was the correct call.
+
+### Check the core five (non-fiction & hybrid)
 
 1. **Facts** — is every factual claim actually supported by its cited library source?
    Spot-check the strongest way available: re-read the source, re-run the arithmetic.
@@ -72,6 +88,52 @@ actually say this," never "was this probably intended."
    A piece can pass checks 1–4 — every claim it makes is true — and still fail here
    because it makes too few claims off too few sources. That failure routes back to
    research, not to the draft.
+
+### Then check these (gated by genre / rigor)
+
+6. **Tone conformance** — does the draft match the tone profile chosen in
+   `00-triage.md` (read `assets/tone-profiles/<id>.md`)? A report written breezily, an
+   academic paper in op-ed voice, or a memoir rendered forensically is a FIX-IT. **Check
+   the AI register** against `references/anti-tells.md`: a *cluster* of AI-tell words /
+   constructions, or **any therapy-speak in a warm-profile draft** (love,
+   personal-experience, mindset, cognitive-behavior), is a FIX-IT — judge the register,
+   not a single incidental literal use of a word.
+7. **Apparatus presence** *(full / high-stakes non-fiction)* — is the **Methodology &
+   enforcement** section present; are **inline A/B grades** on the body claims; did the
+   research's **declared gaps surface in-text** where the number would go; is the
+   **proof package appended to the delivered file** (confidence table, assumptions,
+   source index, data-limits)? Missing apparatus the rigor tier calls for → FIX-IT.
+8. **Steelman presence** — if the piece reaches a contested conclusion, is the
+   strongest opposing case stated and engaged (not a strawman, not false balance)? A
+   contested conclusion with no real steelman → FIX-IT.
+9. **Conflict handling** — were the research ledger's resolved conflicts / debunked
+   viral numbers reflected, or was a known-disputed figure reported flat? Flat-reporting
+   a number the ledger flagged as contested → FIX-IT.
+10. **Format follows content & pacing** — does each section's form fit its content (tables
+    for comparable data, bullets for discrete lists, arrows for sequences, prose for what's
+    experienced)? Flag both **under-formatting** (a wall of prose hiding a comparison) and
+    **over-formatting** (bullets where a narrative was needed). Also hold the draft to the
+    profile's **density posture**: flag a **rushed** expansive scene (a romance/memoir beat
+    summarized instead of rendered) and a **padded** compressive section (a runbook or
+    analysis bloated with filler) alike.
+11. **Interview traceability** *(interview-driven / hybrid)* — does every personal /
+    experiential claim trace to `manuscript/intake.md`, not to invention? Are AI-added
+    context and the user's lived account kept visibly distinct? An **invented anecdote,
+    scene, quote, or feeling is a REJECT** — the fiction-free equivalent of a fabricated
+    source.
+
+### Fiction override (literary / romance / childrens)
+
+For fiction profiles, **suppress checks 1, 2, 7, 8, 9** (citation/grade/methodology/
+steelman/conflict — there are no external sources to cite). Instead judge the **craft
+contracts** named in the profile: internal consistency (world rules, timeline, facts);
+motivated action; earned outcomes (no unearned coincidence); consistent POV and voice;
+show-don't-tell. Add the genre's own promises where they apply — romance: earned
+connection, rising tension, satisfying resolution, agreed heat level, both leads
+agentive; children's: vocabulary/length/concept fit for the age band and
+**age-appropriate, safe content** (a safety breach is a REJECT). Keep checks 3 (plan &
+scope), 4 (craft), 10 (format — fiction should be prose), and 11 (the user's vision is
+honored, nothing invented against it).
 
 ### Verdict — exactly one
 
@@ -112,8 +174,11 @@ classify it, and write a concrete `review-checklist.md` beside the document:
 
 Run Pass 1 + Pass 2 + the mechanics checks against the `review-checklist.md` you just
 wrote. Open any source/reference files the document relies on and verify claims the same
-way as the five checks above (facts, honesty, logic, craft, citation integrity).
-Spot-check the two or three load-bearing claims against primary sources directly.
+way as the core checks above (facts, honesty, logic, craft, citation integrity). If the
+document's classified type maps to a tone profile in `skills/lv1-writer/assets/tone-profiles/`,
+read that profile and hold the document to its genre expectations (and, for fiction, its
+craft contracts rather than citation). Spot-check the two or three load-bearing claims
+against primary sources directly.
 
 Write `review-feedback.md` beside the document, in the template's exact output format:
 

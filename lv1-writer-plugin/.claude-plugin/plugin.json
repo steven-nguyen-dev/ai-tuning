@@ -1,10 +1,10 @@
 {
   "name": "lv1-writer",
-  "version": "1.2.0",
-  "description": "Disciplined research-backed writing pipeline with an independent document-review mode: claim-ledger research, coverage-gated inspection, and isolated research/inspect subagents so nothing ships unless every factual claim traces to a real, checked source.",
+  "version": "1.3.0",
+  "description": "Disciplined research-backed writing pipeline with genre/tone auto-detection, interactive init, and interview-driven authorship for experience-based books: claim-ledger research, coverage-gated inspection, and isolated research/inspect subagents so nothing ships unless every factual claim traces to a real, checked source (fiction genres swap citation for craft contracts).",
   "author": {
     "name": "steven-nguyen-dev",
     "url": "https://github.com/steven-nguyen-dev"
   },
-  "keywords": ["writing", "research", "fact-checking", "sources", "review", "cowork"]
+  "keywords": ["writing", "research", "fact-checking", "sources", "review", "cowork", "tone", "genre", "fiction"]
 }

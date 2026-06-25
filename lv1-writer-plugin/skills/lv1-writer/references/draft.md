@@ -3,21 +3,102 @@
 Write the real prose, at full effort, following the outline. Save it to `manuscript/`
 (one file per chapter or piece) and a copy to `runs/<id>/03-draft.md`.
 
-## Tone
+## Tone — compose the voice (in precedence order)
 
-Before writing, read `manuscript/writing-instruction.md` if it exists, and follow it
-for voice, structure, and vividness — it's this project's default prose style (or a
-custom one if the user edited it). If the file doesn't exist, skip this and write in
-clear, accurate, plain prose instead.
+Read `00-triage.md` for the chosen tone profile and authorship approach, then compose
+the voice from these layers, highest precedence first:
 
-This is a style layer, not a replacement for the rules below. If its own grading
-language (the "echo / consistent with / well-evidenced / replicated" ladder) and the
-project's A/B/C/D source grades ever seem to pull in different directions, the
-A/B/C/D system decides whether a claim ships at all; the writing-instruction.md
-ladder only governs which verb you use to phrase a claim that already cleared that
-bar.
+1. **Explicit user instruction** for this task always wins.
+2. **The tone profile** named in `00-triage.md` — read `assets/tone-profiles/<id>.md`
+   and follow its Spine / Truth-or-fiction contract / Detail / Tone / Structure /
+   Never-do. This is the genre's voice and shape.
+3. **Project overrides** in `manuscript/writing-instruction.md`, layered on top, if it
+   exists (the user's project-wide tone edits).
 
-## Honesty (non-negotiable)
+If no profile is set and no `writing-instruction.md` exists, write in clear, accurate,
+plain prose. Also read `references/working-lessons.md` and `references/anti-tells.md`
+before drafting.
+
+**Load only the assigned profile.** Read the single tone profile named in `00-triage.md`
+— do not re-load `tone-detect.md` or the other profiles into the drafting context. The
+genre is already decided; the rest of the taxonomy is noise that encourages register
+bleed (an analytical tic creeping into a memoir, or vice versa).
+
+**Write out of the AI register.** `references/anti-tells.md` lists the words and
+constructions that mark prose as machine-written (generic-AI filler, therapy-speak, hype,
+empty pivots). Avoid them as reflexive filler in every genre; for warm/intimate profiles
+(love, personal-experience, mindset, cognitive-behavior) a slide into therapy-speak is an
+automatic FIX-IT at inspection.
+
+The profile is a style + structure layer, not a replacement for the honesty rules
+below. **The profile also decides whether those rules apply at all:** a fiction profile
+(literary, romance, childrens) switches A/B/C/D grading and the proof package **off** and
+runs its craft contracts instead; non-fiction and hybrid profiles keep grading on. Where
+a profile's own grading ladder ("echo / consistent with / well-evidenced / replicated")
+and the project's A/B/C/D grades seem to pull apart, A/B/C/D decides whether a claim
+ships at all; the ladder only governs which verb phrases a claim that already cleared
+that bar.
+
+## Apparatus by rigor level (non-fiction & hybrid)
+
+Match how much proof machinery the prose carries to the rigor tier set in triage:
+
+- **full / high-stakes** — open with a **Methodology & enforcement** section (recency
+  window, source spine, enforcement rule, red-line exclusions, from the triage research
+  contract); carry **inline A/B grades** on every factual claim in the body; **surface
+  every DECLARED GAP** from `01-research.md` in-text where the number would go, phrased
+  as an explicit refusal to invent; and **append the proof package to the delivered
+  file itself** (confidence table, assumptions, source index with in-window flags,
+  data-limits) — not only to `runs/<id>/05-manifest.md`.
+- **normal / medium** — grades in a closing notes/appendix, inline only on load-bearing
+  claims; methodology compressed to a one-paragraph "About the sources" note.
+- **tiny** — grades available in `sources/library.md`; keep the prose clean.
+- **fiction** — none of the above; follow the profile's craft contracts.
+
+For **hybrid** (cognitive-behavior, mindset): grade and cite the science; treat the
+user's material from `manuscript/intake.md` as experience-truth (ungraded); keep the two
+visibly distinct in the prose.
+
+## Format follows content
+
+Before writing each section, pick its presentation form from the *content type*, not a
+fixed template:
+
+- **Table** — multiple data points, stats, or numbers that invite comparison.
+- **Bullets** — a list of discrete ideas or key points (or, in mindset/how-to, steps
+  the reader will *do*).
+- **Dashes / arrows** (`A → B → C`) — a loop, sequence, pipeline, or cause-effect chain.
+- **Prose** — content the reader should *experience* (a person, an unfolding process, a
+  reflection, an argument).
+
+This is a deliberate decision point ("what shape does this content want?"), not a
+license to over-format. Respect the genre: fiction and narrative/experience profiles
+default to prose and use markup sparingly; analytical and technical profiles use tables,
+diagrams, and arrows freely. The inspector flags both under-formatting (a wall of prose
+hiding a comparison that wants a table) and over-formatting (bullets where the reader
+needed a narrative).
+
+**Honor the profile's density posture** (the `Density & pacing` line in its header):
+- **compress** (technical, analytical-intelligence, academic) — shortest path to the
+  claim; lead with tables/lists; no narrative throat-clearing.
+- **expand** (literary, romance, love, personal-experience) — stay inside the scene;
+  render the beat before moving on; don't summarize what should be lived. *Expansion is
+  rendered detail, never filler — never pad to hit a length.*
+- **balanced** (the rest) — length follows the idea.
+
+There is **no minimum word count per section** — a quota only produces padding (the exact
+filler `anti-tells.md` targets). The inspector flags a *rushed* expansive scene and a
+*padded* compressive section alike.
+
+## Interview-driven & hybrid drafts
+
+If the authorship approach is interview-driven or hybrid, read `manuscript/intake.md`
+as a first-class source and draft the lived material from it — **never invent a
+personal anecdote, scene, quote, or feeling the user didn't give**. A gap the user
+skipped stays a gap (keep the section leaner); don't fill it with invention. See
+`references/interview.md`; an invented anecdote is a REJECT at inspection.
+
+## Honesty (non-negotiable — non-fiction & hybrid; fiction follows its craft contracts)
 
 1. **Every factual claim** carries a confidence grade and ties to a source in
    `sources/library.md`. No source, no claim. "D" guesses never ship.

@@ -68,6 +68,16 @@ Each station's contract lives in exactly one place — no duplication:
 
 - **Inline stations** (run in the orchestrator's own context): `references/triage.md`,
   `references/outline.md`, `references/draft.md`, `references/source-intake.md`.
+- **Support contracts** (read by the inline stations): `references/tone-detect.md`
+  (genre→profile detection), `references/structure-shapes.md` (descriptive vs
+  hypothesis-driven), `references/interview.md` (interview-driven / hybrid material
+  gathering, batched rounds), `references/working-lessons.md` (read before drafting),
+  `references/anti-tells.md` (the AI register to write out of; checked at inspection).
+- **Tone profiles**: `assets/tone-profiles/*.md` — one voice spec per genre; triage picks
+  one per task. The profile decides voice, structure, and whether source-grading applies
+  (fiction switches it off for craft contracts). Editing a project's default voice means
+  editing `manuscript/writing-instruction.md`; editing a genre's voice means editing its
+  profile file.
 - **Subagent stations** (run in their own isolated context): the research and inspection
   contracts live in `../../agents/lv1-research.md` and `../../agents/lv1-inspect.md` at
   the plugin root. The orchestrator delegates to them by name; it keeps no inline copy of
