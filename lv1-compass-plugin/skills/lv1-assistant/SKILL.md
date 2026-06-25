@@ -59,8 +59,9 @@ verdict.)
 > **Passing the discipline to a subagent (required).** A subagent runs from the project
 > directory and **cannot read the plugin's `core/` from its own path**. So when you
 > delegate, paste the governing context into the subagent's task prompt: the contents of
-> `../../core/constitution.md` and `../../core/working-lessons.md` (which you, the
-> orchestrator, can read). Without this the subagent runs blind to the bar and the grades.
+> `../../core/constitution.md`, `../../core/working-lessons.md`, and (for the inspector)
+> `../../core/readability.md` — which you, the orchestrator, can read. Without this the
+> subagent runs blind to the bar, the grades, and the format rules it must enforce.
 
 1. **Set up the run.** Create `runs/<UTC-timestamp>-<short-slug>/`. Tell the user the run
    id.
@@ -75,7 +76,11 @@ verdict.)
    `references/source-intake.md` and add it to `sources/library.md`. For facts still
    missing, **delegate to the `lv1-research` subagent** — it writes `01-research.md` as a
    graded claim ledger and returns a summary. Don't move on until every claim the
-   deliverable needs is a ledger row sourced (A/B) or marked a declared gap.
+   deliverable needs is a ledger row sourced (A/B) or marked a declared gap — **and until
+   the spine actually landed**: confirm `sources/library.md` now holds the run's A/B source
+   blocks. If `lv1-research` reported a library write failure (a `library.pending.md`
+   fallback), surface it to the user and treat the spine as degraded; don't proceed as if
+   `sources/library.md` is intact when it's empty.
 4. **Outline.** Read `references/outline.md` and follow it. Write `02-outline.md`.
 5. **Draft.** Read `references/draft.md` and follow it: compose the voice from the register
    in `00-triage.md`, apply the apparatus for the rigor tier, and let format follow content.
@@ -91,7 +96,12 @@ verdict.)
    - **REJECT** → stop. Report honestly. Do not ship.
    - **PASS** → ship.
 7. **Ship.** Write `05-manifest.md`: a confidence list (every factual claim, its grade, its
-   source), an assumptions list, a receipts index. For **full / high-stakes**, also
+   source), an assumptions list, a receipts index. **Verify every receipt before listing
+   it** — list only files that are actually on disk; if a station's receipt is missing
+   because a write failed (e.g. `04-inspection.md`), say so explicitly (`04-inspection.md —
+   MISSING, write failed`) rather than listing it, and never report a verdict (PASS, etc.)
+   drawn from a receipt that was never written (constitution → Write integrity, R4).
+   Likewise flag an empty/degraded `sources/library.md` here. For **full / high-stakes**, also
    **append the proof package to the delivered file itself** (confidence table,
    assumptions, source index, data-limits) — the reader should verify without opening
    `runs/`. Lighter tiers keep grades in a closing note. Deliver the file plus a short

@@ -104,11 +104,14 @@ tier calls for.
 9. **Conflict handling** — were the research ledger's resolved conflicts / debunked viral
    numbers reflected, or was a known-disputed figure reported flat? Flat-reporting a number
    the ledger flagged as contested → FIX-IT.
-10. **Format follows content** — does each section's form fit its content (tables for
-    comparable data, bullets for discrete lists, arrows for sequences, prose for what's
-    reasoned through)? Flag both **under-formatting** (a wall of prose hiding a comparison
-    that wants a table) and **over-formatting** (bullets where an argument needed to be made
-    in prose).
+10. **Format follows content** — enforce `core/readability.md` (handed to you in your task
+    prompt). Does each block take the right shape: tables for comparable data, lists for
+    scannable sets, **one-per-line for label–value metadata, legends/keys, and reference
+    run-ons**, steps/arrows for sequences, prose for what's reasoned through? Flag both
+    **under-formatting** (prose hiding a comparison that wants a table; a key packed into a
+    paragraph) and **over-formatting** (bullets shredding an argument that needed prose).
+    Also check the mechanics: parallel list items, one kind per list, nesting ≤ 2 levels,
+    emphasis not over-used.
 
 ### Verdict — exactly one
 

@@ -46,6 +46,11 @@ readouts, documentation, explainers.*
 
 ---
 
+The per-register `Format:` lines above set *how much* structure each voice uses; the
+concrete rules for *which* shape each block takes (lists vs tables vs prose, metadata
+stacking, legends, mechanics) live once in **`core/readability.md`** — both registers obey
+it.
+
 **Write out of the AI register.** In both voices, avoid the words and constructions that
 mark prose as machine-written — generic filler, empty pivots, hype, and reflexive hedging.
 A *cluster* of these is a register failure the inspector flags. Judge the register, not one

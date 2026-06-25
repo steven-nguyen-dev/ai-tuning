@@ -32,19 +32,17 @@ Match how much proof machinery the deliverable carries to the rigor tier set in 
 
 ## Format follows content
 
-Before writing each section, pick its presentation form from the *content type*, not a
-fixed template:
+Pick each block's presentation form from the *content type*, not a fixed template. The full
+rules — the trigger test, when to list / table / step / keep prose, metadata stacking,
+legends and reference run-ons, and the mechanics (parallelism, item length, nesting,
+emphasis, headings, paragraphs) — are single-sourced in **`core/readability.md`**. Apply
+them as you draft; the inspector enforces the same file, so they can't drift.
 
-- **Table** — multiple data points, stats, or numbers that invite comparison.
-- **Bullets** — a list of genuinely discrete ideas or key points.
-- **Dashes / arrows** (`A → B → C`) — a loop, sequence, pipeline, or cause-effect chain.
-- **Prose** — content to be reasoned through (an argument, a synthesis, a recommendation).
-
-A deliberate decision point ("what shape does this content want?"), not a license to
-over-format. `analytical` uses tables/arrows freely and compresses; `neutral-professional`
-structures for scanning but doesn't bullet prose that should read as prose. The inspector
-flags both under-formatting (a wall of prose hiding a comparison that wants a table) and
-over-formatting (bullets where an argument needed to be made).
+The one-line version: **will the reader scan / refer back to these items individually? →
+list or table them. Must they follow a connected thread? → keep prose.** Never bullet
+reasoning, and never bury a comparison or a stack of label–value fields inside a paragraph.
+`analytical` uses tables/arrows freely and compresses; `neutral-professional` structures for
+scanning but doesn't bullet prose that should read as prose.
 
 ## Output is markdown
 

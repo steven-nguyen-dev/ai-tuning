@@ -28,6 +28,11 @@ Never alter a quotation. Never invent a page number or a citation — if you can
 grade the claim C and say it's unverified. A made-up page number is worse than no page
 number, because it survives unnoticed until a reader checks it.
 
+Writing to `sources/library.md` is a **verified write** (constitution → Write integrity):
+after appending, re-read the file and confirm the block landed. If it's locked, use the
+`sources/library.pending.md` fallback and flag it — never leave the spine missing the source
+and never drop a probe/scratch file in `sources/`.
+
 Return the source id(s) added and a one-line summary of what's now available to cite.
 
 ## Library sync (used by `lv1-compass-init`)
@@ -35,8 +40,12 @@ Return the source id(s) added and a one-line summary of what's now available to 
 Setup runs this every time, even if `sources/library.md` already exists — the goal is to
 keep the library in sync with whatever's actually in `sources/`.
 
-1. List every file under `sources/` (recursively, across `pdf/`, `word/`, `images/`,
-   `web/`, and anything loose directly in `sources/`).
+1. List the **source files** under `sources/` (recursively, across `pdf/`, `word/`,
+   `images/`, `web/`, and any genuine loose source directly in `sources/`). **Exclude the
+   library's own bookkeeping files** — `library.md`, `library.pending.md`, and anything
+   matching `library*.md` — from this scan; the library must never try to ingest itself. A
+   loose file in `sources/` that is clearly not a source (e.g. a stray `test` or scratch
+   file) is **flagged in your report, not silently intaken** as a source.
 2. For each file **not yet represented** in `sources/library.md` (matched by file path),
    run the intake steps above and append its block.
 3. For each file **already represented**, leave its existing block alone — don't re-read and

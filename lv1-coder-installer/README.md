@@ -22,7 +22,7 @@ project.
 1. From the project root, run:
 
    ```
-   /lv1-coder-installer init
+   /lv1-coder-installer
    ```
 
    This scaffolds:

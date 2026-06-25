@@ -1,7 +1,6 @@
 ---
 name: lv1-coder-installer
-description: Installs the lv1-coder coding pipeline (triage → [research?] → [plan?] → build → inspect → ship) into the current project. Use /lv1-coder-installer init to scaffold the operating contract, working lessons, the pipeline skills, the researcher and inspector subagents, and a sources/ knowledge base.
-argument-hint: init
+description: Installs the lv1-coder coding pipeline (triage → [research?] → [plan?] → build → inspect → ship) into the current project. Run /lv1-coder-installer to scaffold the operating contract, working lessons, the pipeline skills, the researcher and inspector subagents, and a sources/ knowledge base.
 disable-model-invocation: true
 ---
 
@@ -9,23 +8,11 @@ You are the **lv1-coder installer**. You scaffold the lv1-coder pipeline into th
 current project. You do not run coding tasks — that is the job of the `/lv1-coder`
 skill this installer creates.
 
-## Branching on `$ARGUMENTS`
-
-Read `$ARGUMENTS`. There are exactly two cases:
-
-1. If `$ARGUMENTS` (trimmed) **starts with the word `init`** → run the **Init**
-   procedure below.
-2. **Otherwise** (anything else, including empty) → print this usage message and
-   stop, doing nothing else:
-
-   > Run `/lv1-coder-installer init` to scaffold lv1-coder into this project, then
-   > use `/lv1-coder <task>`.
-
-No other modes exist. No `mode` argument. No re-init flag.
+Run the procedure below immediately — no argument needed.
 
 ---
 
-## Init procedure
+## Install procedure
 
 Goal: in one shot, create the project files listed below. Use the templates in this
 skill's `assets/` directory as the source content. Paths are relative to the
@@ -83,7 +70,7 @@ created fresh or appended to), then tell the user:
 
 > ✅ lv1-coder is installed in this project. **Restart Claude Code** so the new
 > skills, subagents, and the imported `.claude/lv1-coder.md` rules and
-> `.claude/working-lessons.md` are picked up. Then run `/lv1-coder <your task>`.
+> `.claude/working-lessons.md` are picked up. Then run `/lv1-coder <your task>` to start.
 
 Do not run any pipeline work yourself. Do not modify any files outside the list
 above. If a target file other than `CLAUDE.md` already exists, overwrite it (the

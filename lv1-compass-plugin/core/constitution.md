@@ -127,3 +127,22 @@ Each run writes its artifacts to `runs/<UTC-timestamp>-<slug>/`, and ships with 
 its role calls for — a confidence list, an assumptions list, and a receipts index for a
 deliverable; a graded, sourced basis for a recommendation. The product is its own proof:
 the reader can trust it *and* check it.
+
+**Write integrity.** A write that matters — the source spine (`sources/library.md`) and the
+run receipts — is *verified*, not assumed. After writing such a file, confirm it actually
+contains what you wrote (re-read it). If a write fails (a locked, read-only, or otherwise
+unwritable file), do **not** invent a work-around and do **not** leave a silent gap:
+
+- If the failure is a **read-only attribute** (common when a file was created by copying a
+  read-only template asset), clear the read-only bit and retry. Otherwise retry once. If it
+  still fails, write the same content to a clearly named `*.pending.md` beside the target
+  (e.g. `sources/library.pending.md`), and **report the failure** in the run summary and the
+  manifest, naming the file that couldn't be written.
+- **Never create undocumented scratch or probe files** to test writability (a stray
+  `test` / `library2.md`-style file is a defect, not a diagnostic).
+- **Never list an artifact in the manifest that is not actually on disk**, and never report
+  a verdict drawn from a receipt that was never written — that is faking "done" / faking a
+  step (R2/R4).
+
+An empty `sources/library.md` after a sourced research run is a failure to **surface**,
+never to ignore.

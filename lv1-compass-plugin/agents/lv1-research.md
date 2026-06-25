@@ -106,11 +106,21 @@ reconciliation (definitional/frame mismatch, stale data…) with the correcting 
 <every row marked DECLARED GAP, gathered here so the draft and the judge can't miss them>
 ```
 
-Then append every A/B row to `sources/library.md` in the format `source-intake` uses, so
-the draft and the judge have one library to check.
+Then **write the source spine**: append every A/B row to `sources/library.md` in the format
+`source-intake` uses, so the draft and the judge have one library to check. This is a
+**verified write** (constitution → Write integrity):
+
+- After appending, **re-read `sources/library.md`** and confirm the new source blocks are
+  actually there. The library — not just `01-research.md` — is the spine the draft and the
+  inspector check against; leaving it empty breaks both.
+- If the file is **locked or unwritable**, retry once; if it still fails, write the same
+  blocks to `sources/library.pending.md` and **flag the failure in your return summary**
+  (name the file). Never leave the spine silently empty, and **never drop an ad-hoc
+  probe/scratch file** in `sources/` to test writability.
 
 ## Return to the parent
 
 A short summary only: how many claims in the ledger, the A/B/C split, how many declared
-gaps and what they are, and any conflict the next station needs to know about. Keep the
-bulk on disk — that's the point of running here.
+gaps and what they are, any conflict the next station needs to know about, and **whether the
+`sources/library.md` spine was written successfully** (or fell back to
+`library.pending.md`, and why). Keep the bulk on disk — that's the point of running here.

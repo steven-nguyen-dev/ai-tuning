@@ -44,7 +44,8 @@ best objection is incomplete; self-check this before delivering (`references/dec
 > **Passing the discipline to a subagent (required).** When a mode delegates to
 > `lv1-research` or `lv1-inspect`, paste the governing context into the subagent's task
 > prompt — the contents of `../../core/constitution.md` and `../../core/working-lessons.md`
-> (and, for a standalone review, the `assets/review-checklist-template.md` content). A
+> (and, for a standalone review, `../../core/readability.md` plus the
+> `assets/review-checklist-template.md` content). A
 > subagent runs from the project directory and **cannot read the plugin's `core/` or this
 > skill's `assets/` from its own path**; the orchestrator can, so it carries them in.
 

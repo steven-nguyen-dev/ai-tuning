@@ -16,7 +16,7 @@ the voice from these layers, highest precedence first:
    exists (the user's project-wide tone edits).
 
 If no profile is set and no `writing-instruction.md` exists, write in clear, accurate,
-plain prose. Also read `references/working-lessons.md` and `references/anti-tells.md`
+plain prose. Also read `../../../core/working-lessons.md` and `references/anti-tells.md`
 before drafting.
 
 **Load only the assigned profile.** Read the single tone profile named in `00-triage.md`
