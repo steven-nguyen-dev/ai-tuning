@@ -68,9 +68,8 @@ draft an analytical readout deck on our H2 IT-hiring outlook
 Runs the make pipeline (or the fast lane for something small): triage sets the rigor tier
 and register; research builds a graded claim ledger; the draft writes a **markdown**
 deliverable; an independent inspection pass reads that real artifact and checks it; it
-ships with a proof package. If you asked for a deck, the approved markdown is converted to
-`pptx` as an explicit step *after* it passes — the pipeline itself stays markdown so the
-inspector can actually read what it judges.
+ships with a proof package. The pipeline stays markdown throughout so the inspector can
+actually read what it judges.
 
 ```
 review manuscript/q3-strategy.md
@@ -106,10 +105,9 @@ The discipline is **single-sourced** in `core/`, so it can't drift between the t
   agent file.
 - **lv1-assistant** — `SKILL.md` is the orchestrator; `references/` holds the inline station
   contracts: `triage.md` (one knob — rigor — plus the register and structure shape; no
-  genre detection; **markdown-only output**, with an optional convert-to target), `register.md`
+  genre detection; **markdown-only output**), `register.md`
   (the two work voices: analytical · neutral-professional), `outline.md`, `draft.md`
-  (apparatus-by-rigor, format-follows-content, markdown out), `source-intake.md`. Conversion
-  to `docx`/`pptx`/`xlsx` is an explicit post-inspection step, not a pipeline format.
+  (apparatus-by-rigor, format-follows-content, markdown out), `source-intake.md`.
 - **lv1-advisor** — `SKILL.md` holds the mode router; `references/` holds one contract per
   mode: `review-mode.md` (delegates to the inspector), `challenge-mode.md` (restate →
   sourced steelman → six-angle probe → verdict), `decide-mode.md` (frame → basis round →

@@ -73,5 +73,9 @@ created fresh or appended to), then tell the user:
 > `.claude/working-lessons.md` are picked up. Then run `/lv1-coder <your task>` to start.
 
 Do not run any pipeline work yourself. Do not modify any files outside the list
-above. If a target file other than `CLAUDE.md` already exists, overwrite it (the
-templates are the canonical source); `CLAUDE.md` is the only file you must preserve.
+above. `CLAUDE.md` is the only file you must preserve (append-only, never overwrite).
+For all other target files: if the file already exists and its content differs from
+the template, do **not** overwrite silently — list it in the Step 9 report as
+`⚠ CONFLICT: <path> — differs from template. Overwrite? (y/n)` and wait for user
+confirmation before proceeding. If the user declines, skip that file and note it as
+skipped. If the file does not exist, create it from the template without prompting.

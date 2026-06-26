@@ -6,9 +6,7 @@ analysis and a bad fact ships unchecked; over-sort a quick note and you burn a f
 pipeline on something that needed three sentences.
 
 The assistant sets **one knob (rigor) + a register + a structure shape** — there is no
-genre/tone detection, and **no output-format knob: every deliverable is markdown.** If the
-user wants a `docx`/`pptx`/`xlsx`, that is a separate, explicit conversion step *after* the
-work passes inspection (see `references/draft.md` → "Output is markdown"). Write
+genre/tone detection, and **no output-format knob: every deliverable is markdown.** Write
 `runs/<id>/00-triage.md`:
 
 ```
@@ -17,7 +15,6 @@ work passes inspection (see `references/draft.md` → "Output is markdown"). Wri
 - Rigor tier: tiny | normal | full | high-stakes   (gates which stations run — see core/constitution.md tier table)
 - Work register: analytical | neutral-professional   (see references/register.md)
 - Structure shape: descriptive | hypothesis-driven    (see below)
-- Convert-to (optional): docx | pptx | xlsx | none    (a post-approval step, not a pipeline knob)
 - Deliverable: <what it is, roughly how long/large, for whom>
 - Sources on hand: <what the user already has, or "none yet">
 - Open questions: <blocking ambiguities, or "none">
@@ -42,9 +39,6 @@ short and decisive — this is a sort, not an essay.
 - **Rigor tier** — see the tier→station table in `core/constitution.md`. The tier gates
   which stations actually run (tiny skips research/outline/inspect; high-stakes adds a
   second research pass and a re-inspection). Default light; escalate for a reason.
-- **Convert-to (optional)** — the deliverable is always markdown. If the user will need a
-  `docx` (memo/report), `pptx` (readout), or `xlsx` (model), note it here; the conversion
-  runs as an explicit step after inspection passes, on the approved markdown.
 - **Work register** — `analytical` when the job is to reach and defend a conclusion
   (strategy, market read, recommendation-backing analysis); `neutral-professional` when the
   job is to inform clearly without taking a side (status brief, summary, documentation).

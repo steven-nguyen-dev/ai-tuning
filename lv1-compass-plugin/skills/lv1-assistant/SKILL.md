@@ -36,9 +36,7 @@ detection, and **no output-format knob**:
 
 **Output is always markdown.** The pipeline produces a markdown deliverable so the
 independent inspector — which has only Read/Grep/Glob — can judge the *real* shipped
-artifact. If the user needs a `docx` / `pptx` / `xlsx`, that is an **explicit conversion
-step after inspection passes** (step 7), run on the approved markdown via the office skill —
-never a pipeline-internal format the inspector can't read.
+artifact.
 
 The **work register** (analytical | neutral-professional) and **structure shape** are the
 two lighter choices, also set in triage — see `references/register.md`.
@@ -66,8 +64,7 @@ verdict.)
 1. **Set up the run.** Create `runs/<UTC-timestamp>-<short-slug>/`. Tell the user the run
    id.
 2. **Triage.** Read `references/triage.md` and follow it. Write `00-triage.md`: rigor tier,
-   work register, structure shape, scope, an optional convert-to target, and (full/
-   high-stakes) a research contract. If scope is genuinely ambiguous, ask one batched round
+   work register, structure shape, scope, and (full/high-stakes) a research contract. If scope is genuinely ambiguous, ask one batched round
    (rule 1). On `tiny`, say you're running the fast lane: the station set is **triage →
    draft → self-review → ship** (research, outline, and the inspect subagent are skipped).
    **But if the tiny task carries any factual claim, escalate to `normal`** — the fast lane
@@ -106,13 +103,6 @@ verdict.)
    assumptions, source index, data-limits) — the reader should verify without opening
    `runs/`. Lighter tiers keep grades in a closing note. Deliver the file plus a short
    cover note; state overall confidence and any open assumptions plainly.
-8. **Convert (only if `Convert-to` was set in triage).** On the **approved, inspected**
-   markdown, invoke the matching office skill to produce the `docx` / `pptx` / `xlsx`:
-   - **docx** — memos, reports, letters, briefs (heading structure + tables + appended proof package).
-   - **pptx** — readouts, decks (one idea per slide; grades/sources in speaker notes, clean slide face).
-   - **xlsx** — models, data tables, trackers (schema, formulas, source per input figure).
-   Conversion is format only — it must not add or change a claim. If it would, stop and
-   re-inspect. Save the converted file to `manuscript/` alongside the markdown.
 
 After each station, give the user a one-line status (e.g. "Research: 12 facts, all
 sourced"). If you cut a corner, say so — never fake a step (R4).

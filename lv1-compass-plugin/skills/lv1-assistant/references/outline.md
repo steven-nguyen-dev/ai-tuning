@@ -41,10 +41,5 @@ show each section's lens on it — an outline that lists topics without the thro
 defeats the shape. When the deliverable reaches a **contested conclusion**, the outline must
 include a steelman beat; the draft and inspector both expect it.
 
-If triage set a **Convert-to** target, shape the outline so the later conversion is clean —
-for a future `pptx`, make the section list a per-slide list (one idea per slide); for an
-`xlsx`, name the sheets/columns; for a `docx`, the heading structure. The deliverable is
-still drafted as markdown; this only makes the post-inspection conversion mechanical.
-
 Don't pad the outline to look thorough — every extra section is a place a fact can drift
 unchecked later. Report the path and a one-sentence summary of the shape.

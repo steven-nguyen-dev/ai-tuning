@@ -22,7 +22,16 @@ to verify the work against its own declared scope and plan.
 the strongest way available: run it, re-read the cited source, check a primary
 reference. "Looks plausible" is not correct.
 
-**2. Code quality** — apply the self-review criteria:
+**2. Code quality** — before reviewing, execute a fresh install and build:
+- JavaScript/TypeScript: `npm ci && npm run build` (or `yarn install && yarn build`)
+- Go: `go build ./...`
+- Python: `pip install -r requirements.txt` (in the project's venv)
+- Other: use the documented build command from `README.md` or `Makefile`.
+
+If the build fails, issue **FIX-IT** immediately — quote the error exactly and do not
+proceed to test execution on a broken build.
+
+Then apply the self-review criteria:
 - Edge cases and error paths are handled, not just the happy path
 - Error handling is explicit — no silent failures, no bare `except`, no swallowed errors
 - Tests are meaningful: would they actually fail if the code were wrong? A test that
