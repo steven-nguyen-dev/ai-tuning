@@ -5,8 +5,8 @@ one constitution and ship only work that is **impressive AND true**, with every 
 graded and traceable to a real source:
 
 - **lv1-assistant** — the **maker**. Turns a work brief into a deliverable (analysis,
-  report, memo, brief, slide deck, spreadsheet model) through `triage → research → outline
-  → draft → inspect → ship`. Narrower than a general writing tool: work registers, not an
+  report, memo, brief) through `triage → research → outline → draft → inspect → ship`.
+  Output is always markdown. Narrower than a general writing tool: work registers, not an
   open-ended genre/tone space.
 - **lv1-advisor** — the **judge**. One skill, three modes: **review** an existing artifact,
   **challenge** a position with a sourced steelman, or **decide** a fork (it frames, weighs

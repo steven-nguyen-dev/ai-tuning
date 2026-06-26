@@ -84,11 +84,13 @@ promise.
 
 ## Idempotence and existing files
 
-- `CLAUDE.md` is preserved: if it exists, the import line `@.claude/lv1-coder.md` is
-  appended only if missing.
-- Other scaffolded files (the rules file, skills, agents, `sources/library.md`) are
-  overwritten by the templates if you re-run `init`. To customize them, edit the
-  templates inside `~/.claude/skills/lv1-coder-installer/assets/` before re-running.
+- `CLAUDE.md` is preserved (append-only): if it exists, the import line
+  `@.claude/lv1-coder.md` is appended only if missing. It is never overwritten.
+- Other scaffolded files (the rules file, skills, agents, `sources/library.md`): if a
+  file already exists and its content differs from the template, the installer flags it
+  as `⚠ CONFLICT: <path> — differs from template. Overwrite? (y/n)` and waits for your
+  confirmation before touching it. If you decline, the file is left as-is. Files that
+  don't exist yet are created from the template without prompting.
 
 ## Uninstall
 

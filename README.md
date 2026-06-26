@@ -23,7 +23,7 @@ Three skills: `lv1-author` (main pipeline), `lv1-writer-init` (project setup),
 Install by uploading `lv1-writer-plugin.zip` as a plugin in Cowork ("Upload local
 plugin"). Works in Claude Code via `--plugin-dir`.
 
-→ See [`lv1-writer-plugin/skills/lv1-author/README.md`](./lv1-writer-plugin/skills/lv1-author/README.md)
+→ See [`lv1-writer-plugin/README.md`](./lv1-writer-plugin/README.md)
 
 ---
 
@@ -34,9 +34,8 @@ plugin"). Works in Claude Code via `--plugin-dir`.
 A work deliverable + advisory pipeline. Two roles share one constitution and one pair
 of subagents:
 
-- **lv1-assistant** (maker) — turns a work brief into an analysis, report, memo, deck,
-  or spreadsheet model through `triage → research → outline → draft → inspect → ship`.
-  Markdown-only pipeline; docx/pptx/xlsx conversion is an explicit post-inspection step.
+- **lv1-assistant** (maker) — turns a work brief into an analysis, report, memo, or brief
+  through `triage → research → outline → draft → inspect → ship`. Markdown-only pipeline.
 - **lv1-advisor** (judge) — three modes: **review** an existing artifact, **challenge**
   a position with a sourced steelman, or **decide** a fork with a graded recommendation.
   Judges and advises; never makes the thing.
