@@ -79,6 +79,12 @@ verdict.)
    fallback), surface it to the user and treat the spine as degraded; don't proceed as if
    `sources/library.md` is intact when it's empty.
 4. **Outline.** Read `references/outline.md` and follow it. Write `02-outline.md`.
+   **High-stakes approval beat (high-stakes only):** before drafting, present the outline
+   (scope + structure + the research contract's coverage) to the user and **await an explicit
+   go** — the one consequential decision in an otherwise autonomous pipeline stays with the
+   human (P12). Record the outcome on its own line at the foot of `02-outline.md`
+   (`Approval: approved <UTC> by user` — or the change requested). For tiny/normal/full the
+   pipeline proceeds without this gate.
 5. **Draft.** Read `references/draft.md` and follow it: compose the voice from the register
    in `00-triage.md`, apply the apparatus for the rigor tier, and let format follow content.
    Write the markdown deliverable to `manuscript/` and a copy to `03-draft.md`. Run the
@@ -106,6 +112,17 @@ verdict.)
 
 After each station, give the user a one-line status (e.g. "Research: 12 facts, all
 sourced"). If you cut a corner, say so — never fake a step (R4).
+
+## After ship (optional) — office-file conversion
+
+The pipeline's shipped artifact is **always markdown**, on purpose: the independent
+inspector (Read/Grep/Glob only) can judge markdown but not a binary office file, so
+inspecting markdown is what makes the PASS mean something. Conversion is therefore **not a
+pipeline station** and is never inspected — it runs only *after* a PASS, only if the user
+needs a `.docx`/`.pptx`/`.xlsx`, and only on the already-approved markdown. It is a
+format-only transform: **it adds no claim, changes no number, and is re-derivable from the
+shipped markdown.** If the user asks for an office file, convert the approved markdown and
+note plainly that the markdown remains the inspected source of truth.
 
 ## A single source you're handed mid-task
 

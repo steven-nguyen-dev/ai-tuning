@@ -64,6 +64,9 @@ tier calls for.
 
 1. **Facts** — is every factual claim actually supported by its cited library source?
    Spot-check the strongest way available: re-read the source, re-run the arithmetic.
+   **At high-stakes, don't spot-check the numbers — recompute *every* load-bearing figure
+   independently** from the cited inputs and reconcile it against the draft. A material
+   number that doesn't reproduce, or whose working isn't shown to reproduce it, → FIX-IT.
 2. **Honesty** — is interpretation labeled as interpretation, not dressed as fact? Any
    D-grade guess that leaked in? Any number without its working? Where the piece takes a
    side, is the strongest counter-argument faced?
@@ -97,7 +100,9 @@ tier calls for.
    section present; are **inline A/B grades** on the body claims; did the research's
    **declared gaps surface in-text** where the number would go; is the **proof package
    appended to the delivered file** (confidence table, assumptions, source index,
-   data-limits)? Missing apparatus the rigor tier calls for → FIX-IT.
+   data-limits)? Missing apparatus the rigor tier calls for → FIX-IT. *(high-stakes also:* is
+   the **outline-approval beat recorded** at the foot of `02-outline.md` — `Approval: …`? A
+   high-stakes draft that skipped the human go-ahead → FIX-IT.)
 8. **Steelman presence** — if the piece reaches a contested conclusion, is the strongest
    opposing case stated and engaged (not a strawman, not false balance)? A contested
    conclusion with no real steelman → FIX-IT.

@@ -34,6 +34,11 @@ Understand the *real* ask (rule 1); name the scope precisely rather than gesturi
 Default to the lighter lane; escalate for a reason you could explain to the user. Keep it
 short and decisive — this is a sort, not an essay.
 
+If you set **high-stakes**, note in the triage file that an outline-approval beat is due
+before drafting (SKILL.md step 4): the user signs off on the plan before the pipeline
+commits effort to a draft. This is the single human gate in the assistant pipeline; lighter
+tiers don't carry it.
+
 ## Choosing the knobs
 
 - **Rigor tier** — see the tier→station table in `core/constitution.md`. The tier gates

@@ -91,8 +91,9 @@ recommendation and what would change it. The call stays yours.
 The discipline is **single-sourced** in `core/`, so it can't drift between the two roles:
 
 - **Shared core** (read first by both skills; passed into both subagents): `core/constitution.md` —
-  the bar, the A/B/C/D grades and the `[A]` provenance test, the core rules, the R1–R6
-  failure modes, the smallest-team rule, the effort-tier→station table. `core/working-lessons.md` —
+  the bar, the A/B/C/D grades and the `[A]` provenance test, the core rules, the R1–R7
+  failure modes (incl. input-trust / prompt-injection), the smallest-team rule, the
+  effort-tier→station table. `core/working-lessons.md` —
   the hard-won lessons (neutral ≠ timid; a label is a reason to commit harder; show the
   arithmetic; the user's position is a signal to investigate, not a mirror; steelman ≠
   false balance). `core/readability.md` — the format rules the drafter applies and the

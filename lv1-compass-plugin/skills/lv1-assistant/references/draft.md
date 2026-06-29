@@ -52,11 +52,12 @@ artifact, which it can do for markdown but not for a binary office file. Write t
 deliverable — sections, tables, the apparatus the rigor tier calls for, the appended proof
 package — as markdown.
 
-If the user needs an office file, the orchestrator runs the conversion as an **explicit
-step after inspection passes** (SKILL.md step 8), on this approved markdown. For a deck,
-shape the markdown so the conversion is clean: one idea per section/slide, with
-grades/sources in a notes block rather than on the visible face. The conversion is format
-only — it adds no claim.
+If the user needs an office file, the orchestrator runs the conversion as an **optional
+post-ship step, only after inspection passes** — see "After ship (optional)" in
+`SKILL.md`. Conversion is not a pipeline station and is never inspected; it runs on this
+approved markdown. For a deck, shape the markdown so the conversion is clean: one idea per
+section/slide, with grades/sources in a notes block rather than on the visible face. The
+conversion is format only — it adds no claim.
 
 ## Honesty (non-negotiable)
 
