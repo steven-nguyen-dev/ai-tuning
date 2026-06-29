@@ -40,9 +40,11 @@ of subagents:
   a position with a sourced steelman, or **decide** a fork with a graded recommendation.
   Judges and advises; never makes the thing.
 
-Shared `core/` holds the constitution, working-lessons, and readability rules — single-
-sourced so discipline can't drift between the two roles. Skills trigger on natural-
-language descriptions; no slash commands needed.
+Shared `discipline/` holds the constitution, working-lessons, and readability rules —
+single-sourced so discipline can't drift between the two roles; a plugin-root `references/`
+holds `source-intake.md`, shared by lv1-assistant and lv1-compass-init. Skills reach both
+via `${CLAUDE_PLUGIN_ROOT}/…` and trigger on natural-language descriptions; no slash
+commands needed.
 
 Install by uploading `lv1-compass-plugin.zip` as a plugin in Cowork ("Upload local
 plugin"). Works in Claude Code via `--plugin-dir`.

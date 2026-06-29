@@ -62,25 +62,25 @@ blank. Each question accepts "Other" for free text or custom input:
    the concrete authorship approach from genre + this choice.
 
 **Resolve the specific tone profile before running Setup.** From the confirmed group,
-topic, angle, and POV, read `../lv1-author/references/tone-detect.md` and scan
-`../lv1-author/assets/tone-profiles/` to pick the single best-fit profile. If the group
+topic, angle, and POV, read `${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md` and scan
+`${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/` to pick the single best-fit profile. If the group
 has only one plausible match, pick it directly. If tone is "decide per task", leave it
 unresolved — per-task triage drives it instead.
 
 ## Step 3 — Run Setup
 
 1. **Sync the source library.** If `sources/library.md` doesn't exist, create it by
-   writing the content of `../lv1-author/assets/library-template.md` into the file as
+   writing the content of `${CLAUDE_PLUGIN_ROOT}/assets/library-template.md` into the file as
    fresh text. **Do not copy the asset file itself** — read its content and write it out
    so the new file is writable. After creating, confirm `sources/library.md` is writable
    (clear any read-only attribute if the host set one). Either way, run the **Library
-   sync** from `../lv1-author/references/source-intake.md` — scan `sources/` for files
+   sync** from `${CLAUDE_PLUGIN_ROOT}/references/source-intake.md` — scan `sources/` for files
    not yet in the library and add them. Runs every time, not just on a fresh project.
 2. **`manuscript/_about.md`** — write (or overwrite) with the confirmed topic and angle.
    This file always reflects the current project description after init runs.
 3. **`manuscript/writing-instruction.md`** — apply the following rules in order:
    - **Missing** → create it, seeded from the resolved tone profile
-     (`../lv1-author/assets/tone-profiles/<id>.md`).
+     (`${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/<id>.md`).
    - **Tone changed** (user picked a different profile this run) → regenerate it from
      the new profile. The old file was for a different voice; replace it.
    - **Exists, tone unchanged, but thin or incomplete** (missing voice, structure,
@@ -90,7 +90,7 @@ unresolved — per-task triage drives it instead.
      live there.
    - If tone is unresolved ("decide per task"), leave this file unwritten.
 4. **`CLAUDE.md` (last).** If it doesn't exist, create from
-   `../lv1-author/assets/claude-md-template.md`. If it exists, replace only the text
+   `${CLAUDE_PLUGIN_ROOT}/assets/claude-md-template.md`. If it exists, replace only the text
    between `<!-- lv1-writer:structure:start -->` and `<!-- lv1-writer:structure:end -->`
    with a fresh copy of that block; if those markers aren't present, append the block.
    Record the confirmed topic, angle, POV, resolved tone profile, and working mode inside
@@ -106,7 +106,4 @@ the tone in 2–4 plain sentences distilled from `manuscript/writing-instruction
 
 Tell the user: to change tone, re-run init and pick a different group — or edit
 `manuscript/writing-instruction.md` directly for fine-grained voice control. Available
-profiles are in `../lv1-author/assets/tone-profiles/`.
-
-**Do not** start a writing task from here — describe it and `lv1-author` takes over. To
-review an existing document, use `lv1-reviewer`.
+profiles are in `${CLAUDE_PLUGIN_ROOT}/

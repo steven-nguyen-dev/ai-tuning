@@ -9,14 +9,14 @@ Read `00-triage.md` for the chosen tone profile and authorship approach, then co
 the voice from these layers, highest precedence first:
 
 1. **Explicit user instruction** for this task always wins.
-2. **The tone profile** named in `00-triage.md` — read `assets/tone-profiles/<id>.md`
+2. **The tone profile** named in `00-triage.md` — read `${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/<id>.md`
    and follow its Spine / Truth-or-fiction contract / Detail / Tone / Structure /
    Never-do. This is the genre's voice and shape.
 3. **Project overrides** in `manuscript/writing-instruction.md`, layered on top, if it
    exists (the user's project-wide tone edits).
 
 If no profile is set and no `writing-instruction.md` exists, write in clear, accurate,
-plain prose. Also read `../../../core/working-lessons.md` and `references/anti-tells.md`
+plain prose. Also read `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md` and `${CLAUDE_PLUGIN_ROOT}/references/anti-tells.md`
 before drafting.
 
 **Load only the assigned profile.** Read the single tone profile named in `00-triage.md`
@@ -24,7 +24,7 @@ before drafting.
 genre is already decided; the rest of the taxonomy is noise that encourages register
 bleed (an analytical tic creeping into a memoir, or vice versa).
 
-**Write out of the AI register.** `references/anti-tells.md` lists the words and
+**Write out of the AI register.** `${CLAUDE_PLUGIN_ROOT}/references/anti-tells.md` lists the words and
 constructions that mark prose as machine-written (generic-AI filler, therapy-speak, hype,
 empty pivots). Avoid them as reflexive filler in every genre; for warm/intimate profiles
 (love, personal-experience, mindset, cognitive-behavior) a slide into therapy-speak is an
@@ -96,7 +96,7 @@ If the authorship approach is interview-driven or hybrid, read `manuscript/intak
 as a first-class source and draft the lived material from it — **never invent a
 personal anecdote, scene, quote, or feeling the user didn't give**. A gap the user
 skipped stays a gap (keep the section leaner); don't fill it with invention. See
-`references/interview.md`; an invented anecdote is a REJECT at inspection.
+`${CLAUDE_PLUGIN_ROOT}/references/interview.md`; an invented anecdote is a REJECT at inspection.
 
 ## Honesty (non-negotiable — non-fiction & hybrid; fiction follows its craft contracts)
 
@@ -123,4 +123,4 @@ Read `04-inspection.md`, address **every** finding, note exactly what changed, a
 don't argue with the inspection findings — their job is to be harder to satisfy than
 you are, not easier.
 
-Report a one-line confidence count (e.g. "18 claims: 13xA, 4xB, 1xC held back").
+Report a one-line confidence count (e.g. "18 claims: 13xA, 4xB, 1xC

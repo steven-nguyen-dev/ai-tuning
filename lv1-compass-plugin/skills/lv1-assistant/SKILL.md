@@ -9,8 +9,8 @@ The make-half of lv1-compass: a disciplined pipeline that turns a work brief int
 deliverable a reader can both trust and verify. Narrower than a general writing tool — it
 covers **work deliverables** in one of two registers, not the open-ended genre/tone space.
 
-**Read first, every run:** the shared constitution at `core/constitution.md` (from this
-skill: `../../core/constitution.md`) and `core/working-lessons.md`. They define the bar,
+**Read first, every run:** the shared constitution at `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md`
+and `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md`. They define the bar,
 the A/B/C/D grades, the `[A]` provenance test, the failure modes, and the lessons every
 station obeys. This skill does not restate them — it applies them.
 
@@ -30,7 +30,7 @@ more.
 Unlike the wider writing tool, the assistant sets one main knob — there is no genre/tone
 detection, and **no output-format knob**:
 
-1. **Rigor tier** — `tiny | normal | full | high-stakes` (from `core/constitution.md`).
+1. **Rigor tier** — `tiny | normal | full | high-stakes` (from `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md`).
    Per the tier→station table there, it gates *which stations actually run* and how much
    proof apparatus ships.
 
@@ -55,10 +55,10 @@ The orchestrator delegates and integrates; the two loops are driven by the inspe
 verdict.)
 
 > **Passing the discipline to a subagent (required).** A subagent runs from the project
-> directory and **cannot read the plugin's `core/` from its own path**. So when you
+> directory and **cannot read the plugin's `discipline/` from its own path**. So when you
 > delegate, paste the governing context into the subagent's task prompt: the contents of
-> `../../core/constitution.md`, `../../core/working-lessons.md`, and (for the inspector)
-> `../../core/readability.md` — which you, the orchestrator, can read. Without this the
+> `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md`, `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md`, and (for the inspector)
+> `${CLAUDE_PLUGIN_ROOT}/discipline/readability.md` — which you, the orchestrator, can read. Without this the
 > subagent runs blind to the bar, the grades, and the format rules it must enforce.
 
 1. **Set up the run.** Create `runs/<UTC-timestamp>-<short-slug>/`. Tell the user the run
@@ -70,7 +70,7 @@ verdict.)
    **But if the tiny task carries any factual claim, escalate to `normal`** — the fast lane
    has no station to source a claim, and rule 5 (no source, no claim) still binds.
 3. **Gather material.** For a source handed over (PDF, Word, image, URL), read
-   `references/source-intake.md` and add it to `sources/library.md`. For facts still
+   `${CLAUDE_PLUGIN_ROOT}/references/source-intake.md` and add it to `sources/library.md`. For facts still
    missing, **delegate to the `lv1-research` subagent** — it writes `01-research.md` as a
    graded claim ledger and returns a summary. Don't move on until every claim the
    deliverable needs is a ledger row sourced (A/B) or marked a declared gap — **and until
@@ -127,5 +127,5 @@ note plainly that the markdown remains the inspected source of truth.
 ## A single source you're handed mid-task
 
 If the user just hands over a file or link without asking for the full pipeline, read
-`references/source-intake.md`, add it to `sources/library.md`, and report the source id and
+`${CLAUDE_PLUGIN_ROOT}/references/source-intake.md`, add it to `sources/library.md`, and report the source id and
 what's now citable — no run folder needed.

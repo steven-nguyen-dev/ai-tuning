@@ -43,7 +43,7 @@
 
 ## Structure & format
 
-- **Format follows content** (see `references/draft.md`): **numbered steps** for
+- **Format follows content** (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`): **numbered steps** for
   sequences the reader executes in order; **tables** for parameters, options, error
   codes, compatibility; **code blocks** for commands/config/examples; **arrows** for
   data/control flow (`request → handler → store`); prose only for concepts that need

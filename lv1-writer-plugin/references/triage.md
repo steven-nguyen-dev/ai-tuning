@@ -17,10 +17,10 @@ Write `runs/<id>/00-triage.md`:
 - Scope (one paragraph): <…>
 
 ## Genre & tone
-- Detected genre: <from references/tone-detect.md, or "UNRESOLVED — asking" if ambiguous>
-- Tone profile: <profile id at assets/tone-profiles/, or "project default (writing-instruction.md)">
+- Detected genre: <from ${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md, or "UNRESOLVED — asking" if ambiguous>
+- Tone profile: <profile id at ${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/, or "project default (writing-instruction.md)">
 - Proof-apparatus level: <none (fiction) | low | medium | full> — scaled by genre + effort
-- Structure shape: <descriptive | hypothesis-driven> (see references/structure-shapes.md)
+- Structure shape: <descriptive | hypothesis-driven> (see ${CLAUDE_PLUGIN_ROOT}/references/structure-shapes.md)
 - Working mode: <auto | interactive> (from init / the user)
 - Authorship approach: <AI-autonomous | interview-driven | hybrid> — resolved from genre + working mode
 - Voice/apparatus composition: <none | e.g. "Voice: academic · Apparatus: experience-truth
@@ -42,13 +42,13 @@ Understand the *real* ask (rule 1); name the scope precisely rather than gesturi
 it. Default to the lighter lane; escalate for a reason you could explain to the user.
 Keep it short and decisive — this is a sort, not an essay.
 
-For the **Genre & tone** block, read `references/tone-detect.md` and follow its
-detection signal order and taxonomy; read `references/structure-shapes.md` to choose
+For the **Genre & tone** block, read `${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md` and follow its
+detection signal order and taxonomy; read `${CLAUDE_PLUGIN_ROOT}/references/structure-shapes.md` to choose
 the shape. The genre is decisive downstream: it picks the voice *and* whether the
 A/B/C/D grading and proof package apply at all (fiction switches them off for craft
 contracts instead). When the genre is genuinely ambiguous, ask one batched round
 rather than guessing. Resolve the authorship approach from the genre's default
-authorship and the user's auto/interactive working mode (see `references/interview.md`).
+authorship and the user's auto/interactive working mode (see `${CLAUDE_PLUGIN_ROOT}/references/interview.md`).
 If an explicitly requested genre's apparatus contradicts the supplied material (e.g. an
 academic paper about the user's own divorce), follow tone-detect.md's "When voice and
 material disagree" — compose voice + material-appropriate apparatus, record it in the

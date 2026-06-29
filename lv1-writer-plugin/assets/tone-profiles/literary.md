@@ -16,7 +16,7 @@
 
 ## Authorship — the user's vision leads
 
-- Establish the user's intent first (`references/interview.md`): premise, characters,
+- Establish the user's intent first (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`): premise, characters,
   setting, themes, arc, tone, any non-negotiables. Store in `manuscript/intake.md`.
 - AI drafts *within* that vision; it doesn't hijack the story toward its own. Surface
   meaningful forks (a plot turn, a character choice) as a batched round rather than
@@ -48,7 +48,7 @@ accurate unless the fiction deliberately alters them and signals it.)
 ## Structure & format
 
 - **Prose throughout.** This is the purest "content the reader experiences" — no tables,
-  no bullets, no diagrams (see `references/draft.md`). Structural markup is for the
+  no bullets, no diagrams (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`). Structural markup is for the
   manuscript's chapters/scenes only.
 
 ## Process & self-review

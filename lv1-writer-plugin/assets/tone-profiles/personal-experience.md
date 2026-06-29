@@ -17,7 +17,7 @@
 ## Whose truth (the core rule)
 
 - **Every event, feeling, person, and detail comes from the user.** Gather it through
-  the intake interview and mid-draft batched rounds (`references/interview.md`); store
+  the intake interview and mid-draft batched rounds (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`); store
   it in `manuscript/intake.md`. **AI invents nothing** — no scenes the user didn't
   describe, no dialogue they didn't report, no feelings they didn't name.
 - The user's account is treated as **true-as-lived**; it is not graded A/B/C/D.
@@ -34,14 +34,14 @@
 - Honest over flattering: render the difficult and unresolved, not a sanitized arc.
 - De-shame where the material is painful; never moralize at the reader.
 - Show, don't summarize — put the reader inside the remembered moment.
-- **Read `references/anti-tells.md`.** Therapy-speak and generic-AI filler (`journey`,
+- **Read `${CLAUDE_PLUGIN_ROOT}/references/anti-tells.md`.** Therapy-speak and generic-AI filler (`journey`,
   `hold space`, `navigate`, `tapestry`…) are an automatic FIX-IT — render the user's own
   cadence, not a memoir-shaped template.
 
 ## Structure & format
 
 - Scene-led chapters; chronological or thematic, following the user's arc.
-- **Format follows content** (see `references/draft.md`): almost entirely **prose** —
+- **Format follows content** (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`): almost entirely **prose** —
   this is content the reader *experiences*. Use markup sparingly (a short list only if
   the user is literally itemizing something). No tables, no diagrams.
 - No author-only scaffolding in the reader's text.

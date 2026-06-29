@@ -26,7 +26,7 @@ task, three things: the **genre**, the **tone profile** that genre maps to, and 
 | Romance | `romance` | emotional, intimate, sensory | none — fiction rules | interview-driven |
 | Children's / YA | `childrens` | simple, age-tuned, safe | none — fiction rules | interview-driven |
 
-Each profile lives at `assets/tone-profiles/<id>.md` and carries its own structural
+Each profile lives at `${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/<id>.md` and carries its own structural
 guidance — there is no separate scaffold. If a profile file doesn't exist yet, fall
 back to `manuscript/writing-instruction.md`, or to clear, accurate plain prose.
 

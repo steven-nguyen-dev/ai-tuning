@@ -17,7 +17,7 @@ only judge what's actually on the page against what's actually in the sources. U
 
 The orchestrator that delegated to you **includes the working-lessons discipline and the
 A/B/C/D grade definitions in your task prompt** — treat those as governing. The plugin's
-`core/` files are not on your working path; the grade table below is your authoritative
+`discipline/` files are not on your working path; the grade table below is your authoritative
 copy.
 
 > This file is the single source of truth for the inspection contract. The orchestrator
@@ -76,7 +76,7 @@ fiction run the craft override at the end.
 
 **Honor a recorded voice/apparatus composition.** If `00-triage.md` records a *composition*
 (e.g. `Voice: academic · Apparatus: experience-truth (lived spine)` — the resolution when an
-explicit genre's apparatus contradicts the material; see `references/tone-detect.md`), judge
+explicit genre's apparatus contradicts the material; see `${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md`), judge
 the **voice** against the named profile but apply the **apparatus** checks (7–9, 11) to the
 recorded apparatus, not the stock profile's. Do **not** fail a composed-academic memoir for
 leaving the user's lived spine ungraded — that split was the correct call.
@@ -109,9 +109,9 @@ leaving the user's lived spine ungraded — that split was the correct call.
 ### Then check these (gated by genre / rigor)
 
 6. **Tone conformance** — does the draft match the tone profile chosen in
-   `00-triage.md` (read `assets/tone-profiles/<id>.md`)? A report written breezily, an
+   `00-triage.md` (read `${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/<id>.md`)? A report written breezily, an
    academic paper in op-ed voice, or a memoir rendered forensically is a FIX-IT. **Check
-   the AI register** against `references/anti-tells.md`: a *cluster* of AI-tell words /
+   the AI register** against `${CLAUDE_PLUGIN_ROOT}/references/anti-tells.md`: a *cluster* of AI-tell words /
    constructions, or **any therapy-speak in a warm-profile draft** (love,
    personal-experience, mindset, cognitive-behavior), is a FIX-IT — judge the register,
    not a single incidental literal use of a word.
@@ -179,7 +179,7 @@ Here you review a document that may have no pipeline run behind it. Work in two 
 ### Step 1 — Generate the document-specific checklist
 
 The review checklist template content is in your task prompt — the orchestrator read
-`assets/ai-review-checklist-template.md` from the plugin path and injected it (that file
+`${CLAUDE_PLUGIN_ROOT}/assets/ai-review-checklist-template.md` from the plugin path and injected it (that file
 is not on your working path). Use the template content from your task prompt directly.
 Do the **Pass 1 cold read** of the target document (document only, no sources yet),
 classify it, and write a concrete `review-checklist.md` beside the document:

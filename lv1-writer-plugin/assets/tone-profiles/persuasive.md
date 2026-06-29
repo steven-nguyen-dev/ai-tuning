@@ -43,7 +43,7 @@
 ## Structure & format
 
 - Thesis → reasons with evidence → steelman → rebuttal → conclusion.
-- **Format follows content** (see `references/draft.md`): mostly **prose** (argument is
+- **Format follows content** (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`): mostly **prose** (argument is
   experienced as a line of reasoning); a table only if comparing options/positions
   genuinely helps; arrows for a causal chain. Avoid bulletizing an argument into
   disconnected points.

@@ -62,7 +62,7 @@
 
 - Chapter: driving question → hook case → mechanism → evidence ladder → implication →
   bridge to the next question.
-- **Format follows content** (see `references/draft.md`): prose for the unfolding
+- **Format follows content** (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`): prose for the unfolding
   story and mechanism; a table when comparing several studies, organisms, or numbers;
   dashes/arrows for a pathway or sequence; bullets only for a genuine list (e.g. named
   parts to recap). Default to prose; reach for markup when it genuinely clarifies.

@@ -17,7 +17,7 @@
 ## Two kinds of claim (keep them honest)
 
 - **The user's experience and philosophy** — the stories, the hard-won principles, the
-  worldview. Gather via `references/interview.md` into `manuscript/intake.md`. Treated
+  worldview. Gather via `${CLAUDE_PLUGIN_ROOT}/references/interview.md` into `manuscript/intake.md`. Treated
   as the author's voice; not graded; **never invented** by AI.
 - **Factual claims about how things work** — "the brain does X", "studies show Y",
   "habit forms in Z". These are **cited and graded** (A/B/C/D), scoped honestly, and
@@ -36,7 +36,7 @@ it. A paragraph break alone isn't enough.
 - Concrete over abstract: a real example beats an inspirational slogan.
 - Avoid grand unfalsifiable promises ("this will change your life"); promise the
   specific, doable shift.
-- **Read `references/anti-tells.md`.** Hype and therapy-speak (`game-changer`,
+- **Read `${CLAUDE_PLUGIN_ROOT}/references/anti-tells.md`.** Hype and therapy-speak (`game-changer`,
   `unlock your potential`, `do the work`, `show up for yourself`…) are an automatic
   FIX-IT — concrete and direct beats inspirational filler.
 
@@ -45,7 +45,7 @@ it. A paragraph break alone isn't enough.
 - Per-chapter beat: **the problem (and the promise) → the principle → a real story
   (user's or a documented one) → a concrete practice the reader can do today**.
 - One idea per chapter; build cumulatively.
-- **Format follows content** (see `references/draft.md`): prose for story and
+- **Format follows content** (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`): prose for story and
   principle; **bullets or numbered steps for a practice the reader will *do*** (this is
   the one genre where actionable lists earn their place); arrows for a simple
   before→after or loop. Don't bury an action in a paragraph.

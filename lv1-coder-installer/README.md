@@ -29,9 +29,10 @@ project.
 
    ```
    your-project/
-   ├── CLAUDE.md                                  ← created or appended-to (adds @.claude/lv1-coder.md)
+   ├── CLAUDE.md                                  ← created or appended-to (adds @.claude/lv1-coder.md + @.claude/working-lessons.md)
    ├── .claude/
    │   ├── lv1-coder.md                           ← operating rules (the contract)
+   │   ├── working-lessons.md                     ← hard-won lessons (imported into CLAUDE.md)
    │   ├── skills/
    │   │   ├── lv1-coder/SKILL.md                 ← /lv1-coder pipeline runner
    │   │   ├── triage/SKILL.md
@@ -46,7 +47,7 @@ project.
    ```
 
 2. **Restart Claude Code** so the project's skills, agents, and the imported
-   `CLAUDE.md` rules load.
+   `@.claude/lv1-coder.md` rules and `@.claude/working-lessons.md` load.
 
 3. Each session in this project, run a task:
 
@@ -84,9 +85,11 @@ promise.
 
 ## Idempotence and existing files
 
-- `CLAUDE.md` is preserved (append-only): if it exists, the import line
-  `@.claude/lv1-coder.md` is appended only if missing. It is never overwritten.
-- Other scaffolded files (the rules file, skills, agents, `sources/library.md`): if a
+- `CLAUDE.md` is preserved (append-only): if it exists, the import lines
+  `@.claude/lv1-coder.md` and `@.claude/working-lessons.md` are appended only if missing.
+  It is never overwritten.
+- Other scaffolded files (the rules file, working-lessons, skills, agents,
+  `sources/library.md`): if a
   file already exists and its content differs from the template, the installer flags it
   as `⚠ CONFLICT: <path> — differs from template. Overwrite? (y/n)` and waits for your
   confirmation before touching it. If you decline, the file is left as-is. Files that
@@ -96,6 +99,7 @@ promise.
 
 Delete the `lv1-coder-installer` folder from `~/.claude/skills/` (or
 `%USERPROFILE%\.claude\skills\`) and restart Claude Code. To remove lv1-coder from a
-project, delete `.claude/lv1-coder.md`, `.claude/skills/{lv1-coder,triage,plan,build}/`,
+project, delete `.claude/lv1-coder.md`, `.claude/working-lessons.md`,
+`.claude/skills/{lv1-coder,triage,plan,build}/`,
 `.claude/agents/{researcher,inspector}.md`, `sources/library.md`, and `runs/`, and
-remove the `@.claude/lv1-coder.md` line from `CLAUDE.md`.
+remove the `@.claude/lv1-coder.md` and `@.claude/working-lessons.md` lines from `CLAUDE.md`.

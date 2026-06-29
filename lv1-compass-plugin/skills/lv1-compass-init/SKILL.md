@@ -60,7 +60,7 @@ blank. Each question accepts "Other" for free text or custom input:
    After creating it, **confirm `sources/library.md` is writable** (if the host left a
    read-only attribute on it, clear it); the same applies to any project file built from an
    asset. Either way, run the **Library sync** in
-   `../lv1-assistant/references/source-intake.md` — scan `sources/` for files not yet in
+   `${CLAUDE_PLUGIN_ROOT}/references/source-intake.md` — scan `sources/` for files not yet in
    the library and add them. Runs every time, not just on a fresh project.
 2. **`runs/`** — create the directory if missing.
 3. **`CLAUDE.md` (last).** If it doesn't exist, create it from

@@ -23,11 +23,12 @@ ends in a judgment you own.
 ## Install
 
 Install the whole plugin — don't upload a single skill folder on its own (the skills share
-`core/` and the `agents/` subagents, which live at the plugin root outside any one skill).
+`discipline/`, the root `references/`, and the `agents/` subagents, which live at the plugin
+root outside any one skill).
 
 - **Claude Cowork (desktop app):** "Upload local plugin" and point it at
   `lv1-compass-plugin.zip` (the zip whose root contains `.claude-plugin/plugin.json`,
-  `core/`, `skills/`, and `agents/`). No marketplace needed.
+  `discipline/`, `references/`, `skills/`, and `agents/`). No marketplace needed.
 - **Claude Code (optional):** `claude --plugin-dir ./lv1-compass-plugin` (unzipped) or
   `claude --plugin-dir lv1-compass-plugin.zip`.
 
@@ -88,15 +89,17 @@ recommendation and what would change it. The call stays yours.
 
 ## How the system is laid out
 
-The discipline is **single-sourced** in `core/`, so it can't drift between the two roles:
+The discipline is **single-sourced** in `discipline/`, so it can't drift between the two
+roles. Skills and agents reference these shared files by their plugin-root path,
+`${CLAUDE_PLUGIN_ROOT}/discipline/…`, never by climbing out of a skill with `../`:
 
-- **Shared core** (read first by both skills; passed into both subagents): `core/constitution.md` —
+- **Shared discipline** (read first by both skills; passed into both subagents): `discipline/constitution.md` —
   the bar, the A/B/C/D grades and the `[A]` provenance test, the core rules, the R1–R7
   failure modes (incl. input-trust / prompt-injection), the smallest-team rule, the
-  effort-tier→station table. `core/working-lessons.md` —
+  effort-tier→station table. `discipline/working-lessons.md` —
   the hard-won lessons (neutral ≠ timid; a label is a reason to commit harder; show the
   arithmetic; the user's position is a signal to investigate, not a mirror; steelman ≠
-  false balance). `core/readability.md` — the format rules the drafter applies and the
+  false balance). `discipline/readability.md` — the format rules the drafter applies and the
   inspector enforces (the trigger test; list vs table vs prose; metadata stacking; legends
   and reference run-ons one-per-line; never bullet reasoning; parallelism, nesting, emphasis).
 - **Subagents** (run in their own isolated context, delegated to by name):
@@ -104,11 +107,14 @@ The discipline is **single-sourced** in `core/`, so it can't drift between the t
   `agents/lv1-inspect.md` (independent check — pipeline mode for the assistant, standalone
   review mode for the advisor). Editing a research or inspection rule means editing the
   agent file.
-- **lv1-assistant** — `SKILL.md` is the orchestrator; `references/` holds the inline station
-  contracts: `triage.md` (one knob — rigor — plus the register and structure shape; no
+- **Shared references** (plugin-root `references/`, used by more than one skill):
+  `source-intake.md` — the source-handover and library-sync contract, read by both
+  lv1-assistant and lv1-compass-init via `${CLAUDE_PLUGIN_ROOT}/references/source-intake.md`.
+- **lv1-assistant** — `SKILL.md` is the orchestrator; its own `references/` holds the inline
+  station contracts: `triage.md` (one knob — rigor — plus the register and structure shape; no
   genre detection; **markdown-only output**), `register.md`
   (the two work voices: analytical · neutral-professional), `outline.md`, `draft.md`
-  (apparatus-by-rigor, format-follows-content, markdown out), `source-intake.md`.
+  (apparatus-by-rigor, format-follows-content, markdown out).
 - **lv1-advisor** — `SKILL.md` holds the mode router; `references/` holds one contract per
   mode: `review-mode.md` (delegates to the inspector), `challenge-mode.md` (restate →
   sourced steelman → six-angle probe → verdict), `decide-mode.md` (frame → basis round →
@@ -134,11 +140,12 @@ Re-running init only touches the text between its `<!-- lv1-compass:structure:st
 
 ## Honest limits
 
-- **How the shared core reaches each runner.** A *skill* reads it directly: from a
-  `SKILL.md`, `../../core/constitution.md` resolves to `<plugin-root>/core/` — inside the
-  plugin, so it survives install (a plugin may not reference files *outside* its root, but
-  this lands on it). A *subagent*, though, runs from the project directory and can't read
-  the plugin's `core/` from its own path — so the orchestrator reads the constitution and
+- **How the shared discipline reaches each runner.** A *skill* reads it directly via the
+  plugin-root variable: `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md` resolves to the
+  plugin's install directory — inside the plugin, so it survives install and stays correct
+  even if a file moves (unlike a `../` climb, which is location-dependent and breaks on a
+  move). A *subagent*, though, runs from the project directory and can't read the plugin's
+  `discipline/` from its own path — so the orchestrator reads the constitution and
   working-lessons and **passes them into the subagent's task prompt** when it delegates.
   This pattern is sound in principle but best confirmed with a real install test.
 - Decide mode's "steelman your own front-runner" rule is a **self-check**, not a

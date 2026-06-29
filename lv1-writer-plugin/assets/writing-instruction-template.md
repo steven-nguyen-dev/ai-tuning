@@ -2,11 +2,11 @@
 
 This file is no longer the source of the default tone. Since the genre/tone system was
 added, `lv1-writer init` seeds `manuscript/writing-instruction.md` from the **tone
-profile** the user chooses, drawn from `assets/tone-profiles/`.
+profile** the user chooses, drawn from `${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/`.
 
 - The old default voice (science-grounded narrative nonfiction) now lives, verbatim, at
-  **`assets/tone-profiles/narrative-nonfiction.md`** — edit it there.
-- Genre detection and the full profile taxonomy: **`references/tone-detect.md`**.
+  **`${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/narrative-nonfiction.md`** — edit it there.
+- Genre detection and the full profile taxonomy: **`${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md`**.
 - If the user picks "you decide" for genre at init, no `writing-instruction.md` is
   seeded and tone is detected per task instead.
 

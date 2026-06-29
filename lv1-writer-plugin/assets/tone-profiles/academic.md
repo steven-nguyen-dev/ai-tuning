@@ -51,7 +51,7 @@
 ## Structure & format
 
 - Section structure per convention; numbered sections if the venue uses them.
-- **Format follows content** (see `references/draft.md`): tables/figures for data
+- **Format follows content** (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`): tables/figures for data
   (numbered, captioned, self-contained, referenced in text); prose for argument;
   equations/notation where the field requires. Every figure cited in text exists and
   vice versa.

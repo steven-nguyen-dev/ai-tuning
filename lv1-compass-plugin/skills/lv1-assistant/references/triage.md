@@ -12,7 +12,7 @@ genre/tone detection, and **no output-format knob: every deliverable is markdown
 ```
 # Triage — <task title>
 - Lane: fast | full
-- Rigor tier: tiny | normal | full | high-stakes   (gates which stations run — see core/constitution.md tier table)
+- Rigor tier: tiny | normal | full | high-stakes   (gates which stations run — see ${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md tier table)
 - Work register: analytical | neutral-professional   (see references/register.md)
 - Structure shape: descriptive | hypothesis-driven    (see below)
 - Deliverable: <what it is, roughly how long/large, for whom>
@@ -41,7 +41,7 @@ tiers don't carry it.
 
 ## Choosing the knobs
 
-- **Rigor tier** — see the tier→station table in `core/constitution.md`. The tier gates
+- **Rigor tier** — see the tier→station table in `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md`. The tier gates
   which stations actually run (tiny skips research/outline/inspect; high-stakes adds a
   second research pass and a re-inspection). Default light; escalate for a reason.
 - **Work register** — `analytical` when the job is to reach and defend a conclusion

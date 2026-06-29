@@ -16,7 +16,7 @@
 
 ## Authorship — the user's vision leads
 
-- Establish first (`references/interview.md`): the **target age band** (picture book /
+- Establish first (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`): the **target age band** (picture book /
   early reader / middle-grade / YA), the characters, the story, and any message or
   value the user wants. Store in `manuscript/intake.md`. The age band drives every other
   choice — confirm it explicitly.
@@ -53,7 +53,7 @@
 ## Structure & format
 
 - **Prose throughout** (or verse if that's the form) — no tables/bullets/diagrams (see
-  `references/draft.md`). Markup is for chapters/pages only.
+  `${CLAUDE_PLUGIN_ROOT}/references/draft.md`). Markup is for chapters/pages only.
 
 ## Process & self-review
 

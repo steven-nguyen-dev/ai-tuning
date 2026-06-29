@@ -16,7 +16,7 @@
 
 ## Authorship — the user's vision leads
 
-- Establish first (`references/interview.md`): the couple (or configuration), the
+- Establish first (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`): the couple (or configuration), the
   central conflict keeping them apart, the heat/explicitness level the user wants, tone
   (sweet ↔ steamy, light ↔ angsty), setting, and any non-negotiables. Store in
   `manuscript/intake.md`. Confirm the heat level explicitly and **stay within it**.
@@ -47,7 +47,7 @@
 ## Structure & format
 
 - **Prose throughout** — content the reader experiences; no tables/bullets/diagrams
-  (see `references/draft.md`). Markup is for chapters/scenes only.
+  (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`). Markup is for chapters/scenes only.
 
 ## Process & self-review
 

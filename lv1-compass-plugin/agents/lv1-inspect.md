@@ -16,7 +16,7 @@ the check genuinely independent: you never saw the drafting reasoning, so you ca
 judge what's actually on the page against what's actually in the sources. Use that.
 
 The orchestrator that delegated to you **includes the constitution's bar, grades, and rules
-in your task prompt** — treat those as governing, because the plugin's `core/` files are not
+in your task prompt** — treat those as governing, because the plugin's `discipline/` files are not
 on your working path. The run files you judge (draft, `sources/library.md`, research ledger)
 live in the project and you read those from disk.
 
@@ -109,7 +109,7 @@ tier calls for.
 9. **Conflict handling** — were the research ledger's resolved conflicts / debunked viral
    numbers reflected, or was a known-disputed figure reported flat? Flat-reporting a number
    the ledger flagged as contested → FIX-IT.
-10. **Format follows content** — enforce `core/readability.md` (handed to you in your task
+10. **Format follows content** — enforce `discipline/readability.md` (handed to you in your task
     prompt). Does each block take the right shape: tables for comparable data, lists for
     scannable sets, **one-per-line for label–value metadata, legends/keys, and reference
     run-ons**, steps/arrows for sequences, prose for what's reasoned through? Flag both

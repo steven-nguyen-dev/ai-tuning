@@ -16,9 +16,10 @@ Target resolution:
 into the subagent's task prompt — lv1-inspect runs from the project folder and cannot
 reach the plugin path on its own:
 
-1. `assets/ai-review-checklist-template.md` — the inspector uses this directly from the
-   prompt; it must not try to read it from disk.
-2. `../../core/working-lessons.md` — the governing discipline for the inspection run.
+1. `${CLAUDE_PLUGIN_ROOT}/assets/ai-review-checklist-template.md` — the
+   inspector uses this directly from the prompt; it must not try to read it from disk.
+2. `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md` — the governing discipline for the
+   inspection run.
 
 `lv1-inspect` must, in this order:
 
@@ -38,4 +39,4 @@ reach the plugin path on its own:
    error / Quality gap), and a concrete fix.
 
 The inspector is **read-only** — it writes only `review-checklist.md` and
-`review-feedback.md`; it must never edit the document it is judging.
+`review-f

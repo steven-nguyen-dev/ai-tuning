@@ -18,11 +18,11 @@ for craft contracts instead.
 ## Install
 
 Install the whole plugin — don't upload a single skill folder on its own (the skills share
-`core/` and the `agents/` subagents, which live at the plugin root outside any one skill).
+`discipline/`, `references/`, `assets/`, and the `agents/` subagents, which live at the plugin root outside any one skill).
 
 - **Claude Cowork (desktop app):** "Upload local plugin" and point it at
   `lv1-writer-plugin.zip` (the zip whose root contains `.claude-plugin/plugin.json`,
-  `core/`, `skills/`, and `agents/`). No marketplace needed.
+  `discipline/`, `references/`, `assets/`, `skills/`, and `agents/`). No marketplace needed.
 - **Claude Code (optional):** `claude --plugin-dir ./lv1-writer-plugin` (unzipped) or
   `claude --plugin-dir lv1-writer-plugin.zip`.
 
@@ -116,26 +116,30 @@ authorship approach:
 
 ## How the system is laid out
 
-The discipline is **single-sourced** in `core/`, so it can't drift between roles:
+The discipline is **single-sourced** in `discipline/`, so it can't drift between roles.
+Every shared resource lives at the **plugin root** — `discipline/`, `references/`, `assets/`,
+and `agents/` — so no single skill owns it; skills reach them via `${CLAUDE_PLUGIN_ROOT}/…`:
 
-- **Shared core** (read first by the orchestrator; injected into subagents): `core/constitution.md` —
+- **Governing discipline** (read first by the orchestrator; injected into subagents): `discipline/constitution.md` —
   the bar, A/B/C/D grades, `[A]` provenance test, core rules, failure modes, effort-tier→station
-  table. `core/working-lessons.md` — hard-won lessons (neutral ≠ timid; labels commit harder;
+  table. `discipline/working-lessons.md` — hard-won lessons (neutral ≠ timid; labels commit harder;
   show the arithmetic; the user's position is a signal to investigate; steelman ≠ false balance).
 - **Subagents** (run in their own isolated context, delegated to by name):
   `agents/lv1-research.md` (graded claim ledger, conflict-hunt, steelman material, declared
   gaps) and `agents/lv1-inspect.md` (independent check — pipeline mode after drafting,
   standalone review mode for `lv1-reviewer`). Editing a research or inspection rule means
   editing the agent file.
-- **lv1-author** — `SKILL.md` is the orchestrator; `references/` holds the inline station
-  contracts: `triage.md`, `tone-detect.md` (genre → profile resolution), `structure-shapes.md`,
+- **Station contracts** — `references/` holds the inline station contracts the orchestrator
+  reads: `triage.md`, `tone-detect.md` (genre → profile resolution), `structure-shapes.md`,
   `source-intake.md`, `outline.md`, `draft.md`, `interview.md` (batching rule, gap handling,
-  invention ban), `working-lessons.md` (a local copy for the draft station), `anti-tells.md`
-  (AI-register checks the inspector enforces). `assets/` holds the 13 `tone-profiles/`,
-  the `ai-review-checklist-template.md`, and the CLAUDE.md + library templates.
-- **lv1-reviewer** — `SKILL.md` delegates directly to `lv1-inspect` in standalone mode.
-  No inline procedure — the inspection contract lives in the agent file.
-- **lv1-writer-init** — `SKILL.md` handles the full init flow (scan → confirm → setup).
+  invention ban), `anti-tells.md` (AI-register checks the inspector enforces).
+- **Templates & profiles** — `assets/` holds the 13 `tone-profiles/`, the
+  `ai-review-checklist-template.md`, and the CLAUDE.md, library, writing-instruction, and
+  manuscript-about templates.
+- **Skills** — each is a single `SKILL.md` with no private resources: **lv1-author** orchestrates
+  the pipeline; **lv1-reviewer** delegates directly to `lv1-inspect` in standalone mode (the
+  inspection contract lives in the agent file); **lv1-writer-init** handles the full init flow
+  (scan → confirm → setup).
 
 ## What ships with the work
 
@@ -161,9 +165,9 @@ and never deletes a source or user edit.
 
 ## Honest limits
 
-- **How the shared core reaches subagents.** A skill reads `core/` directly via its
-  `../../core/` path. A subagent runs from the project directory and cannot reach the
-  plugin's `core/` from its own path — so the orchestrator reads the constitution and
+- **How the governing discipline reaches subagents.** A skill reads `discipline/` via its
+  `${CLAUDE_PLUGIN_ROOT}/discipline/` path. A subagent runs from the project directory and cannot reach the
+  plugin's `discipline/` from its own path — so the orchestrator reads the constitution and
   working-lessons and **injects them into the subagent's task prompt** when it delegates.
   This pattern is sound but best confirmed with a real install test.
 - **Interview-driven invention protection.** The inspector REJECTs invented anecdotes,

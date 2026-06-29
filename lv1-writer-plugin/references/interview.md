@@ -8,7 +8,7 @@ gathered, stored, and used.
 ## When this applies
 
 The authorship approach is resolved in triage from genre + working mode (see
-`references/tone-detect.md`):
+`${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md`):
 
 - **Interview-driven** — personal-experience, love, and fiction (literary, romance,
   childrens); or *any* genre when the user chose **interactive** working mode. The

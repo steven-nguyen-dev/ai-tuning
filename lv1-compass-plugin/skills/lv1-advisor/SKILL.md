@@ -9,8 +9,8 @@ The judge-half of lv1-compass. It never makes the thing; it makes your thinking 
 fool. One skill, three modes, one shared engine: skeptical, sourced, steelman-first. Every
 mode ends in a **judgment you own**, never a silently-shipped artifact.
 
-**Read first, every run:** the shared constitution at `core/constitution.md` (from this
-skill: `../../core/constitution.md`) and `core/working-lessons.md`. The bar, the A/B/C/D
+**Read first, every run:** the shared constitution at `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md`
+and `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md`. The bar, the A/B/C/D
 grades, the steelman rule, and the lesson that *the user's stated position is a signal to
 investigate, not a mirror* (§4) are defined there. This skill applies them.
 
@@ -43,10 +43,10 @@ best objection is incomplete; self-check this before delivering (`references/dec
 
 > **Passing the discipline to a subagent (required).** When a mode delegates to
 > `lv1-research` or `lv1-inspect`, paste the governing context into the subagent's task
-> prompt — the contents of `../../core/constitution.md` and `../../core/working-lessons.md`
-> (and, for a standalone review, `../../core/readability.md` plus the
+> prompt — the contents of `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md` and `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md`
+> (and, for a standalone review, `${CLAUDE_PLUGIN_ROOT}/discipline/readability.md` plus the
 > `assets/review-checklist-template.md` content). A
-> subagent runs from the project directory and **cannot read the plugin's `core/` or this
+> subagent runs from the project directory and **cannot read the plugin's `discipline/` or this
 > skill's `assets/` from its own path**; the orchestrator can, so it carries them in.
 
 ## Shared engine (all three modes)

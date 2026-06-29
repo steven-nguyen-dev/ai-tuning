@@ -12,7 +12,7 @@ Read `00-triage.md` for the work register and rigor tier, then compose the voice
 2. **The work register** named in `00-triage.md` — `analytical` or `neutral-professional`.
    Read `references/register.md` and follow that voice's stance, shape, and apparatus.
 
-Also read `core/working-lessons.md` before drafting. Write **out of the AI register** — no
+Also read `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md` before drafting. Write **out of the AI register** — no
 generic filler, empty pivots, hype, or reflexive hedging.
 
 ## Apparatus by rigor level
@@ -35,7 +35,7 @@ Match how much proof machinery the deliverable carries to the rigor tier set in 
 Pick each block's presentation form from the *content type*, not a fixed template. The full
 rules — the trigger test, when to list / table / step / keep prose, metadata stacking,
 legends and reference run-ons, and the mechanics (parallelism, item length, nesting,
-emphasis, headings, paragraphs) — are single-sourced in **`core/readability.md`**. Apply
+emphasis, headings, paragraphs) — are single-sourced in **`${CLAUDE_PLUGIN_ROOT}/discipline/readability.md`**. Apply
 them as you draft; the inspector enforces the same file, so they can't drift.
 
 The one-line version: **will the reader scan / refer back to these items individually? →

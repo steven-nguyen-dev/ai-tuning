@@ -17,7 +17,7 @@
 ## Whose truth
 
 - **The relationships, moments, and reflections come from the user**, gathered via
-  `references/interview.md` into `manuscript/intake.md`. AI invents no scene, no person,
+  `${CLAUDE_PLUGIN_ROOT}/references/interview.md` into `manuscript/intake.md`. AI invents no scene, no person,
   no exchange, no feeling. The account is true-as-lived; not graded.
 - A skip is a **declared gap** — ask in a batched round or keep the chapter leaner;
   never fabricate intimacy the user didn't describe.
@@ -31,7 +31,7 @@
 - Warm, reflective, intimate — the user's own voice and emotional register.
 - Honest about ambivalence and difficulty; resist the tidy romantic cliché.
 - Tender, not sentimental; specific, not greeting-card.
-- **Read `references/anti-tells.md`.** The therapy-speak register (`hold space`, `your
+- **Read `${CLAUDE_PLUGIN_ROOT}/references/anti-tells.md`.** The therapy-speak register (`hold space`, `your
   journey`, `lean into`, `give yourself grace`…) is an automatic FIX-IT here — write the
   user's actual voice, not a wellness-post template.
 
@@ -39,7 +39,7 @@
 
 - Scene or remembered moment → reflection → the insight it yields; chronological or
   thematic by the user's arc.
-- **Format follows content** (see `references/draft.md`): **prose** almost throughout —
+- **Format follows content** (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`): **prose** almost throughout —
   this is felt, not decoded. No tables/diagrams; markup only if the user is itemizing.
 
 ## Process

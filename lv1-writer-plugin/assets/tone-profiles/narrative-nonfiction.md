@@ -95,7 +95,7 @@ the explanation arrives.
 - Match list form to the cognitive job: bullets for content the reader *decodes*
   (a taxonomy, a recap of named parts); prose for content the reader *experiences*
   (a person, an unfolding process, a reflection). (See the format-follows-content rule
-  in `references/draft.md`.)
+  in `${CLAUDE_PLUGIN_ROOT}/references/draft.md`.)
 - Bold the named mechanisms as skim-anchors. No internal/author-only artifacts (file
   paths, audit-folder names, scaffolding) in the reader's text.
 

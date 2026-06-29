@@ -6,7 +6,7 @@ down so it can be checked.
 
 Read `00-triage.md` (for the tone profile, **structure shape**, and authorship
 approach), `01-research.md` (if it exists), `sources/library.md`, the chosen
-`assets/tone-profiles/<id>.md` and `references/structure-shapes.md`, and
+`${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/<id>.md` and `${CLAUDE_PLUGIN_ROOT}/references/structure-shapes.md`, and
 `manuscript/writing-instruction.md` (if it exists), then write `runs/<id>/02-outline.md`:
 
 ```

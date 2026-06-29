@@ -48,7 +48,7 @@ readouts, documentation, explainers.*
 
 The per-register `Format:` lines above set *how much* structure each voice uses; the
 concrete rules for *which* shape each block takes (lists vs tables vs prose, metadata
-stacking, legends, mechanics) live once in **`core/readability.md`** — both registers obey
+stacking, legends, mechanics) live once in **`${CLAUDE_PLUGIN_ROOT}/discipline/readability.md`** — both registers obey
 it.
 
 **Write out of the AI register.** In both voices, avoid the words and constructions that

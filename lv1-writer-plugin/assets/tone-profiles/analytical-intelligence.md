@@ -4,7 +4,7 @@
 - **Register:** decisive, epistemic, hypothesis-driven — the author argues, never merely narrates
 - **Proof apparatus:** **full** — inline A/B grades, a methodology/enforcement section up front, mandatory steelman, and a proof appendix that ships *inside* the document
 - **Default authorship:** AI-autonomous
-- **Structure shape:** hypothesis-driven (see `references/structure-shapes.md`)
+- **Structure shape:** hypothesis-driven (see `${CLAUDE_PLUGIN_ROOT}/references/structure-shapes.md`)
 - **Density & pacing:** **compress** — lead with tables/lists; every paragraph earns its space; no narrative throat-clearing before the finding
 
 > An *audited intelligence memorandum*, not a market overview. A reader — or an
@@ -80,7 +80,7 @@ reader sees, stating:
 
 - Executive summary of numbered findings → methodology → per-section lens analysis →
   steelman + synthesis → recommendations → proof appendix.
-- **Format follows content** (see `references/draft.md`): tables for comparable
+- **Format follows content** (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`): tables for comparable
   data/stats; bullets for discrete lists; dashes/arrows (`A → B → C`) for sequences and
   cause-effect; prose for the argument connecting them. This profile leans on tables
   and structured markup freely.

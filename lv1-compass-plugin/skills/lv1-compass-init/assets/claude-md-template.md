@@ -17,7 +17,7 @@ Project defaults (set at init):
 - **Working mode:** <auto | interactive>
 
 Layout:
-- `core/constitution.md`, `core/working-lessons.md`, `core/readability.md` — the shared
+- `discipline/constitution.md`, `discipline/working-lessons.md`, `discipline/readability.md` — the shared
   discipline both skills read first and both subagents are handed: the bar, A/B/C/D grades,
   the `[A]` test, failure modes, lessons, and the format/readability rules.
 - `sources/library.md` — every kept source and graded claim (A/B/C/D). The spine: no factual

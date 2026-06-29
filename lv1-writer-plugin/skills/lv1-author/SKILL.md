@@ -5,7 +5,7 @@ description: Run a book chapter, article, report, or any research-backed writing
 
 # lv1-author
 
-**Read first, every run:** `../../core/constitution.md` and `../../core/working-lessons.md`.
+**Read first, every run:** `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md` and `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md`.
 The bar, the A/B/C/D grades, the rigor tiers, the failure modes, and the steelman rule
 are defined there. This skill applies them; it does not restate them.
 
@@ -42,14 +42,14 @@ This skill handles writing tasks. Two sibling skills handle the other entry poin
 Every task is sorted along three independent knobs, recorded in `00-triage.md`:
 
 1. **Genre / tone profile** — *what voice and shape*. Detected per
-   `references/tone-detect.md`; selects a profile from `assets/tone-profiles/`. The
+   `${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md`; selects a profile from `${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/`. The
    profile also decides whether the A/B/C/D grading and proof package apply at all
    (fiction switches them off for craft contracts instead).
 2. **Rigor tier** — *how much proof apparatus ships* (tiny / normal / full / high-stakes;
-   full definitions and station-gate table in `../../core/constitution.md`).
+   full definitions and station-gate table in `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md`).
 3. **Working mode** — *auto | interactive* — which, with the genre, resolves the
    **authorship approach** (AI-autonomous | interview-driven | hybrid; see
-   `references/interview.md`).
+   `${CLAUDE_PLUGIN_ROOT}/references/interview.md`).
 
 ## The pipeline
 
@@ -66,37 +66,37 @@ results; the two loops are driven by the inspector's verdict.)
 
 1. **Set up the run.** Create `runs/<UTC-timestamp>-<short-slug>/` in the project
    folder. Tell the user the run id.
-2. **Triage.** Read `references/triage.md` and follow it. Write `00-triage.md`. This
+2. **Triage.** Read `${CLAUDE_PLUGIN_ROOT}/references/triage.md` and follow it. Write `00-triage.md`. This
    sets all three knobs — detect the **genre / tone profile** and **structure shape**
-   (`references/tone-detect.md`, `references/structure-shapes.md`), the **rigor tier**,
+   (`${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md`, `${CLAUDE_PLUGIN_ROOT}/references/structure-shapes.md`), the **rigor tier**,
    and the **working mode → authorship approach**. If genre or scope is genuinely
    ambiguous, ask one batched round before continuing (rule 1). On `tiny`, say you're
    running the fast lane and skip straight to draft after triage. (`00-triage.md` is
    still written — lv1-inspect reads it for genre and rigor tier regardless of lane.)
 3. **Gather material — routed by authorship approach.**
    - **AI-autonomous:** for a source handed over (PDF, Word, image, URL), read
-     `references/source-intake.md` and add it to `sources/library.md`. For facts still
+     `${CLAUDE_PLUGIN_ROOT}/references/source-intake.md` and add it to `sources/library.md`. For facts still
      missing, **delegate to the `lv1-research` subagent** — it researches in its own
      context and writes `01-research.md` as a graded claim ledger, returning a summary.
      Don't move on until every claim the task needs is a ledger row sourced (A/B) or
      marked a declared gap.
    - **Interview-driven:** the spine comes from the user — run the intake interview
-     (`references/interview.md`), one batched round, and save answers to
+     (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`), one batched round, and save answers to
      `manuscript/intake.md`. Research the web only for context *around* the user's
      material, if at all.
    - **Hybrid (e.g. cognitive-behavior):** do both — interview for the lived material
      (`intake.md`) *and* delegate to `lv1-research` for the science. Keep the two
      visibly distinct downstream.
-4. **Outline.** Read `references/outline.md` and follow it. Write `02-outline.md`.
-5. **Draft.** Read `references/draft.md` and follow it: compose the voice from the tone
+4. **Outline.** Read `${CLAUDE_PLUGIN_ROOT}/references/outline.md` and follow it. Write `02-outline.md`.
+5. **Draft.** Read `${CLAUDE_PLUGIN_ROOT}/references/draft.md` and follow it: compose the voice from the tone
    profile in `00-triage.md` (+ `manuscript/writing-instruction.md` overrides), apply the
    apparatus for the rigor tier, and let format follow content. For interview-driven /
    hybrid work, read `manuscript/intake.md` as a first-class source and invent no
    personal material. Write the prose to `manuscript/` and a copy to `03-draft.md`. Run
    its self-review pass before moving on.
-6. **Inspect.** Before delegating, read `../../core/working-lessons.md` from the plugin
+6. **Inspect.** Before delegating, read `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md` from the plugin
    path and inject its content into the subagent's task prompt — lv1-inspect runs from
-   the project folder and cannot reach the plugin's `core/` on its own. Then **delegate
+   the project folder and cannot reach the plugin's `discipline/` on its own. Then **delegate
    to the `lv1-inspect` subagent** (pipeline mode) — running in its own context, it
    re-reads the real draft, `sources/library.md`, and `01-research.md` from disk (it
    never saw the drafting reasoning, which is what makes the check independent) and
@@ -123,7 +123,7 @@ sourced"). If you cut a corner, say so — never fake a step.
 
 If the user just hands over a file or link without asking for the full pipeline ("file
 this in" / "add this source"), you don't need a full run folder — read
-`references/source-intake.md`, add it to `sources/library.md`, and report the source
+`${CLAUDE_PLUGIN_ROOT}/references/source-intake.md`, add it to `sources/library.md`, and report the source
 id and what's now citable.
 
 ## Reviewing an existing document (no pipeline run)
@@ -131,9 +131,8 @@ id and what's now citable.
 If the user asks you to review / critique / fact-check a document that already exists
 (rather than write a new one) — whether through the `lv1-reviewer` skill or just in plain
 words — hand it to the **lv1-inspect** subagent in **standalone review mode**, following
-the same injection steps as `../lv1-reviewer/SKILL.md`: read `assets/ai-review-checklist-template.md`
-and `../../core/working-lessons.md` from the plugin path and inject both into the
+the same injection steps the `lv1-reviewer` skill uses: read
+`${CLAUDE_PLUGIN_ROOT}/assets/ai-review-checklist-template.md`
+and `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md` from the plugin path and inject both into the
 subagent's task prompt before delegating. lv1-inspect then generates a document-specific
-`review-checklist.md` beside the target and writes `review-feedback.md` (verdict
-PASS / FIX-IT / REJECT, every finding located precisely with a concrete fix). The
-inspector is read-only — it never edits the document itself.
+`review-checklist.md` beside the target and writes `review-feedback.md` (verdic                          

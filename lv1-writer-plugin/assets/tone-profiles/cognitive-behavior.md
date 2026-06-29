@@ -21,7 +21,7 @@ This genre runs on **two distinct kinds of material**, and they must never blur:
 1. **Lived material — from the user (interview-driven).** Real situations, triggers,
    feelings, dialogue, turning points. This is the spine of each chapter. **AI does not
    invent it.** Gather it through the intake interview and mid-draft batched rounds
-   (`references/interview.md`); store it in `manuscript/intake.md`. A user's account is
+   (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`); store it in `manuscript/intake.md`. A user's account is
    treated as true-as-experienced and is **not** graded A/B/C/D.
 2. **Science — from AI (cited).** The cognitive mechanism behind the lived pattern:
    the bias, the loop, the reframe, the evidence it works. Every scientific claim is
@@ -65,7 +65,7 @@ the science into a clinical sidebar — see Tone.)
 - Second person used carefully — describe the mechanism, don't diagnose the individual
   reader ("many people find…" not "you are…").
 - No clinical lecture register; carry the science in plain, moving prose.
-- **Read `references/anti-tells.md`.** Therapy-speak (`hold space`, `do the work`,
+- **Read `${CLAUDE_PLUGIN_ROOT}/references/anti-tells.md`.** Therapy-speak (`hold space`, `do the work`,
   `your journey`, `sit with it`…) is an automatic FIX-IT — describe the mechanism in real
   language, not wellness-post filler.
 
@@ -75,7 +75,7 @@ the science into a clinical sidebar — see Tone.)
   process, cited) → reframe (the shift in seeing it) → practice (a concrete, doable
   step)**.
 - One pattern per chapter; build cumulatively.
-- **Format follows content** (see `references/draft.md`): prose for the scene and the
+- **Format follows content** (see `${CLAUDE_PLUGIN_ROOT}/references/draft.md`): prose for the scene and the
   reflection (content the reader *experiences*); bullets for a recap of named steps or
   a practice the reader will *do*; a simple diagram/arrows for a thought-loop
   (`trigger → thought → feeling → action → reinforcement`). Default to prose.
@@ -83,7 +83,7 @@ the science into a clinical sidebar — see Tone.)
 
 ## Process
 
-1. Gather the user's lived material first (`references/interview.md`) — one batched
+1. Gather the user's lived material first (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`) — one batched
    round at the start; more rounds when a chapter surfaces a gap.
 2. Research the science for each pattern; source and grade it into the library.
 3. Draft to the beat, reading `manuscript/intake.md` as a first-class source for the
