@@ -1,19 +1,25 @@
 # lv1-writer
 
 A **disciplined research-backed writing pipeline** for books, articles, and long-form work.
-Three skills share one constitution and ship only work that is **impressive AND true** —
+Four skills share one constitution and ship only work that is **impressive AND true** —
 every factual claim graded and traceable to a real source. Fiction genres swap citations
 for craft contracts instead.
 
 - **lv1-author** — the **writer**. Turns a writing brief into a draft through
   `triage → research → outline → draft → inspect → ship`. Handles non-fiction (sourced,
   graded), interview-driven work (user's lived material is the spine), hybrid (both), and
-  fiction (craft contracts, no citations).
+  fiction (craft contracts, no citations). Works **one chapter file at a time**.
 - **lv1-reviewer** — the **judge**. Independently reviews an existing document — generates
   a document-specific checklist, then writes a located verdict (PASS / FIX-IT / REJECT)
   without touching the document itself.
-- **lv1-writer-init** — **setup**. Scaffolds the project: source library, manuscript
-  folder, tone profile, working mode, and a `CLAUDE.md` block. Safe to re-run.
+- **lv1-address-feedback** — the **responder**. Reads a human review in `feedback/`,
+  verifies each point against the real draft and sources, grades it, and writes a
+  prioritized improvement plan into a `*-response.md`. It judges feedback; it does not
+  rewrite the manuscript (accepted items go back to `lv1-author`).
+- **lv1-writer-init** — **setup**. Scaffolds the project — `inputs/`, `manuscript/`,
+  `sources/`, `feedback/`, tone profile, working mode, and a `CLAUDE.md` block — and
+  **refactors any existing layout into this canonical structure** non-destructively
+  (splitting a single-file book into chapter files after one confirmation). Safe to re-run.
 
 ## Install
 
@@ -40,6 +46,9 @@ Every entry point is a **skill** that fires on its own natural-language trigger.
   Also handles "file this source" (adds to the library without a full pipeline run).
 - **`lv1-reviewer`** — auto-triggers when you want something **judged**: "review this
   draft", "fact-check this document", "critique my chapter".
+- **`lv1-address-feedback`** — auto-triggers when you want a human review **answered**:
+  "address feedback", "respond to the review", "go through the editor's notes". Reads
+  `feedback/`, verifies, and writes the response + plan.
 
 ## Usage, inside a Cowork project
 
@@ -47,7 +56,7 @@ Every entry point is a **skill** that fires on its own natural-language trigger.
 lv1-writer init
 ```
 First run: ask four questions (topic & angle, POV, tone group, working mode), scaffold
-`sources/library.md`, `manuscript/writing-instruction.md`, and `manuscript/_about.md`,
+`sources/library.md`, `inputs/writing-instruction.md`, and `manuscript/_about.md`,
 then write a `CLAUDE.md` block. Re-running is safe — it syncs, updates, and never
 overwrites user edits to `writing-instruction.md` unless you changed the tone.
 
@@ -64,7 +73,7 @@ I want to write a memoir about leaving my corporate job — interview me
 ```
 Sets `working mode: interactive`. The pipeline switches to **interview-driven**: AI
 interviews the user in one batched round per section, saves answers to
-`manuscript/intake.md`, and drafts only from that material. An invented anecdote is
+`inputs/intake.md`, and drafts only from that material. An invented anecdote is
 treated the same as a fabricated source — the inspector REJECTs it.
 
 ```
@@ -79,6 +88,23 @@ file this in: https://example.com/study.pdf
 ```
 No pipeline needed — adds the source to `sources/library.md` with a grade and summary,
 and reports what's now citable.
+
+```
+address the editor's feedback
+```
+Reads `feedback/editor-review.md`, re-reads the real chapter + sources, verifies each
+point (a wrong note gets a sourced rebuttal, not agreement), and writes
+`feedback/editor-review-response.md` — a prioritized improvement plan. It doesn't touch
+the manuscript; it offers to hand the accepted items to `lv1-author`.
+
+```
+assemble the book
+```
+Concatenates the chapter files (`manuscript/ch01.md`, `ch02.md`, …) in order into the
+finished full book at the **project root**, named after the book (`<book-title>.md`) — a
+generated, do-not-edit build output. The chapters stay the source of truth; to change the
+book, edit a chapter and re-assemble. Init also builds it once after splitting a
+single-file book into chapters.
 
 ## Three knobs (set at triage)
 
@@ -134,12 +160,14 @@ and `agents/` — so no single skill owns it; skills reach them via `${CLAUDE_PL
   `source-intake.md`, `outline.md`, `draft.md`, `interview.md` (batching rule, gap handling,
   invention ban), `anti-tells.md` (AI-register checks the inspector enforces).
 - **Templates & profiles** — `assets/` holds the 13 `tone-profiles/`, the
-  `ai-review-checklist-template.md`, and the CLAUDE.md, library, writing-instruction, and
-  manuscript-about templates.
+  `ai-review-checklist-template.md`, the `feedback-templates/` (user-review, editor-review,
+  review-response), and the CLAUDE.md, library, writing-instruction, and manuscript-about
+  templates.
 - **Skills** — each is a single `SKILL.md` with no private resources: **lv1-author** orchestrates
   the pipeline; **lv1-reviewer** delegates directly to `lv1-inspect` in standalone mode (the
-  inspection contract lives in the agent file); **lv1-writer-init** handles the full init flow
-  (scan → confirm → setup).
+  inspection contract lives in the agent file); **lv1-address-feedback** verifies a human
+  review against the real artifact and writes a graded response + plan; **lv1-writer-init**
+  handles the full init flow (scan → confirm → migrate → setup).
 
 ## What ships with the work
 
@@ -150,10 +178,18 @@ Nothing ships bare.
   confidence table (every factual claim, its grade, its source), assumptions, source index
   with in-window flags, data-limits. Plus a `05-manifest.md` in the run folder.
 - **Fiction** — no proof apparatus. The inspector checks craft contracts instead.
-- **Interview-driven** — `manuscript/intake.md` is the sourcing spine. Every personal claim
+- **Interview-driven** — `inputs/intake.md` is the sourcing spine. Every personal claim
   in the draft traces back to a user answer; gaps are declared, never invented.
 - **A review** — `review-checklist.md` (document-specific) and `review-feedback.md`
   (PASS / FIX-IT / REJECT with located findings and concrete fixes), written beside the target.
+- **A feedback response** — `feedback/<name>-response.md`: a verified, graded reply to a
+  human review (Accept / Partially accept / Reject-with-evidence per point) plus a
+  prioritized improvement plan. The manuscript is left untouched until an `lv1-author` pass.
+- **Every run** — `runs/<id>/decisions.md`: the log of how the run was steered — the
+  reasoning behind each call and the user's confirmations, captured verbatim.
+- **The full book** — `<book-title>.md` at the project root: an on-demand assembly of the
+  chapter files in order. A generated build output (rebuild with "assemble the book"); the
+  chapters remain the source of truth.
 
 ## The CLAUDE.md it writes
 

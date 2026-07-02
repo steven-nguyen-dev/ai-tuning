@@ -47,13 +47,15 @@ blank. Each question accepts "Other" for free text or custom input:
    block if found. (Free text via "Other"; offer "Decide per task" as an option.)
 2. **Default work register** — **analytical** (reach and defend conclusions) ·
    **neutral-professional** (inform clearly) · **you decide** (pick per task in triage).
-3. **Working mode** — **auto** (run autonomously, ask only on blocking ambiguity) ·
-   **interactive** (involve me — and for decisions, expect the basis round).
+3. **Working mode** — **interactive** *(recommended default — involve me; the pipeline
+   asks back in chat and takes correction in chat, batching open questions into one round)* ·
+   **auto** (opt out: run autonomously, ask only on blocking ambiguity). Pre-fill
+   **interactive** as the first/recommended option.
 
 ## Step 3 — Run Setup
 
 1. **Sync the source library.** If `sources/library.md` doesn't exist, create it by
-   **writing the template's *content* into a new file** — read `assets/library-template.md`
+   **writing the template's *content* into a new file** — read `${CLAUDE_PLUGIN_ROOT}/skills/lv1-compass-init/assets/library-template.md`
    and write its text out as `sources/library.md`. **Do not copy the asset file itself**:
    installed plugin assets are read-only, and a file-copy inherits that read-only attribute,
    which would leave `library.md` unwritable so later runs can't append sources to the spine.
@@ -64,7 +66,7 @@ blank. Each question accepts "Other" for free text or custom input:
    the library and add them. Runs every time, not just on a fresh project.
 2. **`runs/`** — create the directory if missing.
 3. **`CLAUDE.md` (last).** If it doesn't exist, create it from
-   `assets/claude-md-template.md`. If it exists, replace only the text between
+   `${CLAUDE_PLUGIN_ROOT}/skills/lv1-compass-init/assets/claude-md-template.md`. If it exists, replace only the text between
    `<!-- lv1-compass:structure:start -->` and `<!-- lv1-compass:structure:end -->` with a
    fresh copy of that block; if the markers aren't present, append the block. Record the
    confirmed **domain**, **default register**, and **working mode** inside that block.
@@ -75,7 +77,8 @@ blank. Each question accepts "Other" for free text or custom input:
 State: what the scan found vs what the user confirmed (note any changes); domain /
 default register / working mode; what was created vs updated vs left alone; how many
 sources are now in the library (and how many newly added, if any); that `CLAUDE.md` now
-reflects the current layout.
+reflects the current layout — the two-folder + root model (`sources/` to cite, `runs/` for
+proof, the project root for the final `<slug>.md` deliverable only).
 
 **Do not** start a task from here — to make a deliverable, describe it (`lv1-assistant`
 takes over); to get something judged, ask (`lv1-advisor` takes over).

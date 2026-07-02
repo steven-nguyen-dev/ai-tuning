@@ -13,7 +13,7 @@ genre/tone detection, and **no output-format knob: every deliverable is markdown
 # Triage — <task title>
 - Lane: fast | full
 - Rigor tier: tiny | normal | full | high-stakes   (gates which stations run — see ${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md tier table)
-- Work register: analytical | neutral-professional   (see references/register.md)
+- Work register: analytical | neutral-professional   (see ${CLAUDE_PLUGIN_ROOT}/skills/lv1-assistant/references/register.md)
 - Structure shape: descriptive | hypothesis-driven    (see below)
 - Deliverable: <what it is, roughly how long/large, for whom>
 - Sources on hand: <what the user already has, or "none yet">

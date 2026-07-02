@@ -64,7 +64,7 @@ text); otherwise ask as a numbered list the user can answer in one reply.
 
 ## Storage
 
-Save intake answers and every round's responses to `manuscript/intake.md` (and/or
+Save intake answers and every round's responses to `inputs/intake.md` (and/or
 `runs/<id>/`). This is the experience-equivalent of the source library: the draft station
 reads it as a first-class source, and the inspector uses it to confirm every
 personal/experiential claim traces to the user's material rather than to invention.

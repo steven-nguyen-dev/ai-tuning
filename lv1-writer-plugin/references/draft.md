@@ -1,7 +1,19 @@
 # Draft — Assembly
 
 Write the real prose, at full effort, following the outline. Save it to `manuscript/`
-(one file per chapter or piece) and a copy to `runs/<id>/03-draft.md`.
+and a copy to `runs/<id>/03-draft.md`.
+
+## Work one chapter at a time (prefer rule)
+
+**The unit of work is a single chapter file, not the whole book.** Draft, revise, and
+hand to inspection **one `manuscript/<chapter>.md` at a time** (e.g. `ch01.md`,
+`ch02.md`). Load only the chapter(s) the current task touches plus `02-outline.md` for
+where they sit — do **not** read the entire manuscript into context just to write or fix
+one chapter. This keeps the working set small, the prose focused, and inspection precise.
+Read another chapter only when the task genuinely needs cross-chapter continuity (a
+callback, a timeline, a running argument), and then read just the spans you need. Operate
+on the whole book at once only when the task is explicitly book-wide (a full-manuscript
+consistency pass, a global rename).
 
 ## Tone — compose the voice (in precedence order)
 
@@ -12,7 +24,7 @@ the voice from these layers, highest precedence first:
 2. **The tone profile** named in `00-triage.md` — read `${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/<id>.md`
    and follow its Spine / Truth-or-fiction contract / Detail / Tone / Structure /
    Never-do. This is the genre's voice and shape.
-3. **Project overrides** in `manuscript/writing-instruction.md`, layered on top, if it
+3. **Project overrides** in `inputs/writing-instruction.md`, layered on top, if it
    exists (the user's project-wide tone edits).
 
 If no profile is set and no `writing-instruction.md` exists, write in clear, accurate,
@@ -56,7 +68,7 @@ Match how much proof machinery the prose carries to the rigor tier set in triage
 - **fiction** — none of the above; follow the profile's craft contracts.
 
 For **hybrid** (cognitive-behavior, mindset): grade and cite the science; treat the
-user's material from `manuscript/intake.md` as experience-truth (ungraded); keep the two
+user's material from `inputs/intake.md` as experience-truth (ungraded); keep the two
 visibly distinct in the prose.
 
 ## Format follows content
@@ -92,7 +104,7 @@ filler `anti-tells.md` targets). The inspector flags a *rushed* expansive scene 
 
 ## Interview-driven & hybrid drafts
 
-If the authorship approach is interview-driven or hybrid, read `manuscript/intake.md`
+If the authorship approach is interview-driven or hybrid, read `inputs/intake.md`
 as a first-class source and draft the lived material from it — **never invent a
 personal anecdote, scene, quote, or feeling the user didn't give**. A gap the user
 skipped stays a gap (keep the section leaner); don't fill it with invention. See

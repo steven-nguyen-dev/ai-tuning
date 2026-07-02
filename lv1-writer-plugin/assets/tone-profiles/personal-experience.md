@@ -18,7 +18,7 @@
 
 - **Every event, feeling, person, and detail comes from the user.** Gather it through
   the intake interview and mid-draft batched rounds (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`); store
-  it in `manuscript/intake.md`. **AI invents nothing** — no scenes the user didn't
+  it in `inputs/intake.md`. **AI invents nothing** — no scenes the user didn't
   describe, no dialogue they didn't report, no feelings they didn't name.
 - The user's account is treated as **true-as-lived**; it is not graded A/B/C/D.
 - A skip is a **declared gap**: if the user hasn't given enough for a chapter, ask
@@ -50,7 +50,7 @@
 
 1. Run the intake interview first — capture events, people, feelings, turning points,
    the arc the user wants, what they're willing vs not willing to share.
-2. Draft scene by scene from `manuscript/intake.md`, asking a batched round whenever a
+2. Draft scene by scene from `inputs/intake.md`, asking a batched round whenever a
    scene needs detail only the user has.
 3. Verify every rendered detail traces to the user's account; check external facts.
 4. Read drafts back to the user for truth and voice before finalizing.

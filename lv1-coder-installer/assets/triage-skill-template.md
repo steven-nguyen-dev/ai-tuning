@@ -29,6 +29,8 @@ Trigger research when:
 
 "I haven't tried yet" is not a valid reason. Research fires for a named, specific gap — not as a precaution.
 
+**Hard rule — a claim with no in-repo grounding cannot ride the fast lane.** If delivering the task requires asserting an external fact that *cannot* be grounded from the codebase, a passing test, or a project doc — a dependency version, a third-party API contract, a framework edge case, a standard's requirement — then research is **not optional**: either fire it, or escalate off `tiny`. The fast lane (build → inspect) has no station to source a claim, and rule 5 (no source, no claim) still binds. Grounding a factual claim in a test or run counts; asserting it from memory does not. When unsure whether a claim is codebase-grounded, treat it as not, and escalate.
+
 **Plan decision — default is NO**
 
 Skip the plan step when:

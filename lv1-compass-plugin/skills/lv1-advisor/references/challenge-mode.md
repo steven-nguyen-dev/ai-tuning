@@ -45,3 +45,10 @@ a short **challenge memo** to `runs/<id>/`: *Position (steelmanned) · The case 
 [graded] · Six-angle findings · Verdict + what would change it · Sources*. Either way, end
 by handing the call back to the user — you've stress-tested their thinking; the decision
 stays theirs.
+
+**The delivery gate (self-enforced).** Challenge mode has no separate inspector, so the gate
+is mechanical: before delivering the verdict, confirm the output actually contains the
+**sourced case against the position** as an explicit, non-empty part — graded A/B/C/D, not a
+token objection. A "HOLDS" verdict that never assembled a real opposing case is flattery in
+the costume of rigor (the exact failure this mode exists to prevent); it does not ship until
+the case against is built. Restating the position and jumping to a verdict is a faked step (R4).

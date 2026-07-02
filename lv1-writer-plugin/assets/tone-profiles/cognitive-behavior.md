@@ -21,7 +21,7 @@ This genre runs on **two distinct kinds of material**, and they must never blur:
 1. **Lived material — from the user (interview-driven).** Real situations, triggers,
    feelings, dialogue, turning points. This is the spine of each chapter. **AI does not
    invent it.** Gather it through the intake interview and mid-draft batched rounds
-   (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`); store it in `manuscript/intake.md`. A user's account is
+   (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`); store it in `inputs/intake.md`. A user's account is
    treated as true-as-experienced and is **not** graded A/B/C/D.
 2. **Science — from AI (cited).** The cognitive mechanism behind the lived pattern:
    the bias, the loop, the reframe, the evidence it works. Every scientific claim is
@@ -86,7 +86,7 @@ the science into a clinical sidebar — see Tone.)
 1. Gather the user's lived material first (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`) — one batched
    round at the start; more rounds when a chapter surfaces a gap.
 2. Research the science for each pattern; source and grade it into the library.
-3. Draft to the beat, reading `manuscript/intake.md` as a first-class source for the
+3. Draft to the beat, reading `inputs/intake.md` as a first-class source for the
    lived material and the library for the science.
 4. Verify: every scientific claim traces to its source and is faithful in scope; every
    personal detail traces to `intake.md` (not invented); the two are visibly distinct.

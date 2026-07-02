@@ -1,7 +1,7 @@
 # Writing Instruction template — moved
 
 This file is no longer the source of the default tone. Since the genre/tone system was
-added, `lv1-writer init` seeds `manuscript/writing-instruction.md` from the **tone
+added, `lv1-writer init` seeds `inputs/writing-instruction.md` from the **tone
 profile** the user chooses, drawn from `${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/`.
 
 - The old default voice (science-grounded narrative nonfiction) now lives, verbatim, at

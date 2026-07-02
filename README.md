@@ -15,10 +15,15 @@ Three projects, three domains — writing, work deliverables + advisory, coding:
 A writing pipeline for research-backed long-form content. Runs tasks through
 **triage → research → outline → draft (+ self-review) → inspect → ship**. Research and
 inspection run as isolated subagents in their own context; every factual claim is graded
-A/B/C/D and traced to a real source before the draft ships.
+A/B/C/D and traced to a real source before the draft ships. The book is written **one
+chapter file at a time** and assembled into a finished `<book-title>.md` at the project
+root on demand.
 
-Three skills: `lv1-author` (main pipeline), `lv1-writer-init` (project setup),
-`lv1-reviewer` (independent review of an existing document).
+Four skills: `lv1-author` (main pipeline + book assembly), `lv1-writer-init` (project
+setup — refactors any folder into the canonical `inputs/` / `manuscript/` / `sources/` /
+`feedback/` layout), `lv1-reviewer` (independent review of an existing document), and
+`lv1-address-feedback` (verifies a human review in `feedback/` against the real draft and
+writes a graded improvement plan).
 
 Install by uploading `lv1-writer-plugin.zip` as a plugin in Cowork ("Upload local
 plugin"). Works in Claude Code via `--plugin-dir`.

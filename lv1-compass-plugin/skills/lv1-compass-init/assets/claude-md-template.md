@@ -14,12 +14,13 @@ constitution. Two skills:
 Project defaults (set at init):
 - **Domain:** <recorded at init>
 - **Default work register:** <analytical | neutral-professional | per-task>
-- **Working mode:** <auto | interactive>
+- **Working mode:** <interactive (default) | auto>
 
 Layout:
-- `discipline/constitution.md`, `discipline/working-lessons.md`, `discipline/readability.md` — the shared
-  discipline both skills read first and both subagents are handed: the bar, A/B/C/D grades,
-  the `[A]` test, failure modes, lessons, and the format/readability rules.
+- `discipline/constitution.md`, `discipline/working-lessons.md`, `discipline/readability.md`,
+  `discipline/anti-tells.md` — the shared discipline both skills read first and both subagents
+  are handed: the bar, A/B/C/D grades, the `[A]` test, failure modes, lessons, the
+  format/readability rules, and the AI-register anti-tells.
 - `sources/library.md` — every kept source and graded claim (A/B/C/D). The spine: no factual
   claim ships, and no recommendation rests on a fact, without a block here.
 - `sources/pdf/ word/ images/ web/` — the source files, created as needed.
@@ -28,6 +29,9 @@ Layout:
   mode contracts hold the inline station logic.
 - `runs/<id>/` — receipts for each run (triage, research, outline, draft, inspection,
   manifest; or a review-feedback / challenge / decision memo from the advisor).
+- **project root** — the final deliverable only, slug-named (`<slug>.md`). Two folders plus
+  the root: `sources/` is what you cite, `runs/` is the proof behind the work, and the root
+  holds the thing you hand off. Nothing else lands at the root.
 
 Re-running "lv1-compass init" is safe: it syncs `sources/library.md` against whatever's in
 `sources/`, never deletes a graded source, and never touches this file outside this block.

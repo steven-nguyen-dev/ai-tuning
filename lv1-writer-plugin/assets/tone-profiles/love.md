@@ -17,7 +17,7 @@
 ## Whose truth
 
 - **The relationships, moments, and reflections come from the user**, gathered via
-  `${CLAUDE_PLUGIN_ROOT}/references/interview.md` into `manuscript/intake.md`. AI invents no scene, no person,
+  `${CLAUDE_PLUGIN_ROOT}/references/interview.md` into `inputs/intake.md`. AI invents no scene, no person,
   no exchange, no feeling. The account is true-as-lived; not graded.
 - A skip is a **declared gap** — ask in a batched round or keep the chapter leaner;
   never fabricate intimacy the user didn't describe.

@@ -17,7 +17,7 @@
 ## Authorship — the user's vision leads
 
 - Establish the user's intent first (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`): premise, characters,
-  setting, themes, arc, tone, any non-negotiables. Store in `manuscript/intake.md`.
+  setting, themes, arc, tone, any non-negotiables. Store in `inputs/intake.md`.
 - AI drafts *within* that vision; it doesn't hijack the story toward its own. Surface
   meaningful forks (a plot turn, a character choice) as a batched round rather than
   deciding silently.

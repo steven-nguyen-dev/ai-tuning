@@ -53,5 +53,7 @@ it.
 
 **Write out of the AI register.** In both voices, avoid the words and constructions that
 mark prose as machine-written — generic filler, empty pivots, hype, and reflexive hedging.
-A *cluster* of these is a register failure the inspector flags. Judge the register, not one
+The concrete, enumerated set lives once in **`${CLAUDE_PLUGIN_ROOT}/discipline/anti-tells.md`**
+(generic-AI, hype, and structural tells) — read it before drafting. A *cluster* of these is
+a register failure the inspector flags against the same file. Judge the register, not one
 incidental word.

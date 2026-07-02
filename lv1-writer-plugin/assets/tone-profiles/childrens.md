@@ -18,7 +18,7 @@
 
 - Establish first (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`): the **target age band** (picture book /
   early reader / middle-grade / YA), the characters, the story, and any message or
-  value the user wants. Store in `manuscript/intake.md`. The age band drives every other
+  value the user wants. Store in `inputs/intake.md`. The age band drives every other
   choice — confirm it explicitly.
 
 ## Age fit (sizes everything)

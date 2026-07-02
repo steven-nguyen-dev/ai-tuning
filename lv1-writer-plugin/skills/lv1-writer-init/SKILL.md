@@ -1,13 +1,28 @@
 ---
 name: lv1-writer-init
-description: Set up or re-sync the lv1-writer project structure — sources/ library, manuscript/, writing tone, and CLAUDE.md block. Reads the existing project first and pre-fills what it already knows; only asks about what's uncertain. Safe to re-run. Trigger with "lv1-writer init", "set up lv1-writer", "initialize lv1-writer", or when starting in a folder that has no sources/library.md yet.
+description: Set up, re-sync, or refactor a project into the canonical lv1-writer structure — inputs/ (interview + writing-instruction), manuscript/ (one file per chapter), sources/ library, feedback/, runs/, and the CLAUDE.md block. Reads the existing project first, pre-fills what it knows, and migrates any existing layout into the canonical one non-destructively after one confirmation (splitting a single-file book into chapter files). Safe to re-run. Trigger with "lv1-writer init", "set up lv1-writer", "initialize lv1-writer", or when starting in a folder that has no sources/library.md yet.
 ---
 
 # lv1-writer — Setup (init)
 
-Scaffold a project so `lv1-author` (the writer) and `lv1-reviewer` (the judge) have a
-source library to cite, a manuscript folder for prose, and a recorded default tone and
-working mode. This is the **only** init flow — `lv1-author` does not run setup itself.
+Scaffold a project so `lv1-author` (the writer), `lv1-reviewer` (the judge), and
+`lv1-address-feedback` (the responder) have a source library to cite, an `inputs/` folder
+for user-authored material, a `manuscript/` folder for per-chapter prose, a `feedback/`
+folder for reviews, and a recorded default tone and working mode. This is the **only**
+init flow — the other skills do not run setup themselves.
+
+**The canonical structure is the bible.** Init refactors whatever it finds into the
+layout below — but **non-destructively**: it moves and copies, never deletes, archives any
+original it supersedes, and makes any structural move only after the user confirms the
+plan once.
+
+```
+inputs/        writing-instruction.md, intake.md        (user-authored)
+manuscript/    one file per chapter (ch01.md …), _about.md, _archive/
+sources/       library.md  + pdf/ word/ images/ web/
+feedback/      user-review.md, editor-review.md  +  *-response.md (AI)
+runs/<id>/     00-triage … 05-manifest  + decisions.md
+```
 
 Safe to re-run on an existing project: it syncs, updates, and fills gaps without
 destroying user edits.
@@ -22,10 +37,26 @@ Before asking anything, read the project to infer what's already known:
    init run. Treat these as the baseline inferred values.
 2. **`manuscript/_about.md`** — read if the marker block is absent or incomplete; use
    it to infer topic and angle.
-3. **`manuscript/writing-instruction.md`** — read if present; use it to infer the tone
+3. **`inputs/writing-instruction.md`** (also check the legacy location
+   `manuscript/writing-instruction.md`) — read if present; use it to infer the tone
    profile and POV, and assess whether it is complete (has voice, structure, proof
    apparatus, and never-do sections) or thin/incomplete.
 4. **`sources/library.md`** — note whether it exists and how many sources are indexed.
+
+**Also map the existing layout for migration.** List every file and folder in the project
+and classify each against the canonical structure, so Step 3 can refactor:
+- Voice/instruction file in the wrong place (`manuscript/writing-instruction.md`,
+  `writing-instruction.md` at root) → belongs in `inputs/`.
+- Interview answers in the wrong place (`manuscript/intake.md`, `intake.md` at root) →
+  belongs in `inputs/`.
+- Prose: is it **one file per chapter** already, or a **single monolithic book file**
+  (one large `.md`/`.docx`/`.txt` holding multiple chapters)? A monolith is a candidate
+  for the chapter split in Step 3.
+- Loose source files (`.pdf`, `.docx`, images, saved web pages) sitting outside
+  `sources/` → belong under `sources/`.
+- Stray review files → belong in `feedback/`.
+- Anything you cannot confidently classify → leave it exactly where it is and list it for
+  the user; never move a file you don't understand.
 
 From these, form a confidence level for each of the four settings:
 - **Confident** — found in the marker block or clearly inferable from files.
@@ -67,8 +98,46 @@ topic, angle, and POV, read `${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md` an
 has only one plausible match, pick it directly. If tone is "decide per task", leave it
 unresolved — per-task triage drives it instead.
 
-## Step 3 — Run Setup
+## Step 3 — Refactor into the canonical structure (migration)
 
+Using the layout map from Step 1, turn the existing project into the canonical structure.
+**Always confirm before moving** and **never destroy**.
+
+1. **Build the migration plan.** From the map, list the concrete moves/splits — e.g.
+   "`manuscript/writing-instruction.md` → `inputs/writing-instruction.md`",
+   "`my-book.md` (8 chapters detected) → split into `manuscript/ch01.md … ch08.md`,
+   original archived to `manuscript/_archive/my-book.md`", "`/refs/study.pdf` →
+   `sources/pdf/study.pdf` + library entry". If nothing needs moving (already canonical,
+   or a fresh empty folder), say so and skip to Step 4.
+2. **Detect chapter boundaries for any monolith.** For a single-file book, find chapter
+   breaks from its headings (top-level `#`/`##`, or "Chapter N" / "Part N" lines).
+   Produce a proposed split: chapter number, title, and first line of each.
+3. **Confirm once.** Show the user the full plan (every move, and the proposed chapter
+   split with detected titles) via AskUserQuestion or a single prompt, and get explicit
+   approval before touching anything. If the user corrects the chapter boundaries, use
+   their correction. Record the **plan and the user's verbatim confirmation** in
+   `runs/<UTC-timestamp>-init/decisions.md`.
+4. **Execute, non-destructively.**
+   - **Move** misplaced files to their canonical home (move, don't copy-and-orphan).
+   - **Split** a monolith by **copying** each chapter's text into `manuscript/chNN.md`
+     (zero-padded, in order), then move the original intact into `manuscript/_archive/`.
+     Never delete the original. If boundary detection is unreliable and the user can't
+     confirm a clean split, leave the book as a single file and tell the user.
+   - **Preserve content byte-for-byte** when moving/splitting prose — reformat nothing.
+   - Anything unclassified stays put; report it.
+5. After migration, the rest of Setup operates on the canonical paths.
+
+## Step 4 — Run Setup
+
+0. **Create the skeleton.** Ensure `inputs/`, `manuscript/`, `sources/`, `feedback/`, and
+   `runs/` exist. Drop the review templates into `feedback/` if absent (read and write out
+   their content; don't copy the asset files):
+   `${CLAUDE_PLUGIN_ROOT}/assets/feedback-templates/user-review-template.md` →
+   `feedback/user-review.md` and
+   `${CLAUDE_PLUGIN_ROOT}/assets/feedback-templates/editor-review-template.md` →
+   `feedback/editor-review.md` — but **only if no review file exists yet** (never
+   overwrite a review the user has started). The `*-response.md` files are written by
+   `lv1-address-feedback`, not by init.
 1. **Sync the source library.** If `sources/library.md` doesn't exist, create it by
    writing the content of `${CLAUDE_PLUGIN_ROOT}/assets/library-template.md` into the file as
    fresh text. **Do not copy the asset file itself** — read its content and write it out
@@ -78,7 +147,7 @@ unresolved — per-task triage drives it instead.
    not yet in the library and add them. Runs every time, not just on a fresh project.
 2. **`manuscript/_about.md`** — write (or overwrite) with the confirmed topic and angle.
    This file always reflects the current project description after init runs.
-3. **`manuscript/writing-instruction.md`** — apply the following rules in order:
+3. **`inputs/writing-instruction.md`** — apply the following rules in order:
    - **Missing** → create it, seeded from the resolved tone profile
      (`${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/<id>.md`).
    - **Tone changed** (user picked a different profile this run) → regenerate it from
@@ -95,15 +164,22 @@ unresolved — per-task triage drives it instead.
    with a fresh copy of that block; if those markers aren't present, append the block.
    Record the confirmed topic, angle, POV, resolved tone profile, and working mode inside
    that block. Never touch anything else in an existing `CLAUDE.md`.
+5. **Assemble the full book once, if chapters exist.** If `manuscript/` now holds chapter
+   files (e.g. after a split), build the full book per the "Assemble the full book" rule in
+   `lv1-author` — an ordered, byte-for-byte concatenation written to the **project root** as
+   `<book-title>.md` (slug of the recorded title), chapters only, no build marker. Skip on
+   an empty project. Remind the user it is a generated build output — edit chapters and
+   re-assemble, never edit the assembled book directly.
 
 ## Report back
 
-State: what the scan found vs what the user confirmed (note any changes); the resolved
-tone profile and which group it came from; POV; working mode; what was created vs updated
-vs left alone; how many sources are now in the library (and how many newly added, if any);
-the tone in 2–4 plain sentences distilled from `manuscript/writing-instruction.md`; that
+State: what the scan found vs what the user confirmed (note any changes); **what the
+migration moved, split, or archived** (or that nothing needed moving); the resolved tone
+profile and which group it came from; POV; working mode; what was created vs updated vs
+left alone; how many sources are now in the library (and how many newly added, if any);
+the tone in 2–4 plain sentences distilled from `inputs/writing-instruction.md`; that
 `CLAUDE.md` now reflects the current layout.
 
 Tell the user: to change tone, re-run init and pick a different group — or edit
-`manuscript/writing-instruction.md` directly for fine-grained voice control. Available
-profiles are in `${CLAUDE_PLUGIN_ROOT}/
+`inputs/writing-instruction.md` directly for fine-grained voice control. Available
+profiles are in `${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/`.

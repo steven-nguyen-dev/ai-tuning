@@ -5,7 +5,7 @@ description: Inspection / review station of the lv1-writer pipeline, run as an i
   after drafting (pipeline mode), or by the lv1-reviewer skill on an existing
   document (standalone review mode). It re-reads the real files from disk and returns one
   verdict. Read-only — it judges, it never edits the document.
-model: sonnet
+model: opus
 tools: [Read, Grep, Glob]
 ---
 
@@ -57,10 +57,14 @@ You are told which mode you're in when invoked:
 
 The only inputs you trust are files on disk — read them fresh:
 
-- the draft: `manuscript/` (or `runs/<id>/03-draft.md`)
+- the draft: the specific chapter file under `manuscript/` this run produced (e.g.
+  `manuscript/ch01.md`), or `runs/<id>/03-draft.md`. **Inspect the chapter that was
+  drafted** — don't pull in the rest of the book unless the finding requires
+  cross-chapter continuity. (Book-wide passes inspect the whole manuscript.)
 - the sources: `sources/library.md`
 - the research ledger: `runs/<id>/01-research.md`
-- the user's material (interview-driven / hybrid): `manuscript/intake.md`
+- the user's material (interview-driven / hybrid): `inputs/intake.md`
+- the project voice overrides, if present: `inputs/writing-instruction.md`
 - the plan: `runs/<id>/02-outline.md` and `00-triage.md` (for scope, the research
   contract, the **genre / tone profile**, **rigor tier**, **structure shape**, and
   **authorship approach**)
@@ -134,7 +138,7 @@ leaving the user's lived spine ungraded — that split was the correct call.
     summarized instead of rendered) and a **padded** compressive section (a runbook or
     analysis bloated with filler) alike.
 11. **Interview traceability** *(interview-driven / hybrid)* — does every personal /
-    experiential claim trace to `manuscript/intake.md`, not to invention? Are AI-added
+    experiential claim trace to `inputs/intake.md`, not to invention? Are AI-added
     context and the user's lived account kept visibly distinct? An **invented anecdote,
     scene, quote, or feeling is a REJECT** — the fiction-free equivalent of a fabricated
     source.

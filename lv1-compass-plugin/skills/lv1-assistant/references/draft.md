@@ -1,8 +1,8 @@
 # Draft — Assembly
 
 Write the real deliverable, at full effort, following the outline. Save it as **markdown**
-to `manuscript/` and a copy to `runs/<id>/03-draft.md`. Markdown is the only output of this
-pipeline — see "Output is markdown" below.
+to the project root as `<slug>.md` and a copy to `runs/<id>/03-draft.md`. Markdown is the
+only output of this pipeline — see "Output is markdown" below.
 
 ## Compose the voice (in precedence order)
 
@@ -10,7 +10,7 @@ Read `00-triage.md` for the work register and rigor tier, then compose the voice
 
 1. **Explicit user instruction** for this task always wins.
 2. **The work register** named in `00-triage.md` — `analytical` or `neutral-professional`.
-   Read `references/register.md` and follow that voice's stance, shape, and apparatus.
+   Read `${CLAUDE_PLUGIN_ROOT}/skills/lv1-assistant/references/register.md` and follow that voice's stance, shape, and apparatus.
 
 Also read `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md` before drafting. Write **out of the AI register** — no
 generic filler, empty pivots, hype, or reflexive hedging.

@@ -26,7 +26,11 @@ unchecked facts is the advisory version of dazzling-but-false.
 
 1. **Understand the real ask first.** Pin down what is actually wanted — the deliverable
    or the decision, its scope, its audience, its limits — before doing any work. For a
-   decision, that means naming the real question and what's at stake.
+   decision, that means naming the real question and what's at stake. **Batch your
+   questions.** Interactive is the default working mode: prefer asking the human over
+   guessing. But when you need input, collect *every* open question into **one round** and
+   ask it together — never drip questions one at a time. Frequent involvement must not
+   become annoyingly often.
 2. **Check, don't trust memory.** Gather real material first — read the sources, search
    the web, delegate to `lv1-research`. Never assert a factual claim, or build advice on
    one, from memory alone.
@@ -49,6 +53,9 @@ unchecked facts is the advisory version of dazzling-but-false.
    re-reads the actual artifact against the actual sources — the way an outsider would, not
    the way the maker would. For the advisor, the same skepticism is the *whole product*:
    read the real thing, never a summary of it.
+9. **Spend the smallest effort that works.** Run only the stations the tier calls for; read
+   only the files the task needs. Don't sweep every source when a targeted read covers the
+   question, and don't inflate a tier out of habit.
 
 ---
 
@@ -133,6 +140,22 @@ Each run writes its artifacts to `runs/<UTC-timestamp>-<slug>/`, and ships with 
 its role calls for — a confidence list, an assumptions list, and a receipts index for a
 deliverable; a graded, sourced basis for a recommendation. The product is its own proof:
 the reader can trust it *and* check it.
+
+**The delivery gate.** How a run proves the check happened depends on the role:
+
+- **Assistant (maker), any tier that runs the inspector (normal and up):** nothing ships
+  until the inspection artifact (`04-inspection.md`) **exists on disk, is non-empty**, and
+  carries a **PASS written by the inspector** — never a verdict inferred from the drafter's
+  own words. A missing, empty, or maker-authored verdict keeps the gate shut. (`tiny` runs
+  no inspector; its self-review stands in, declared per R4.)
+- **Advisor (judge):** there is no separate inspector, so the gate is the **enforced
+  steelman self-check** — a decision or challenge memo does not ship unless it contains an
+  explicit, non-empty section stating the strongest case *against* its own recommendation or
+  verdict, and answers it. A recommendation that never faced its own best objection is not
+  gated and does not ship.
+
+The gate confirms the check *took place*; the depth of the check is what makes it *mean*
+something.
 
 **Write integrity.** A write that matters — the source spine (`sources/library.md`) and the
 run receipts — is *verified*, not assumed. After writing such a file, confirm it actually

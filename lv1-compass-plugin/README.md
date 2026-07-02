@@ -54,6 +54,11 @@ The dividing line: the advisor judges or advises on something; the assistant mak
 thing. "Review my report" → advisor. "Write me a report" → assistant. "Write me a report
 that reviews vendor X" → assistant (the deliverable is the report).
 
+**Interactive by default.** Compass prefers human involvement: the pipeline asks back in
+chat and takes correction in chat. When it needs input it batches every open question into
+one round rather than dripping them one at a time. `auto` is the opt-out — run
+autonomously, asking only on a blocking ambiguity — and is set per project at init.
+
 ## Use, inside a Cowork project
 
 ```
@@ -73,7 +78,7 @@ ships with a proof package. The pipeline stays markdown throughout so the inspec
 actually read what it judges.
 
 ```
-review manuscript/q3-strategy.md
+review q3-strategy.md
 ```
 The advisor hands the document to the independent inspector, which writes a tailored
 `review-checklist.md` and a `review-feedback.md` beside it (verdict + located findings +
@@ -89,9 +94,27 @@ recommendation and what would change it. The call stays yours.
 
 ## How the system is laid out
 
+A project has **two folders plus the root**: `sources/` is what compass cites (`library.md`
++ source files), `runs/<id>/` holds all proof and receipts for each run (triage, research,
+outline, draft, inspection, manifest — plus any challenge or decision memo), and the
+**project root holds the final deliverable only**, slug-named `<slug>.md`. The rule is
+simple: **root = the thing you hand off; `runs/` = the proof behind it.** An advisor review
+of a file you handed over is the exception — its verdict stays beside that file, since the
+file is yours wherever it lives, not a compass deliverable.
+
 The discipline is **single-sourced** in `discipline/`, so it can't drift between the two
 roles. Skills and agents reference these shared files by their plugin-root path,
 `${CLAUDE_PLUGIN_ROOT}/discipline/…`, never by climbing out of a skill with `../`:
+
+> **Where a resource lives — the placement rule.** A resource used by **more than one
+> skill** lives at the plugin root (`discipline/`, `references/`); a resource used by
+> **exactly one skill** stays nested under that skill (`skills/<name>/references/`,
+> `skills/<name>/assets/`). This keeps compass close to the Agent Skills spec, which defines
+> `references/` and `assets/` as *per-skill* bundled resources. **Every reference is written
+> as a fully-qualified `${CLAUDE_PLUGIN_ROOT}/…` path** — including skill-local ones
+> (`${CLAUDE_PLUGIN_ROOT}/skills/lv1-assistant/references/triage.md`) — so nothing depends on
+> the current working directory. Current layout obeys the rule: `source-intake.md` is shared
+> (root `references/`); each skill's mode/station contracts and templates are nested with it.
 
 - **Shared discipline** (read first by both skills; passed into both subagents): `discipline/constitution.md` —
   the bar, the A/B/C/D grades and the `[A]` provenance test, the core rules, the R1–R7
@@ -102,6 +125,8 @@ roles. Skills and agents reference these shared files by their plugin-root path,
   false balance). `discipline/readability.md` — the format rules the drafter applies and the
   inspector enforces (the trigger test; list vs table vs prose; metadata stacking; legends
   and reference run-ons one-per-line; never bullet reasoning; parallelism, nesting, emphasis).
+  `discipline/anti-tells.md` — the enumerated AI-register tells (generic-AI, hype, structural)
+  the drafter writes out of and the inspector's register check tests against.
 - **Subagents** (run in their own isolated context, delegated to by name):
   `agents/lv1-research.md` (graded claim ledger, conflict-hunt, steelman material) and
   `agents/lv1-inspect.md` (independent check — pipeline mode for the assistant, standalone

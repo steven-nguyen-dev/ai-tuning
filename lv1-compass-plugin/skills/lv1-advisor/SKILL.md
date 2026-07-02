@@ -27,9 +27,9 @@ clarifying round before proceeding.
 
 | If the user… | Mode | Reference |
 |---|---|---|
-| hands over an artifact to review / critique / fact-check ("is this right?", "review my memo") | **review** | `references/review-mode.md` |
-| states a position, plan, or belief to stress-test ("poke holes", "push back", "steelman the other side", "what am I missing?") | **challenge** | `references/challenge-mode.md` |
-| faces a fork and wants help choosing ("X or Y?", "should I…", "help me decide") | **decide** | `references/decide-mode.md` |
+| hands over an artifact to review / critique / fact-check ("is this right?", "review my memo") | **review** | `${CLAUDE_PLUGIN_ROOT}/skills/lv1-advisor/references/review-mode.md` |
+| states a position, plan, or belief to stress-test ("poke holes", "push back", "steelman the other side", "what am I missing?") | **challenge** | `${CLAUDE_PLUGIN_ROOT}/skills/lv1-advisor/references/challenge-mode.md` |
+| faces a fork and wants help choosing ("X or Y?", "should I…", "help me decide") | **decide** | `${CLAUDE_PLUGIN_ROOT}/skills/lv1-advisor/references/decide-mode.md` |
 
 The dividing line from `lv1-assistant`: the advisor judges or advises on something; it does
 **not** write the deliverable. "Review my report" → advisor. "Write me a report" →
@@ -39,15 +39,21 @@ report). If the user wants the thing *made*, route them to `lv1-assistant`.
 **Decide mode has one hard requirement:** before recommending, it must steelman its *own*
 front-runner — assemble the strongest case against the option it's about to recommend and
 show why it still wins (or revise). A decision memo that recommends without facing its own
-best objection is incomplete; self-check this before delivering (`references/decide-mode.md`).
+best objection is incomplete; self-check this before delivering (`${CLAUDE_PLUGIN_ROOT}/skills/lv1-advisor/references/decide-mode.md`).
 
 > **Passing the discipline to a subagent (required).** When a mode delegates to
 > `lv1-research` or `lv1-inspect`, paste the governing context into the subagent's task
 > prompt — the contents of `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md` and `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md`
 > (and, for a standalone review, `${CLAUDE_PLUGIN_ROOT}/discipline/readability.md` plus the
-> `assets/review-checklist-template.md` content). A
+> `${CLAUDE_PLUGIN_ROOT}/skills/lv1-advisor/assets/review-checklist-template.md` content). A
 > subagent runs from the project directory and **cannot read the plugin's `discipline/` or this
 > skill's `assets/` from its own path**; the orchestrator can, so it carries them in.
+>
+> **Fail loud — never delegate blind.** Confirm that context was actually assembled into the
+> task prompt before you delegate. If you could not read `discipline/` from
+> `${CLAUDE_PLUGIN_ROOT}`, **stop and report it** — do not spawn `lv1-research` or `lv1-inspect` without the
+> discipline. A pass run without it is a faked step (R4), worse than none because it looks
+> real. Missing discipline halts the run; it never degrades it silently.
 
 ## Shared engine (all three modes)
 

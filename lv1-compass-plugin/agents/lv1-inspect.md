@@ -5,7 +5,7 @@ description: Inspection / review station of lv1-compass, run as an isolated suba
   by lv1-advisor's review mode on an existing document (standalone review mode). It
   re-reads the real files from disk and returns one verdict. Read-only — it judges, it
   never edits the document.
-model: sonnet
+model: opus
 tools: [Read, Grep, Glob]
 ---
 
@@ -45,7 +45,7 @@ You are told which mode you're in when invoked:
 
 The only inputs you trust are files on disk — read them fresh:
 
-- the draft: `manuscript/` (or `runs/<id>/03-draft.md`)
+- the draft: the root `<slug>.md` (or `runs/<id>/03-draft.md`)
 - the sources: `sources/library.md`
 - the research ledger: `runs/<id>/01-research.md`
 - the plan: `runs/<id>/02-outline.md` and `00-triage.md` (for scope, the research
@@ -94,8 +94,9 @@ tier calls for.
    `00-triage.md`: **analytical** (decisive, hypothesis-spine, commits to conclusions) or
    **neutral-professional** (clear, measured, briefing voice)? A report written breezily or
    an analysis that won't commit (neutral ≠ timid) is a FIX-IT. Flag a *cluster* of AI-tell
-   words / constructions as a register failure too — judge the register, not one incidental
-   word.
+   words / constructions as a register failure too, tested against the enumerated set in
+   `discipline/anti-tells.md` (generic-AI, hype, and structural tells; handed to you in your
+   task prompt) — judge the register, not one incidental word.
 7. **Apparatus presence** *(full / high-stakes)* — is the **Methodology & enforcement**
    section present; are **inline A/B grades** on the body claims; did the research's
    **declared gaps surface in-text** where the number would go; is the **proof package
@@ -145,7 +146,7 @@ this order** — the checklist first, then the review.
 ### Step 1 — Generate the document-specific checklist
 
 The orchestrator hands you the **review checklist template content** in your task prompt
-(it reads `assets/review-checklist-template.md` for you, since that file is on the plugin
+(it reads `${CLAUDE_PLUGIN_ROOT}/skills/lv1-advisor/assets/review-checklist-template.md` for you, since that file is on the plugin
 path, not yours). Do a **cold read** of the target document (document only, no sources yet),
 classify it, and write a concrete `review-checklist.md` beside the document:
 

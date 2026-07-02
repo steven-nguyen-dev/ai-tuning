@@ -13,7 +13,7 @@ located `review-feedback.md` (PASS / FIX-IT / REJECT) — lives in `agents/lv1-i
 
 When you delegate, carry into the subagent's task prompt: the path to the artifact, the
 constitution + working-lessons content, and the **contents of
-`assets/review-checklist-template.md`** (you can read it from this skill; the subagent
+`${CLAUDE_PLUGIN_ROOT}/skills/lv1-advisor/assets/review-checklist-template.md`** (you can read it from this skill; the subagent
 cannot reach it from its own working path). The inspector is **read-only** — it judges, it
 never edits the document.
 

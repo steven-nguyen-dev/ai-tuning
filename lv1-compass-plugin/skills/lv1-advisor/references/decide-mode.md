@@ -63,7 +63,19 @@ requirement of decide mode (self-check it before delivering; see SKILL.md).
 
 ## Output — the decision memo
 
-Write `runs/<id>/decision-memo.md` from `assets/decision-memo-template.md`, and offer it as
+Write `runs/<id>/decision-memo.md` from `${CLAUDE_PLUGIN_ROOT}/skills/lv1-advisor/assets/decision-memo-template.md`, and offer it as
 a standalone file. For a quick fork the memo can be delivered inline, but keep every
 section — the framing and the front-runner steelman are what make it a decision aid rather
 than an opinion.
+
+## The delivery gate (self-enforced — the advisor has no separate inspector)
+
+The advisor ships a judgment, not a maker's artifact, so there is no independent inspector
+station to gate it. The gate is therefore **mechanical and self-enforced**: before you
+deliver the memo — inline or as a file — confirm it contains, as an explicit and **non-empty
+section**, the **front-runner steelman**: the strongest case *against* the option you are
+recommending, and your honest answer to it (why it still wins, or the revised call). This is
+the constitution's delivery gate for the advisor role. If that section is absent, empty, or
+merely gestured at, the memo **does not ship** — go back and build it. A recommendation that
+never faced its own best objection is exactly the failure this mode exists to prevent; do not
+deliver it and call the step done (R4).

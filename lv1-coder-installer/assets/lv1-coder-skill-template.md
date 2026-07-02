@@ -28,7 +28,9 @@ $ARGUMENTS
    - **REJECT** → stop the line. Report honestly. Do not ship.
    - **PASS** → ship.
 
-7. **Ship.** Write `manifest.md` in the run folder: confidence list (every claim, its grade, its source), assumptions list, receipts index. Deliver the work plus a short cover note. State overall confidence and any open assumptions plainly.
+   **The delivery gate (before shipping).** On any tier that ran the inspector, verify with your own eyes — not from memory of the delegation — that the inspection receipt **exists in the run folder, is non-empty, and carries a PASS written by the `inspector`**, not a verdict inferred from the build's own output. If it's missing, empty, or maker-authored, the gate stays shut: do not ship, report why (`.claude/lv1-coder.md` → The delivery gate). On `tiny` there is no inspector — say so; the self-review stands in its place.
+
+7. **Ship.** Write `manifest.md` in the run folder: confidence list (every claim, its grade, its source), assumptions list, receipts index. **Verify each receipt is actually on disk before listing it** — never list a receipt that isn't there, and never report a verdict drawn from a receipt that was never written. Deliver the work plus a short cover note. State overall confidence and any open assumptions plainly.
 
 ## Reporting
 After each station, one-line status (e.g. "Triage: fast lane — no research, no plan"). Keep delivery focused on the work and its proof, not on narrating the machinery. If you cut a corner, say so. Never fake a step.

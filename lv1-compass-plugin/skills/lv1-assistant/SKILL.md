@@ -39,7 +39,7 @@ independent inspector — which has only Read/Grep/Glob — can judge the *real*
 artifact.
 
 The **work register** (analytical | neutral-professional) and **structure shape** are the
-two lighter choices, also set in triage — see `references/register.md`.
+two lighter choices, also set in triage — see `${CLAUDE_PLUGIN_ROOT}/skills/lv1-assistant/references/register.md`.
 
 ## The pipeline
 
@@ -58,12 +58,20 @@ verdict.)
 > directory and **cannot read the plugin's `discipline/` from its own path**. So when you
 > delegate, paste the governing context into the subagent's task prompt: the contents of
 > `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md`, `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md`, and (for the inspector)
-> `${CLAUDE_PLUGIN_ROOT}/discipline/readability.md` — which you, the orchestrator, can read. Without this the
-> subagent runs blind to the bar, the grades, and the format rules it must enforce.
+> `${CLAUDE_PLUGIN_ROOT}/discipline/readability.md` and `${CLAUDE_PLUGIN_ROOT}/discipline/anti-tells.md` — which you, the
+> orchestrator, can read. Without this the subagent runs blind to the bar, the grades, and
+> the format and register rules it must enforce.
+>
+> **Fail loud — do not run a subagent blind.** Before delegating, confirm the constitution
+> and working-lessons text was actually assembled into the task prompt. If you could not read
+> them from `${CLAUDE_PLUGIN_ROOT}/discipline/`, **stop and report it** — never fall back to spawning the
+> subagent without them. A research or inspection pass run without the discipline is a fake
+> step (R4), worse than no check because it looks real. Missing discipline halts the run; it
+> never degrades it silently.
 
 1. **Set up the run.** Create `runs/<UTC-timestamp>-<short-slug>/`. Tell the user the run
    id.
-2. **Triage.** Read `references/triage.md` and follow it. Write `00-triage.md`: rigor tier,
+2. **Triage.** Read `${CLAUDE_PLUGIN_ROOT}/skills/lv1-assistant/references/triage.md` and follow it. Write `00-triage.md`: rigor tier,
    work register, structure shape, scope, and (full/high-stakes) a research contract. If scope is genuinely ambiguous, ask one batched round
    (rule 1). On `tiny`, say you're running the fast lane: the station set is **triage →
    draft → self-review → ship** (research, outline, and the inspect subagent are skipped).
@@ -78,17 +86,17 @@ verdict.)
    blocks. If `lv1-research` reported a library write failure (a `library.pending.md`
    fallback), surface it to the user and treat the spine as degraded; don't proceed as if
    `sources/library.md` is intact when it's empty.
-4. **Outline.** Read `references/outline.md` and follow it. Write `02-outline.md`.
+4. **Outline.** Read `${CLAUDE_PLUGIN_ROOT}/skills/lv1-assistant/references/outline.md` and follow it. Write `02-outline.md`.
    **High-stakes approval beat (high-stakes only):** before drafting, present the outline
    (scope + structure + the research contract's coverage) to the user and **await an explicit
    go** — the one consequential decision in an otherwise autonomous pipeline stays with the
    human (P12). Record the outcome on its own line at the foot of `02-outline.md`
    (`Approval: approved <UTC> by user` — or the change requested). For tiny/normal/full the
    pipeline proceeds without this gate.
-5. **Draft.** Read `references/draft.md` and follow it: compose the voice from the register
+5. **Draft.** Read `${CLAUDE_PLUGIN_ROOT}/skills/lv1-assistant/references/draft.md` and follow it: compose the voice from the register
    in `00-triage.md`, apply the apparatus for the rigor tier, and let format follow content.
-   Write the markdown deliverable to `manuscript/` and a copy to `03-draft.md`. Run the
-   self-review pass before moving on.
+   Write the final deliverable to the project root as `<slug>.md`; keep the working copy as
+   `runs/<id>/03-draft.md`. Run the self-review pass before moving on.
 6. **Inspect.** **Delegate to the `lv1-inspect` subagent** (pipeline mode). It re-reads the
    real draft, `sources/library.md`, and `01-research.md` from disk and writes
    `04-inspection.md` with one verdict:
@@ -98,6 +106,13 @@ verdict.)
      named gaps. Cap 2 redos; then ship with gaps declared or REJECT.
    - **REJECT** → stop. Report honestly. Do not ship.
    - **PASS** → ship.
+
+   **The delivery gate (before you ship anything).** For any tier that ran the inspector
+   (normal and up), verify with your own eyes — not from memory of the delegation — that
+   `04-inspection.md` **exists on disk, is non-empty, and carries a PASS written by
+   lv1-inspect**. If it's missing, empty, or the verdict is anything but an inspector-authored
+   PASS, the gate stays shut: do not ship, and report why (constitution → The delivery gate).
+   On the `tiny` fast lane there is no inspector — say so; the self-review stands in its place.
 7. **Ship.** Write `05-manifest.md`: a confidence list (every factual claim, its grade, its
    source), an assumptions list, a receipts index. **Verify every receipt before listing
    it** — list only files that are actually on disk; if a station's receipt is missing
@@ -112,6 +127,23 @@ verdict.)
 
 After each station, give the user a one-line status (e.g. "Research: 12 facts, all
 sourced"). If you cut a corner, say so — never fake a step (R4).
+
+**Interactive by default.** When any station hits a blocking ambiguity or a real gap,
+**ask the user in one batched round before proceeding** rather than guessing — collect
+every open question for that step and put them in a single round (constitution rule 1's
+batching rule). `auto` mode is the opt-out: proceed autonomously and ask only on a truly
+blocking ambiguity.
+
+## Iterating on feedback
+
+The user's corrections are handled **in chat**, not through a feedback file or a separate
+skill. When a note comes back, re-enter the pipeline at the **earliest affected station**
+and re-run forward from there: a fact challenge → **research**; a scope or structure note →
+**outline**; a wording or emphasis note → **draft**. Re-inspect per the rigor tier (a
+`normal`/`full`/`high-stakes` change gets the inspect subagent again; a `tiny` change gets
+the self-review pass), then re-ship. Append a line to the run's receipts noting **what
+changed and why** so the run stays an honest record. Don't spin up a new run for a
+correction to the same deliverable — continue the existing `runs/<id>/`.
 
 ## After ship (optional) — office-file conversion
 

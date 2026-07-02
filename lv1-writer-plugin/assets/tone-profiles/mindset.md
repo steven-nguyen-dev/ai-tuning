@@ -17,7 +17,7 @@
 ## Two kinds of claim (keep them honest)
 
 - **The user's experience and philosophy** — the stories, the hard-won principles, the
-  worldview. Gather via `${CLAUDE_PLUGIN_ROOT}/references/interview.md` into `manuscript/intake.md`. Treated
+  worldview. Gather via `${CLAUDE_PLUGIN_ROOT}/references/interview.md` into `inputs/intake.md`. Treated
   as the author's voice; not graded; **never invented** by AI.
 - **Factual claims about how things work** — "the brain does X", "studies show Y",
   "habit forms in Z". These are **cited and graded** (A/B/C/D), scoped honestly, and

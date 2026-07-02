@@ -28,7 +28,7 @@ task, three things: the **genre**, the **tone profile** that genre maps to, and 
 
 Each profile lives at `${CLAUDE_PLUGIN_ROOT}/assets/tone-profiles/<id>.md` and carries its own structural
 guidance — there is no separate scaffold. If a profile file doesn't exist yet, fall
-back to `manuscript/writing-instruction.md`, or to clear, accurate plain prose.
+back to `inputs/writing-instruction.md`, or to clear, accurate plain prose.
 
 ## Detection signal order
 
@@ -37,7 +37,7 @@ Decide the genre by the first signal that applies:
 1. **Explicit user instruction always wins** — *unless its apparatus contradicts the
    material* (see "When voice and material disagree" below). "Write this as an academic
    paper" / "this is a romance novel" — take it.
-2. **Project default**, if the user deliberately set one — `manuscript/writing-instruction.md`
+2. **Project default**, if the user deliberately set one — `inputs/writing-instruction.md`
    seeded from a chosen profile at init, or the genre recorded in `CLAUDE.md`.
 3. **Inferred from the task wording and any handed-over sources** — "report",
    "analysis", "chapter of my memoir", "spec", a dataset vs a lived anecdote.

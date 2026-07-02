@@ -64,8 +64,25 @@ triage → (source-intake / research) → outline → draft (+ self-review) → 
 each with its own context and contract. The orchestrator delegates and integrates their
 results; the two loops are driven by the inspector's verdict.)
 
+> **Passing the discipline to a subagent (required).** A subagent runs from the project
+> directory and **cannot read the plugin's `discipline/` from its own path**. So on **every**
+> delegation, paste the governing context into the subagent's task prompt: the contents of
+> `${CLAUDE_PLUGIN_ROOT}/discipline/constitution.md` and `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md` (and, for the
+> inspector, `${CLAUDE_PLUGIN_ROOT}/assets/ai-review-checklist-template.md`) — which you, the orchestrator,
+> can read. Without this the subagent runs blind to the bar, the grades, and the failure
+> modes it must obey.
+>
+> **Fail loud — do not run a subagent blind.** Before you delegate, confirm the constitution
+> and working-lessons text was actually assembled into the task prompt. If for any reason you
+> could not read them from `${CLAUDE_PLUGIN_ROOT}/discipline/`, **stop and report it** — do not fall back
+> to spawning the subagent without them. A research or inspection pass run without the
+> discipline is not a cheaper version of the check; it is a fake step (R4), and it is worse
+> than no check because it looks real. Missing discipline halts the run; it never degrades it
+> silently.
+
 1. **Set up the run.** Create `runs/<UTC-timestamp>-<short-slug>/` in the project
-   folder. Tell the user the run id.
+   folder and start `runs/<id>/decisions.md` (the decision log — see "Log decisions"
+   below). Tell the user the run id.
 2. **Triage.** Read `${CLAUDE_PLUGIN_ROOT}/references/triage.md` and follow it. Write `00-triage.md`. This
    sets all three knobs — detect the **genre / tone profile** and **structure shape**
    (`${CLAUDE_PLUGIN_ROOT}/references/tone-detect.md`, `${CLAUDE_PLUGIN_ROOT}/references/structure-shapes.md`), the **rigor tier**,
@@ -82,21 +99,26 @@ results; the two loops are driven by the inspector's verdict.)
      marked a declared gap.
    - **Interview-driven:** the spine comes from the user — run the intake interview
      (`${CLAUDE_PLUGIN_ROOT}/references/interview.md`), one batched round, and save answers to
-     `manuscript/intake.md`. Research the web only for context *around* the user's
+     `inputs/intake.md`. Research the web only for context *around* the user's
      material, if at all.
    - **Hybrid (e.g. cognitive-behavior):** do both — interview for the lived material
      (`intake.md`) *and* delegate to `lv1-research` for the science. Keep the two
      visibly distinct downstream.
 4. **Outline.** Read `${CLAUDE_PLUGIN_ROOT}/references/outline.md` and follow it. Write `02-outline.md`.
 5. **Draft.** Read `${CLAUDE_PLUGIN_ROOT}/references/draft.md` and follow it: compose the voice from the tone
-   profile in `00-triage.md` (+ `manuscript/writing-instruction.md` overrides), apply the
+   profile in `00-triage.md` (+ `inputs/writing-instruction.md` overrides), apply the
    apparatus for the rigor tier, and let format follow content. For interview-driven /
-   hybrid work, read `manuscript/intake.md` as a first-class source and invent no
-   personal material. Write the prose to `manuscript/` and a copy to `03-draft.md`. Run
-   its self-review pass before moving on.
-6. **Inspect.** Before delegating, read `${CLAUDE_PLUGIN_ROOT}/discipline/working-lessons.md` from the plugin
-   path and inject its content into the subagent's task prompt — lv1-inspect runs from
-   the project folder and cannot reach the plugin's `discipline/` on its own. Then **delegate
+   hybrid work, read `inputs/intake.md` as a first-class source and invent no
+   personal material. **Work one chapter file at a time** (prefer rule): draft into a
+   single `manuscript/<chapter>.md` (e.g. `ch01.md`) and load only the chapter(s) the
+   task touches — don't read the whole book to write or fix one chapter (see the chapter
+   rule in `draft.md`). Write a copy to `03-draft.md`. Run its self-review pass before
+   moving on.
+6. **Inspect.** Before delegating, inject the discipline into the subagent's task prompt per
+   the **"Passing the discipline to a subagent (required)"** block above — the constitution,
+   the working-lessons, and the review checklist — since lv1-inspect runs from the project
+   folder and cannot reach the plugin's `discipline/` on its own. If you could not assemble
+   that context, stop and report (the fail-loud rule); do not inspect blind. Then **delegate
    to the `lv1-inspect` subagent** (pipeline mode) — running in its own context, it
    re-reads the real draft, `sources/library.md`, and `01-research.md` from disk (it
    never saw the drafting reasoning, which is what makes the check independent) and
@@ -108,6 +130,13 @@ results; the two loops are driven by the inspector's verdict.)
      redos; then ship with gaps declared or REJECT.
    - **REJECT** → stop. Report honestly. Do not ship.
    - **PASS** → ship.
+
+   **The delivery gate (before you ship anything).** For any tier that ran the inspector
+   (normal and up), verify with your own eyes — not from memory of the delegation — that
+   `04-inspection.md` **exists on disk, is non-empty, and carries a PASS written by
+   lv1-inspect**. If it's missing, empty, or the verdict is anything but an inspector-authored
+   PASS, the gate stays shut: do not ship, and report why (constitution → The delivery gate).
+   On `tiny` there is no inspector — say so; the self-review stands in its place.
 7. **Ship.** Write `05-manifest.md`: a confidence list (every factual claim, its grade,
    its source), an assumptions list, and a receipts index. For **full / high-stakes
    non-fiction**, also **append the proof package to the delivered file itself**
@@ -118,6 +147,67 @@ results; the two loops are driven by the inspector's verdict.)
 
 After each station, give the user a one-line status (e.g. "Research: 12 facts, all
 sourced"). If you cut a corner, say so — never fake a step.
+
+## Log decisions (every run)
+
+Keep `runs/<id>/decisions.md` as a running record of *how the run was steered* — the
+reasoning behind the calls, not the deliverable. Append to it (don't overwrite) at each
+station and whenever a fork is resolved. Capture two things:
+
+- **AI reasoning** — each material decision and *why*: the genre/tier/approach chosen at
+  triage and what tipped it, scope cuts, a structure or framing choice, a FIX-IT you
+  accepted or pushed back on, a declared gap and why it stayed open.
+- **User confirmations — verbatim.** Whenever you ask the user a question (an
+  AskUserQuestion round, a scope or direction check) record the question and the user's
+  answer **word for word**, with a timestamp. This is the recoverable basis for why the
+  piece is shaped the way it is.
+
+Format each entry as `## <UTC time> — <station>` followed by `Decision:`, `Why:`, and
+(if any) `User confirmed:` lines. Keep it terse; it is a log, not prose.
+
+## Assemble the full book (on demand)
+
+The chapter files in `manuscript/` are the source of truth; the full book is a **build
+output**, regenerated from them — never hand-edited. When the user asks to "assemble the
+book", "compile the manuscript", "stitch the chapters", or "export the full book", do this
+(no run folder needed):
+
+**Assembly is a file operation, not a reading task.** Concatenate the chapter files with a
+shell command (`cat`); never `Read` full chapter contents into context in order to
+reassemble them — the prose is copied byte-for-byte anyway, so reading it first only burns
+tokens. Reading full chapters is for editing, review, or a consistency audit (see below) —
+not for assembly.
+
+1. Collect the chapter files in `manuscript/` in order — the zero-padded `chNN.md` sort
+   (`ch01.md`, `ch02.md`, …). **Exclude** `_about.md` and anything under `_archive/`. If
+   the chapter naming is irregular, order them by `02-outline.md` (the latest run's
+   outline) instead, and say which ordering you used.
+2. **Decide the filename from the book's title** — slugified to kebab-case (e.g. *The
+   Science of Habit* → `the-science-of-habit.md`). Take the title from the marker block in
+   `CLAUDE.md` / `manuscript/_about.md`; if none is recorded, ask the user for the title
+   once, then proceed. Use the **same filename every rebuild** so it overwrites cleanly.
+3. **Build it in the shell**, at the **project root** (not inside `manuscript/`): `cat` the
+   chapters straight into the file, in order, with a blank line forced between each so
+   spacing is right regardless of what each chapter file ends with — e.g.
+   `(cat manuscript/ch01.md; echo; cat manuscript/ch02.md; echo; cat manuscript/ch03.md) > <book-title>.md`
+   (list every chapter file explicitly, in order). Each chapter keeps its own heading.
+   **Copy the prose byte-for-byte — reformat nothing, and don't retype it from context. Write
+   only the chapters' own content — no build marker, comment, or metadata gets added to the
+   file.** This is the finished book, the reader-facing artifact — not a scratch or
+   prototype file, so nothing goes in it that isn't part of the book itself.
+4. **Regenerate fresh every time** (overwrite the existing `<book-title>.md`); never merge
+   into a stale copy. Get the chapter count and word count from the shell (`wc -l
+   manuscript/ch*.md`, `wc -w <book-title>.md`) rather than by reading the content — report
+   both.
+
+**If the result looks wrong** (a chapter too short, one missing, a stale mount/tool read) —
+verify with metadata first: `wc -c`/`wc -l` on the chapter files, or `md5sum` before/after
+an edit. Run one targeted check, report what it shows, and only fall back to reading full
+chapter contents if that check actually confirms a discrepancy. Don't re-verify a clean
+result "just in case" — one check, one conclusion, move on.
+
+This is assembly only — it does not draft, edit, or inspect. To change the book, edit the
+chapter and re-assemble.
 
 ## A single source you're handed mid-task
 
